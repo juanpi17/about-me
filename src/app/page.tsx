@@ -146,48 +146,21 @@ import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import About from './about/page';
 
 import { Droppable } from './droppable';
-// import {Draggable} from './draggable';
 
 export default function App() {
-  // const [isDropped, setIsDropped] = useState(false);
   const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
   function handleDragEnd(event: DragEndEvent) {
     if (event.over && event.over.id === 'droppable') {
-      // event.active.rect.current.initial!.left = event.active.rect.current.translated!.left;
-      // event.active.rect.current.initial!.top = event.active.rect.current.translated!.top;
-      // setIsDropped(true);
       setPosition({ x: event.active.rect.current.translated?.left || 0, y: event.active.rect.current.translated?.top || 0 });
-      // setIsDropped(true);
     }
   }
-
-  const draggableMarkup = (
-    // <div
-    //   style={
-    //     isDropped
-    //       ? {
-    //           position: 'absolute',
-    //           left: position.x,
-    //           top: position.y,
-    //           zIndex: 10,
-    //         }
-    //       : undefined
-    //   }
-    // >
-    <About position={{x: position.x,y: position.y}}/>
-    // <About position={isDropped ? {
-    //     x: position.x,
-    //     y: position.y,
-    //   } : undefined } />
-    // </div>
-  );
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <div className="relative h-screen">
         <Droppable>
-          {draggableMarkup}
+          <About position={position}/>
           {/* {!isDropped ? draggableMarkup : null}
           {isDropped ? draggableMarkup : 'Drop here'} */}
         </Droppable>

@@ -3,7 +3,7 @@ import { CSS } from '@dnd-kit/utilities';
 
 import CloseIcon from '../svg/closeIcon';
 
-interface WindowElementProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CommonWindowProps extends React.HTMLAttributes<HTMLDivElement> {
   id?: string;
   position: { x: number; y: number } | undefined;
   zIndex?: number;
@@ -11,19 +11,21 @@ interface WindowElementProps extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
 };
 
-export default function CommonWindow(props: WindowElementProps) {
+export function CommonWindow(props: CommonWindowProps) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: 'draggable',
+    id: props.id || 'draggable',
   });
 
   const style = {
     transform: CSS.Translate.toString(transform),
-    left: props.position ? props.position.x : 0,
-    top: props.position ? props.position.y : 0,
+    ...(props.position ? {
+      left: props.position.x,
+      top: props.position.y,
+    } : {}),
   };
 
   return (
-    <button ref={setNodeRef} style={style} {...listeners} {...attributes} className='absolute z-10'>
+    <div ref={setNodeRef} style={style} {...listeners} {...attributes} className={`absolute  hover:cursor-grab z-${props.zIndex} ${props.className}`}>
       <div className='flex flex-col border-1 border-black rounded-lg shadow-lg bg-white w-128 h-fit'>
         <div className='header flex items-center justify-between bg-blue-300 p-3 rounded-t-lg'>
           <h1 className="title text-2xl font-bold">{props.title}</h1>
@@ -33,6 +35,6 @@ export default function CommonWindow(props: WindowElementProps) {
           {props.children}
         </div>
       </div>
-    </button>
+    </div>
   );
 }
