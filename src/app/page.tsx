@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 
-import About from './about/page';
+import About from './_pages/about/page';
 import { DroppableCanvas } from './_components/droppableCanvas';
 
 export default function App() {

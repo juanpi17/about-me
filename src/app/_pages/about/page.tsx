@@ -1,6 +1,7 @@
-import { about } from '../_text/es';
+import { about } from '../../_text/es';
 
-import { CommonWindow, CommonWindowProps } from '../_components/commonWindow';
+import { CommonWindow } from '../../_components/commonWindow';
+import { CommonWindowProps } from '../../models';
 
 export default function About(props: CommonWindowProps) {
   return (
