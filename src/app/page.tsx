@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
+import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 
 import About from './about/page';
 import { DroppableCanvas } from './_components/droppableCanvas';
@@ -15,7 +16,7 @@ export default function App() {
   }
 
   return (
-    <DndContext onDragEnd={handleDragEnd}>
+    <DndContext onDragEnd={handleDragEnd} modifiers={[restrictToWindowEdges]}>
       <div className="relative h-screen">
         <DroppableCanvas>
           <About position={position}/>

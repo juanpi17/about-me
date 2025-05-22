@@ -9,6 +9,7 @@ export default function About(props: CommonWindowProps) {
       position={props.position}
       zIndex={10}
       title={about.title}
+      className='resize overflow-auto'
     >
       <p className="text-lg">{about.description}</p>
     </CommonWindow>
