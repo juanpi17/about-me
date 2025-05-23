@@ -2,11 +2,10 @@ import React from 'react';
 import {useDroppable} from '@dnd-kit/core';
 
 export function DroppableCanvas(props: React.PropsWithChildren) {
-  const {isOver, setNodeRef} = useDroppable({
+  const {setNodeRef} = useDroppable({
     id: 'droppableCanvas',
   });
   const style = {
-    color: isOver ? 'green' : undefined,
     backgroundColor: '#326294',
   };
   

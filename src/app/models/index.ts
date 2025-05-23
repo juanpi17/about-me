@@ -3,7 +3,7 @@ import { ClientRect } from '@dnd-kit/core';
 interface CommonWindowProps {
   id?: string;
   element?: Element;
-  className?: string;
+  extendedClasses?: Array<string>;
   title?: string;
   children?: React.ReactNode;
 };

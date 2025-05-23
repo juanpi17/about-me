@@ -6,10 +6,11 @@ import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { Element } from './models'
 
 import { DroppableCanvas } from './_components/droppableCanvas';
-import About from './_pages/about/page';
-import Contact from './_pages/contact/page';
+import { About } from './_pages/about/page';
+import {Contact } from './_pages/contact/page';
 
 import { ElementsType } from './_const';
+// import { ElementsContext } from './_context/elementsContext';
 
 const initialStateElement: Element = {
     id: '',
@@ -38,7 +39,7 @@ export default function App() {
 
   const handleDragEnd = (event: DragEndEvent) => {
     if (event.over && event.over.id === 'droppableCanvas') {
-      const current = allowedElements.find((el) => el.id === event.active.id);
+      const current = elements.find((el) => el.id === event.active.id);
       setElements(elements.map((el) => {
         return {
           ...el,
