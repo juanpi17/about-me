@@ -3,15 +3,27 @@ import React, { useState } from 'react';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 
-import About from './_pages/about/page';
+import { Element } from './models'
+
 import { DroppableCanvas } from './_components/droppableCanvas';
+import About from './_pages/about/page';
+// import Contact from './_pages/contact/page';
+
+// const allowedElements = [
+//   'about',
+//   'contact'
+// ];
 
 export default function App() {
-  const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [element, setElement] = useState<Element>();
 
   function handleDragEnd(event: DragEndEvent) {
     if (event.over && event.over.id === 'droppableCanvas') {
-      setPosition({ x: event.active.rect.current.translated?.left || 0, y: event.active.rect.current.translated?.top || 0 });
+      setElement({
+        id: event.active.id,
+        visible: true,
+        position: event.active.rect.current.translated,
+      });
     }
   }
 
@@ -19,7 +31,8 @@ export default function App() {
     <DndContext onDragEnd={handleDragEnd} modifiers={[restrictToWindowEdges]}>
       <div className="relative h-screen">
         <DroppableCanvas>
-          <About position={position}/>
+          <About element={element!}/>
+          {/* <Contact  element={element!}/> */}
         </DroppableCanvas>
       </div>
     </DndContext>

@@ -1,20 +1,20 @@
-import { about } from '../../_text/es';
+import { contact } from '../../_text/es';
 
 import { CommonWindow } from '../../_components/commonWindow';
 import { CommonWindowProps } from '../../models';
 
-export default function About(props: CommonWindowProps) {
-  const id = 'about';
+export default function Contact(props: CommonWindowProps) {
+  const id = 'contact';
 
   return (
     <CommonWindow
       id={id}
       element={props.element}
       zIndex={10}
-      title={about.title}
+      title={contact.title}
       className='resize overflow-auto'
     >
-      <p className="text-lg">{about.description}</p>
+      <p className="text-lg">{contact.description}</p>
     </CommonWindow>
   );
 }

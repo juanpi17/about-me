@@ -7,7 +7,7 @@ export function DroppableCanvas(props: React.PropsWithChildren) {
   });
   const style = {
     color: isOver ? 'green' : undefined,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#326294',
   };
   
   return (
