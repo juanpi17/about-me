@@ -3,14 +3,13 @@ import { about } from '../../_text/es';
 import { CommonWindow } from '../../_components/commonWindow';
 import { CommonWindowProps } from '../../models';
 
-export default function About(props: CommonWindowProps) {
-  const id = 'about';
+import { ElementsType } from '../../_const';
 
+export default function About(props: CommonWindowProps) {
   return (
     <CommonWindow
-      id={id}
+      id={ElementsType.about}
       element={props.element}
-      zIndex={10}
       title={about.title}
       className='resize overflow-auto'
     >
