@@ -5,8 +5,9 @@ export interface CommonWindowProps {
   id: string | number;
   element: SectionPageElement;
   extendedClasses?: Array<string>;
-  title?: string;
+  titleName?: string;
   children?: React.ReactNode;
+  info?: SectionPageElementText;
 };
 
 export interface SectionPageElement {

@@ -10,7 +10,7 @@ export const About = (props: CommonWindowProps) => {
     <CommonWindow
       id={WindowElementsType.ABOUT}
       element={props.element}
-      title={about.title}
+      titleName={about.title}
       extendedClasses={['w-128', 'h-fit']}
     >
       <p className="text-lg">{about.description}</p>

@@ -14,7 +14,7 @@ export const CommonWindow = (props: CommonWindowProps) => {
     id: props.id || 'draggable',
   });
 
-  const { title, element, extendedClasses = [], children } = props || {};
+  const { titleName, element, extendedClasses = [], children } = props || {};
   const { onTop, position } = element || {};
 
   const style = {
@@ -71,7 +71,7 @@ export const CommonWindow = (props: CommonWindowProps) => {
             <CloseIcon />
           </button>
           <div ref={setActivatorNodeRef} {...listeners} {...attributes} className='flex-grow p-1'>
-            <span className="title text-md font-bold text-black font-[family-name:var(--font-inconsolata)]">{title}</span>
+            <span className="title text-md font-bold text-black font-[family-name:var(--font-inconsolata)]">{titleName}</span>
           </div>
         </div>
         <div className='content p-3 border-1 bg-white border-[#abacad] rounded-b-lg rounded-tr-lg shadow-lg font-[family-name:var(--font-inconsolata)]'>

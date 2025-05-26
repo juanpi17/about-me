@@ -12,7 +12,7 @@ export const Skills = (props: CommonWindowProps) => {
       <CommonWindow
         id={item.name}
         element={props.element}
-        title={item.name}
+        titleName={item.name}
         extendedClasses={['w-128', 'h-fit']}
       >
         <p className="text-lg">{item.description}</p>
@@ -24,7 +24,7 @@ export const Skills = (props: CommonWindowProps) => {
     <CommonWindow
       id={WindowElementsType.SKILLS}
       element={props.element}
-      title={skills.title}
+      titleName={skills.title}
       extendedClasses={['w-128', 'h-fit']}
     >
       <p className="text-lg">{skills.description}</p>

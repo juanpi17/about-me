@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inconsolata, Jersey_10 } from "next/font/google";
 import "./globals.css";
 
-import { ElementsProvider } from './_context/windowElementsContext';
+import { WindowElementsProvider } from './_context/windowElementsContext';
 
 const inconsolata = Inconsolata({
   variable: "--font-inconsolata",
@@ -31,9 +31,9 @@ export default function RootLayout({
       <body
         className={`${inconsolata.variable} ${jersey.variable} antialiased`}
       >
-        <ElementsProvider>
+        <WindowElementsProvider>
           {children}
-        </ElementsProvider>
+        </WindowElementsProvider>
       </body>
     </html>
   );

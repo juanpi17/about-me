@@ -5,16 +5,23 @@ import { Dispatch, SetStateAction } from "react";
 import { SectionPageElement, CommonWindowProps } from '../../models';
 import { WindowElementsType } from '@/app/_const';
 
+import { about, contact, skills } from '../../_text/es';
+
 interface CommonWindowElementsContextProps {
     windowElements: CommonWindowProps[];
     setWindowElements: Dispatch<SetStateAction<CommonWindowProps[]>>;
 }
 
 // TODO: Remove this when we instantiate the elements dinamically
-const initialStateElement: SectionPageElement = {
-    visible: true,
-    onTop: false,
-    position: null,
+export const initialStateElement: SectionPageElement = {
+  visible: true,
+  onTop: false,
+  position: null,
+};
+
+export const initialStateWindowElement: CommonWindowProps = {
+  id: '',
+  element: initialStateElement,
 };
 
 // const initialElements: Array<string> = [
@@ -28,24 +35,27 @@ const startingWindowElements: Array<CommonWindowProps> =
     {
       id: WindowElementsType.ABOUT,
       element: initialStateElement,
-      title: 'About',
+      titleName: about.title,
+      info: about,
     },
     {
       id: WindowElementsType.CONTACT,
       element: initialStateElement,
-      title: 'Contact',
+      titleName: contact.title,
+      info: contact,
     },
     {
       id: WindowElementsType.SKILLS,
       element: initialStateElement,
-      title: 'Skills',
+      titleName: skills.title,
+      info: skills,
     },
   ];
 // END TODO
 
 const WindowElements = createContext<CommonWindowElementsContextProps>({ windowElements: [], setWindowElements: () => {} });
 
-export function ElementsProvider({ children } : { children: React.ReactNode }) {
+export function WindowElementsProvider({ children } : { children: React.ReactNode }) {
   const [windowElements, setWindowElements] = useState<Array<CommonWindowProps>>(startingWindowElements);
 
   return (

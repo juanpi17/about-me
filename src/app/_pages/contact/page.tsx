@@ -9,7 +9,7 @@ export const Contact = (props: CommonWindowProps) => {
     <CommonWindow
       id={WindowElementsType.CONTACT}
       element={props.element}
-      title={contact.title}
+      titleName={contact.title}
       extendedClasses={['w-128', 'h-fit']}
     >
       <p className="text-lg">{contact.description}</p>
