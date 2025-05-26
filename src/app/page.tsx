@@ -1,39 +1,18 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { DndContext, DragEndEvent, DragStartEvent } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
-
-import { Element } from './models'
 
 import { DroppableCanvas } from './_components/droppableCanvas';
 import { About } from './_pages/about/page';
 import {Contact } from './_pages/contact/page';
 
 import { ElementsType } from './_const';
-// import { ElementsContext } from './_context/elementsContext';
+import { ElementsContext } from './_context/elementsContext';
 
-const initialStateElement: Element = {
-    id: '',
-    visible: true,
-    onTop: false,
-    position: null,
-};
-
-const initialElements: Array<string> = [
-  ElementsType.about,
-  ElementsType.contact,
-]
-
-const allowedElements: Array<Element> = 
-  initialElements.map((el) => {
-    return {
-      ...initialStateElement,
-      id: el,
-    }
-  });
 
 export default function App() {
-  const [elements, setElements] = useState<Array<Element>>(allowedElements);
+  const { elements, setElements } = useContext(ElementsContext);
 
   const getElement = (elementId: string) => elements.find((el) => el.id === elementId);
 
@@ -60,12 +39,12 @@ export default function App() {
 
   return (
     <DndContext onDragEnd={handleDragEnd} onDragStart={handleDragStart} modifiers={[restrictToWindowEdges]}>
-      <div className="relative h-screen">
-        <DroppableCanvas>
-          <About element={getElement(ElementsType.about)}/>
-          <Contact element={getElement(ElementsType.contact)}/>
-        </DroppableCanvas>
-      </div>
+        <div className="relative h-screen">
+          <DroppableCanvas>
+            <About element={getElement(ElementsType.about)}/>
+            <Contact element={getElement(ElementsType.contact)}/>
+          </DroppableCanvas>
+        </div>
     </DndContext>
   );
 }

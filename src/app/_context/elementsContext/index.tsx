@@ -1,44 +1,46 @@
 'use client';
-import { createContext } from 'react';
-import { Element } from '../../models';
+import React, { createContext, useContext, useState } from 'react';
 import { Dispatch, SetStateAction } from "react";
+
+import { Element } from '../../models';
+import { ElementsType } from '../../_const';
 
 interface ElementsContextProps {
     elements: Element[];
     setElements: Dispatch<SetStateAction<Element[]>>;
 }
 
+const initialStateElement: Element = {
+    id: '',
+    visible: true,
+    onTop: false,
+    position: null,
+};
+
+const initialElements: Array<string> = [
+  ElementsType.about,
+  ElementsType.contact,
+]
+
+const allowedElements: Array<Element> = 
+  initialElements.map((el) => {
+    return {
+      ...initialStateElement,
+      id: el,
+    }
+  });
+
 export const ElementsContext = createContext<ElementsContextProps>({ elements: [], setElements: () => {} });
 
-// import { createContext, useContext, useState } from 'react';
-// import { Dispatch, SetStateAction } from "react";
+export function ElementsProvider({ children } : { children: React.ReactNode }) {
+  // const [elements, setElements] = useState<Element[]>([]);
+  const [elements, setElements] = useState<Array<Element>>(allowedElements);
 
-// interface ElementsContextProps {
-//     elements: Element[];
-//     setElements: Dispatch<SetStateAction<Element[]>>;
-// }
+  return (
+    <ElementsContext.Provider value={{ elements, setElements }}>
+      {children}
+    </ElementsContext.Provider>
+  );
+}
 
-
-// const SidebarContext = createContext<ElementsContextProps>({ elements: [], setElements: () => {} });
-
-// export function Sidebar() {
-//   const [elements, setElements] = useState<Element[]>([]);
-
-//   return (
-//     <SidebarContext.Provider value={{ elements, setElements }}>
-//       <SidebarNav />
-//     </SidebarContext.Provider>
-//   );
-// }
-
-// function SidebarNav() {
-//   const { elements } = useContext(SidebarContext);
-
-//   return (
-//     <div>
-//       <p>Home</p>
-
-//       {elements && <h1>Aqui esta el context</h1>}
-//     </div>
-//   );
-// }
+export const useElementsContext = () => useContext(ElementsContext);
