@@ -1,5 +1,8 @@
 import { SectionPageElementText } from "@/app/models";
 import { JavaScriptIcon } from "@/app/_components/svg/javascriptIcon";
+import { JestIcon } from "@/app/_components/svg/jestIcon";
+import { NodeJsIcon } from "@/app/_components/svg/nodeJsIcon";
+import { ReactIcon } from "@/app/_components/svg/reactIcon";
 import { TypeScriptIcon } from "@/app/_components/svg/typescriptIcon";
 
 export const about: SectionPageElementText = {
@@ -25,6 +28,22 @@ export const skills: SectionPageElementText = {
             icon: <TypeScriptIcon width="48" height="48" />,
             description: '3+ años de experiencia en desarrollo web con TypeScript, mejorando la calidad del código y la mantenibilidad de las aplicaciones.',
         },
+        {
+            name: "React",
+            icon: <ReactIcon width="48" height="48" />,
+            description: '5+ años de experiencia en desarrollo de aplicaciones web/webview/nativas con React: implementación "vanilla" y uso del framework Next.js.',
+        },
+        {
+            name: "Node.js",
+            icon: <NodeJsIcon width="48" height="48" />,
+            description: '5+ años de experiencia en desarrollo de aplicaciones middle-end/back-end con Node.js, incluyendo la creación de APIs RESTful y servicios en tiempo real.',
+        },
+        {
+            name: "Jest",
+            icon: <JestIcon width="48" height="48" />,
+            description: '3+ años de experiencia en pruebas unitarias y de integración con Jest, asegurando la calidad y confiabilidad del código.',
+        }
+
         // "React",
         // "Next.js",
         // "Tailwind CSS",

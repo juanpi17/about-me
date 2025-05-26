@@ -1,6 +1,6 @@
 import { SVGSkillIcons } from "@/app/models";
 
-export const nodeJsIcon = (props: SVGSkillIcons) => (
+export const NodeJsIcon = (props: SVGSkillIcons) => (
   <svg
     width={800}
     height={800}
