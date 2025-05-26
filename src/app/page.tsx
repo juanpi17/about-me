@@ -4,35 +4,42 @@ import { DndContext, DragEndEvent, DragStartEvent } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 
 import { DroppableCanvas } from './_components/droppableCanvas';
-import { About } from './_pages/about/page';
-import {Contact } from './_pages/contact/page';
-import {Skills } from './_pages/skills/page';
+import { MakeSection } from './_components/makeSection';
+// import { About } from './_pages/about/page';
+// import {Contact } from './_pages/contact/page';
+// import {Skills } from './_pages/skills/page';
 
-import { ElementsType } from './_const';
-import { useElementsContext } from './_context/elementsContext';
+// import { ElementsType } from './_const';
+import { useWindowElementsContext } from './_context/windowElementsContext';
 
 export default function App() {
-  const { elements, setElements } = useElementsContext();
+  const { windowElements, setWindowElements } = useWindowElementsContext();
 
-  const getElement = (elementId: string) => elements.find((el) => el.id === elementId && el.visible);
+  // const getElement = (elementId: string) => windowElements.find((w) => w.id === elementId && el.);
 
   const handleDragEnd = (event: DragEndEvent) => {
     if (event.over && event.over.id === 'droppableCanvas') {
-      const current = elements.find((el) => el.id === event.active.id);
-      setElements(elements.map((el) => {
+      const current = windowElements.find((w) => w.id === event.active.id);
+      setWindowElements(windowElements.map((w) => {
         return {
-          ...el,
-          position: el.id === current?.id ? event.active.rect.current.translated : el.position,
+          ...w,
+          element: {
+            ...w.element,
+            position: w.id === current?.id ? event.active.rect.current.translated : w.element.position,
+          },
         }
       }));
     }
   };
 
   const handleDragStart = (event: DragStartEvent) => {
-    setElements(elements.map((el) => {
+    setWindowElements(windowElements.map((w) => {
       return {
-        ...el,
-        onTop: el.id === event.active.id,
+        ...w,
+        element: {
+          ...w.element,
+          onTop: w.id === event.active.id,
+        },
       }
     }));
   };
@@ -41,15 +48,8 @@ export default function App() {
     <DndContext onDragEnd={handleDragEnd} onDragStart={handleDragStart} modifiers={[restrictToWindowEdges]}>
         <div className="relative h-screen">
           <DroppableCanvas>
-            {elements.map((el) => {
-              if (el.id === ElementsType.about) {
-                return <About key={el.id} element={getElement(ElementsType.about)} />;
-              } else if (el.id === ElementsType.contact) {
-                return <Contact key={el.id} element={getElement(ElementsType.contact)} />;
-              } else if (el.id === ElementsType.skills) {
-                return <Skills key={el.id} element={getElement(ElementsType.skills)} />;
-              }
-              return null;
+            {windowElements.map((w) => {
+              return <MakeSection key={w.id} {...w} />;
             })}
             {/* <About element={getElement(ElementsType.about)}/>
             <Contact element={getElement(ElementsType.contact)}/>

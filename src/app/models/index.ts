@@ -2,15 +2,14 @@ import React from 'react';
 import { ClientRect } from '@dnd-kit/core';
 
 export interface CommonWindowProps {
-  id?: string;
-  element?: SectionPageElement;
+  id: string | number;
+  element: SectionPageElement;
   extendedClasses?: Array<string>;
   title?: string;
   children?: React.ReactNode;
 };
 
 export interface SectionPageElement {
-  id: string | number;
   visible: boolean;
   onTop: boolean;
   position: ClientRect | null;

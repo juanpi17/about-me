@@ -2,7 +2,7 @@ import { skills } from '../../_text/es';
 
 import { CommonWindow } from '../../_components/commonWindow';
 import { AdditionalProps, CommonWindowProps } from '../../models';
-import { ElementsType } from '../../_const';
+import { WindowElementsType } from '../../_const';
 
 export const Skills = (props: CommonWindowProps) => {
 
@@ -22,7 +22,7 @@ export const Skills = (props: CommonWindowProps) => {
 
   return (
     <CommonWindow
-      id={ElementsType.skills}
+      id={WindowElementsType.SKILLS}
       element={props.element}
       title={skills.title}
       extendedClasses={['w-128', 'h-fit']}

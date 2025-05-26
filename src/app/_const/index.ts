@@ -1,5 +1,5 @@
-export const ElementsType = {
-    about: 'about',
-    contact: 'contact',
-    skills: 'skills',
+export const WindowElementsType = {
+    ABOUT: 'about',
+    CONTACT: 'contact',
+    SKILLS: 'skills',
 };

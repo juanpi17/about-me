@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inconsolata, Jersey_10 } from "next/font/google";
 import "./globals.css";
 
-import { ElementsProvider } from './_context/elementsContext';
+import { ElementsProvider } from './_context/windowElementsContext';
 
 const inconsolata = Inconsolata({
   variable: "--font-inconsolata",

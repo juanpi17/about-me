@@ -6,10 +6,10 @@ import classNames from 'classnames';
 
 import CloseIcon from '../svg/closeIcon';
 import { CommonWindowProps } from '../../models'
-import { useElementsContext } from '../../_context/elementsContext';
+import { useWindowElementsContext } from '../../_context/windowElementsContext';
 
 export const CommonWindow = (props: CommonWindowProps) => {
-  const { elements, setElements } = useElementsContext();
+  const { windowElements, setWindowElements } = useWindowElementsContext();
   const { attributes, listeners, setNodeRef, transform, setActivatorNodeRef } = useDraggable({
     id: props.id || 'draggable',
   });
@@ -35,11 +35,14 @@ export const CommonWindow = (props: CommonWindowProps) => {
     event.stopPropagation();
     event.preventDefault();
 
-    const current = elements.find((el) => el.id === props.id);
-    setElements(elements.map((el) => {
+    const current = windowElements.find((w) => w.id === props.id);
+    setWindowElements(windowElements.map((w) => {
       return {
-        ...el,
-        visible: el.id === current?.id ? false : el.visible,
+        ...w,
+        element: {
+          ...w.element,
+          visible: w.id === current?.id ? false : w.element.visible,
+        },
       }
     }));
   };
@@ -49,10 +52,13 @@ export const CommonWindow = (props: CommonWindowProps) => {
   }
 
   const handleOnTop = () => {
-    setElements(elements.map((el) => {
+    setWindowElements(windowElements.map((w) => {
       return {
-        ...el,
-        onTop: el.id === props.id ? true : false,
+        ...w,
+        element: {
+          ...w.element,
+          onTop: w.id === props.id ? true : false,
+        },
       }
     }));
   };
