@@ -1,5 +1,5 @@
 'use client';
-import React, { useContext } from 'react';
+import React from 'react';
 import { DndContext, DragEndEvent, DragStartEvent } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 
@@ -8,13 +8,12 @@ import { About } from './_pages/about/page';
 import {Contact } from './_pages/contact/page';
 
 import { ElementsType } from './_const';
-import { ElementsContext } from './_context/elementsContext';
-
+import { useElementsContext } from './_context/elementsContext';
 
 export default function App() {
-  const { elements, setElements } = useContext(ElementsContext);
+  const { elements, setElements } = useElementsContext();
 
-  const getElement = (elementId: string) => elements.find((el) => el.id === elementId);
+  const getElement = (elementId: string) => elements.find((el) => el.id === elementId && el.visible);
 
   const handleDragEnd = (event: DragEndEvent) => {
     if (event.over && event.over.id === 'droppableCanvas') {

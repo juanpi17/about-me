@@ -30,10 +30,9 @@ const allowedElements: Array<Element> =
     }
   });
 
-export const ElementsContext = createContext<ElementsContextProps>({ elements: [], setElements: () => {} });
+const ElementsContext = createContext<ElementsContextProps>({ elements: [], setElements: () => {} });
 
 export function ElementsProvider({ children } : { children: React.ReactNode }) {
-  // const [elements, setElements] = useState<Element[]>([]);
   const [elements, setElements] = useState<Array<Element>>(allowedElements);
 
   return (

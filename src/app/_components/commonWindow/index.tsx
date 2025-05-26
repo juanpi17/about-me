@@ -6,10 +6,10 @@ import classNames from 'classnames';
 
 import CloseIcon from '../svg/closeIcon';
 import { CommonWindowProps } from '../../models'
-// import { ElementsContext } from '../../_context/elementsContext';
+import { useElementsContext } from '../../_context/elementsContext';
 
 export const CommonWindow = (props: CommonWindowProps) => {
-  // const [elements, setElements] = useContext(ElementsContext);
+  const { elements, setElements } = useElementsContext();
   const { attributes, listeners, setNodeRef, transform, setActivatorNodeRef } = useDraggable({
     id: props.id || 'draggable',
   });
@@ -32,17 +32,21 @@ export const CommonWindow = (props: CommonWindowProps) => {
   };
 
   const handleClose = (event: MouseEvent<HTMLButtonElement>) => {
-    console.log('🚀 ~ handleClose ~ event:', event);
-    console.log('🚀 ~ CommonWindow ~ props:', props);
-    // setElements(elements.map((el) => {
-    //   return {
-    //     ...el,
-    //     visible,
-    //   }
-    // }));
-    // Handle close action
-    // console.log('Close button clicked');
+    event.stopPropagation();
+    event.preventDefault();
+
+    const current = elements.find((el) => el.id === props.id);
+    setElements(elements.map((el) => {
+      return {
+        ...el,
+        visible: el.id === current?.id ? false : el.visible,
+      }
+    }));
   };
+
+  if (!element || !element.visible) {
+    return null;
+  }
 
   return (
     <div ref={setNodeRef} style={style} className={`absolute ${classNames(extendedClasses)}`}>
