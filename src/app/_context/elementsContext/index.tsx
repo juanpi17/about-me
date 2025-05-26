@@ -2,15 +2,15 @@
 import React, { createContext, useContext, useState } from 'react';
 import { Dispatch, SetStateAction } from "react";
 
-import { Element } from '../../models';
+import { SectionPageElement } from '../../models';
 import { ElementsType } from '../../_const';
 
-interface ElementsContextProps {
-    elements: Element[];
-    setElements: Dispatch<SetStateAction<Element[]>>;
+interface SectionPageElementsContextProps {
+    elements: SectionPageElement[];
+    setElements: Dispatch<SetStateAction<SectionPageElement[]>>;
 }
 
-const initialStateElement: Element = {
+const initialStateElement: SectionPageElement = {
     id: '',
     visible: true,
     onTop: false,
@@ -20,9 +20,10 @@ const initialStateElement: Element = {
 const initialElements: Array<string> = [
   ElementsType.about,
   ElementsType.contact,
+  ElementsType.skills,
 ]
 
-const allowedElements: Array<Element> = 
+const allowedElements: Array<SectionPageElement> = 
   initialElements.map((el) => {
     return {
       ...initialStateElement,
@@ -30,16 +31,16 @@ const allowedElements: Array<Element> =
     }
   });
 
-const ElementsContext = createContext<ElementsContextProps>({ elements: [], setElements: () => {} });
+const SectionPageElements = createContext<SectionPageElementsContextProps>({ elements: [], setElements: () => {} });
 
 export function ElementsProvider({ children } : { children: React.ReactNode }) {
-  const [elements, setElements] = useState<Array<Element>>(allowedElements);
+  const [elements, setElements] = useState<Array<SectionPageElement>>(allowedElements);
 
   return (
-    <ElementsContext.Provider value={{ elements, setElements }}>
+    <SectionPageElements value={{ elements, setElements }}>
       {children}
-    </ElementsContext.Provider>
+    </SectionPageElements>
   );
 }
 
-export const useElementsContext = () => useContext(ElementsContext);
+export const useElementsContext = () => useContext(SectionPageElements);

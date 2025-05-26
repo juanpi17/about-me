@@ -1,18 +1,33 @@
+import React from 'react';
 import { ClientRect } from '@dnd-kit/core';
 
-interface CommonWindowProps {
+export interface CommonWindowProps {
   id?: string;
-  element?: Element;
+  element?: SectionPageElement;
   extendedClasses?: Array<string>;
   title?: string;
   children?: React.ReactNode;
 };
 
-interface Element {
+export interface SectionPageElement {
   id: string | number;
   visible: boolean;
   onTop: boolean;
   position: ClientRect | null;
 };
 
-export type { CommonWindowProps, Element };
+export interface AdditionalProps {
+  name: string;
+  icon: React.JSX.Element;
+  description?: string;
+};
+
+export interface SectionPageElementText {
+  title: string;
+  description: string;
+  additional?: Array<AdditionalProps>;
+};
+
+export interface SVGSkillIcons {
+  [key: string]: string;
+};

@@ -48,8 +48,17 @@ export const CommonWindow = (props: CommonWindowProps) => {
     return null;
   }
 
+  const handleOnTop = () => {
+    setElements(elements.map((el) => {
+      return {
+        ...el,
+        onTop: el.id === props.id ? true : false,
+      }
+    }));
+  };
+
   return (
-    <div ref={setNodeRef} style={style} className={`absolute ${classNames(extendedClasses)}`}>
+    <div onClick={handleOnTop} ref={setNodeRef} style={style} className={`absolute ${classNames(extendedClasses)}`}>
       <div className={`flex flex-col`}>
         <div className={`header flex flex-row items-center gap-2 ${onTop ? 'bg-[#fec902]' : 'bg-[#abacad]' } border border-[#abacad] rounded-t-lg border-b-0 w-2/5 px-1 hover:cursor-grab`}>
           <button onClick={handleClose} className={`w-auto ${onTop ? 'bg-[#fab503]' : 'bg-[#abacad]' } focus:outline-none rounded-xs hover:bg-red-700`}>
