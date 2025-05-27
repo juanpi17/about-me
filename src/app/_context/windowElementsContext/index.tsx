@@ -24,12 +24,6 @@ export const initialStateWindowElement: CommonWindowProps = {
   element: initialStateElement,
 };
 
-// const initialElements: Array<string> = [
-//   ElementsType.about,
-//   ElementsType.contact,
-//   ElementsType.skills,
-// ]
-
 const startingWindowElements: Array<CommonWindowProps> = 
   [
     {

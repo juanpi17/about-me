@@ -19,7 +19,7 @@ export interface SectionPageElement {
 export interface AdditionalProps {
   name: string;
   icon: React.JSX.Element;
-  description?: string;
+  description: string;
 };
 
 export interface SectionPageElementText {
