@@ -10,6 +10,8 @@ import { about, contact, skills } from '../../_text/es';
 interface CommonWindowElementsContextProps {
     windowElements: CommonWindowProps[];
     setWindowElements: Dispatch<SetStateAction<CommonWindowProps[]>>;
+    historyClickedElements: string[];
+    setHistoryClickedElements:  Dispatch<SetStateAction<string[]>>;
 }
 
 // TODO: Remove this when we instantiate the elements dinamically
@@ -47,13 +49,14 @@ const startingWindowElements: Array<CommonWindowProps> =
   ];
 // END TODO
 
-const WindowElements = createContext<CommonWindowElementsContextProps>({ windowElements: [], setWindowElements: () => {} });
+const WindowElements = createContext<CommonWindowElementsContextProps>({ windowElements: [], setWindowElements: () => {}, historyClickedElements: [], setHistoryClickedElements: () => {} });
 
 export function WindowElementsProvider({ children } : { children: React.ReactNode }) {
   const [windowElements, setWindowElements] = useState<Array<CommonWindowProps>>(startingWindowElements);
+  const [historyClickedElements, setHistoryClickedElements] = useState<string[]>([]);
 
   return (
-    <WindowElements value={{ windowElements, setWindowElements }}>
+    <WindowElements value={{ windowElements, setWindowElements, historyClickedElements, setHistoryClickedElements }}>
       {children}
     </WindowElements>
   );

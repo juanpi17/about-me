@@ -9,7 +9,7 @@ import { CommonWindowProps } from '../../models'
 import { useWindowElementsContext } from '../../_context/windowElementsContext';
 
 export const CommonWindow = (props: CommonWindowProps) => {
-  const { windowElements, setWindowElements } = useWindowElementsContext();
+  const { windowElements, setWindowElements, setHistoryClickedElements } = useWindowElementsContext();
   const { attributes, listeners, setNodeRef, transform, setActivatorNodeRef } = useDraggable({
     id: props.id || 'draggable',
   });
@@ -61,6 +61,20 @@ export const CommonWindow = (props: CommonWindowProps) => {
         },
       }
     }));
+
+    setHistoryClickedElements((prev) => {
+      const newHistory = [...prev];
+      if (newHistory[0] === props.id) {
+        return newHistory; // No need to update if the same element is clicked
+      }
+
+      newHistory.unshift(props.id);
+      if (newHistory.length > 5) {
+        newHistory.pop();
+      }
+
+      return newHistory;
+    });
   };
 
   return (

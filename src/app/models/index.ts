@@ -2,7 +2,7 @@ import React from 'react';
 import { ClientRect } from '@dnd-kit/core';
 
 export interface CommonWindowProps {
-  id: string | number;
+  id: string;
   element: SectionPageElement;
   extendedClasses?: Array<string>;
   titleName?: string;

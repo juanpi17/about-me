@@ -1,24 +1,16 @@
 'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { DndContext, DragEndEvent, DragStartEvent } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 
 import { DroppableCanvas } from './_components/droppableCanvas';
 import { MakeSection } from './_components/makeSection';
 import { MainMenu } from './_components/mainMenu';
-// import { About } from './_pages/about/page';
-// import {Contact } from './_pages/contact/page';
-// import {Skills } from './_pages/skills/page';
 
-// import { ElementsType } from './_const';
 import { useWindowElementsContext } from './_context/windowElementsContext';
 
 export default function App() {
-  const { windowElements, setWindowElements } = useWindowElementsContext();
-
-  useEffect(() => {
-    console.log('Window elements updated:', windowElements);
-  }, [windowElements]);
+  const { windowElements, setWindowElements, setHistoryClickedElements } = useWindowElementsContext();
 
   const handleDragEnd = (event: DragEndEvent) => {
     if (event.over && event.over.id === 'droppableCanvas') {
@@ -32,6 +24,20 @@ export default function App() {
           },
         }
       }));
+
+      setHistoryClickedElements((prev) => {
+        const newHistory = [...prev];
+        if (newHistory[0] === event.active.id) {
+          return newHistory; // No need to update if the same element is clicked
+        }
+
+        newHistory.unshift(String(event.active.id));
+        if (newHistory.length > 5) {
+          newHistory.pop();
+        }
+
+        return newHistory;
+      });
     }
   };
 
@@ -55,9 +61,6 @@ export default function App() {
             {windowElements.map((w) => {
               return <MakeSection key={w.id} {...w} />;
             })}
-            {/* <About element={getElement(ElementsType.about)}/>
-            <Contact element={getElement(ElementsType.contact)}/>
-            <Skills element={getElement(ElementsType.skills)}/> */}
           </DroppableCanvas>
         </div>
     </DndContext>
