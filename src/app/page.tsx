@@ -5,6 +5,7 @@ import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 
 import { DroppableCanvas } from './_components/droppableCanvas';
 import { MakeSection } from './_components/makeSection';
+import { MainMenu } from './_components/mainMenu';
 // import { About } from './_pages/about/page';
 // import {Contact } from './_pages/contact/page';
 // import {Skills } from './_pages/skills/page';
@@ -50,6 +51,7 @@ export default function App() {
     <DndContext onDragEnd={handleDragEnd} onDragStart={handleDragStart} modifiers={[restrictToWindowEdges]}>
         <div className="relative h-screen">
           <DroppableCanvas>
+          <MainMenu />
             {windowElements.map((w) => {
               return <MakeSection key={w.id} {...w} />;
             })}
