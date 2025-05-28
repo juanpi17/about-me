@@ -13,7 +13,6 @@ export const MainMenu = () => {
           onClick={() => {
             const current = windowElements.find((w) => w.id === element.id);
             const lastOnTopId = historyClickedElements.length > 1 ? historyClickedElements.filter(item => item !== current?.id)[0] : undefined;
-            console.log('🚀 ~ MainMenu ~ historyClickedElements:', historyClickedElements);
 
             if (!current) return;
 

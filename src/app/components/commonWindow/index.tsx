@@ -9,7 +9,7 @@ import { CommonWindowProps } from '@/models'
 import { useWindowElementsContext } from '@/context/windowElementsContext';
 
 export const CommonWindow = (props: CommonWindowProps) => {
-  const { windowElements, setWindowElements, setHistoryClickedElements } = useWindowElementsContext();
+  const { windowElements, setWindowElements, historyClickedElements, setHistoryClickedElements } = useWindowElementsContext();
   const { attributes, listeners, setNodeRef, transform, setActivatorNodeRef } = useDraggable({
     id: props.id || 'draggable',
   });
@@ -36,12 +36,26 @@ export const CommonWindow = (props: CommonWindowProps) => {
     event.preventDefault();
 
     const current = windowElements.find((w) => w.id === props.id);
+    const elementsClicked = historyClickedElements.length > 1 ? historyClickedElements.filter(item => item !== current?.id) : undefined;
+    let lastOnTopId: string | undefined;
+
+    if (elementsClicked) {
+      for (const id of elementsClicked) {
+        const activeWindowsId = windowElements.map((w) => w.element.visible ? w.id : {});
+        if (activeWindowsId.includes(id)) {
+          lastOnTopId = id;
+          break;
+        }
+      }
+    }
+
     setWindowElements(windowElements.map((w) => {
       return {
         ...w,
         element: {
           ...w.element,
           visible: w.id === current?.id ? false : w.element.visible,
+          onTop: w.id === lastOnTopId ? true : w.element.onTop,
         },
       }
     }));
