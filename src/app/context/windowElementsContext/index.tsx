@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction } from "react";
 import { SectionPageElement, CommonWindowProps } from '@/models';
 import { WindowElementsType } from '@/const';
 
-import { about, contact, skills } from '@/content/es';
+import { about, contact, skills, workingExperience } from '@/content/es';
 
 interface CommonWindowElementsContextProps {
     windowElements: CommonWindowProps[];
@@ -45,6 +45,11 @@ const startingWindowElements: Array<CommonWindowProps> =
       element: initialStateElement,
       titleName: skills.title,
       info: skills,
+    },{
+      id: WindowElementsType.WORKING_EXPERIENCE,
+      element: initialStateElement,
+      titleName: workingExperience.title,
+      info: workingExperience,
     },
   ];
 // END TODO

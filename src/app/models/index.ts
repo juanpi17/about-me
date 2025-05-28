@@ -7,7 +7,7 @@ export interface CommonWindowProps {
   extendedClasses?: Array<string>;
   titleName?: string;
   children?: React.ReactNode;
-  info?: SectionPageElementText;
+  info?: BasicSectionText | SkillsSectionText | WorkingExperienceSectionText;
 };
 
 export interface SectionPageElement {
@@ -22,11 +22,27 @@ export interface SkillProps {
   description?: string;
 };
 
-export interface SectionPageElementText {
+export interface BasicSectionText {
   title: string;
   description: string;
-  primarySkills?: Array<SkillProps>;
-  secondarySkills?: Array<SkillProps>;
+};
+
+export interface SkillsSectionText extends BasicSectionText {
+  primarySkillsTitle: string;
+  primarySkills: Array<SkillProps>;
+  secondarySkillsTitle: string;
+  secondarySkills: Array<SkillProps>;
+};
+
+export interface WorkingExperienceProps {
+  company: string;
+  position: string;
+  fromTo: string;
+  items: Array<string>;
+};
+
+export interface WorkingExperienceSectionText extends BasicSectionText {
+  jobs: Array<WorkingExperienceProps>; 
 };
 
 export interface SVGSkillIcons {

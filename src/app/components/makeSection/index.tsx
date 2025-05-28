@@ -1,10 +1,50 @@
 import { CommonWindow } from '@/components/commonWindow';
-import { CommonWindowProps } from '@/models';
+import { type SkillsSectionText, type WorkingExperienceSectionText, CommonWindowProps } from '@/models';
 
 import { Accordion } from '@/components/accordion';
 
+const SkillsSection = ({ info } : { info: SkillsSectionText }) => {
+  if (!info.primarySkills && !info.secondarySkills) return null;
+  
+  return (
+    <>
+      <Accordion items={info.primarySkills} />
+      {/* {info.secondarySkills.map((skill) => (
+        <span key={skill.name}>{skill.icon}</span>
+      ))} */}
+    </>
+  )
+};
+
+const WorkingExperienceSection = ({ info } : { info: WorkingExperienceSectionText }) => {
+  if (!info.jobs) return null;
+
+  return (
+    <>
+      {info.jobs.map((job) => (
+        <div key={job.company} className='jobs'>
+          <h4>{job.company}</h4>
+        </div>
+      ))}
+    </>
+  )
+};
+
 export const MakeSection = (props: CommonWindowProps) => {
   const { id, element, titleName, info } = props;
+
+  const isSkillsSection = info && 'primarySkills' in info || false;
+  const isWorkingExperienceSection = info && 'jobs' in info || false;
+
+  // const WorkingExperienceSection = () => {
+  //   if (isWorkingExperienceSection && (info as WorkingExperienceSectionText)?.jobs) {
+  //     return (
+  //       (info as WorkingExperienceSectionText).jobs.map((job) => {
+  //         <h4>{job.company}</h4>
+  //       })
+  //     )
+  //   };
+  // };
 
   return (
       <CommonWindow
@@ -15,12 +55,29 @@ export const MakeSection = (props: CommonWindowProps) => {
       >
         {info && (
           <>
-          <p className="text-lg">{info.description}</p>
-          {info?.primarySkills && (
-            <Accordion items={info.primarySkills} />
-          )}
+            <p className="text-lg">{info.description}</p>
+            {isSkillsSection && <SkillsSection info={info as SkillsSectionText} />}
+            {isWorkingExperienceSection && <WorkingExperienceSection info={info as WorkingExperienceSectionText} />}
+            {/* {<SkillsSection isSkillsSection={isSkillsSection} info={(info as SkillsSectionText)} />} */}
+            {/* {SkillsSection()} */}
+            {/* { isSkillsSection && (
+              <Accordion items={(info as SkillsSectionText).primarySkills} />
+            )} */}
+            {/* { (info as SkillsSectionText)?.primarySkills && (
+              <Accordion items={(info as SkillsSectionText).primarySkills} />
+            )} */}
           </>
         )}
       </CommonWindow>
     );
 }
+
+
+// {info && (
+//           <>
+//           <p className="text-lg">{info.description}</p>
+//           { (info as SkillsSectionText)?.primarySkills && (
+//             <Accordion items={(info as SkillsSectionText).primarySkills} />
+//           )}
+//           </>
+//         )}

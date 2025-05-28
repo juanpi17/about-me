@@ -13,8 +13,50 @@ export const MainMenu = () => {
           onClick={() => {
             const current = windowElements.find((w) => w.id === element.id);
             const lastOnTopId = historyClickedElements.length > 1 ? historyClickedElements.filter(item => item !== current?.id)[0] : undefined;
+            console.log('🚀 ~ MainMenu ~ historyClickedElements:', historyClickedElements);
 
             if (!current) return;
+
+            // Si el elemento es visible pero no está onTop, solo lo ponemos onTop y quitamos onTop a los demás visibles
+            if (current.element.visible && !current.element.onTop) {
+              const updatedElements = windowElements.map((w) => {
+                if (w.id === current.id) {
+                  return {
+                    ...w,
+                    element: {
+                      ...w.element,
+                      onTop: true,
+                    },
+                  };
+                }
+                if (w.element.visible) {
+                  return {
+                    ...w,
+                    element: {
+                      ...w.element,
+                      onTop: false,
+                    },
+                  };
+                }
+                return w;
+              });
+              setWindowElements(updatedElements);
+
+              // setHistoryClickedElements((prev) => {
+              //   const newHistory = [...prev];
+              //   if (newHistory[0] === current.id) {
+              //     return newHistory; // No need to update if the same element is clicked
+              //   }
+
+              //   newHistory.unshift(current.id);
+              //   if (newHistory.length > 5) {
+              //     newHistory.pop();
+              //   }
+
+              //   return newHistory;
+              // });
+              return;
+            }
 
             const willBeVisible = !current.element.visible;
 
@@ -49,6 +91,20 @@ export const MainMenu = () => {
             });
 
             setWindowElements(updatedElements);
+
+            // setHistoryClickedElements((prev) => {
+            //   const newHistory = [...prev];
+            //   if (newHistory[0] === current.id) {
+            //     return newHistory; // No need to update if the same element is clicked
+            //   }
+
+            //   newHistory.unshift(current.id);
+            //   if (newHistory.length > 5) {
+            //     newHistory.pop();
+            //   }
+
+            //   return newHistory;
+            // });
           }}
         >
           <p className="text-sm">{element.titleName}</p>
