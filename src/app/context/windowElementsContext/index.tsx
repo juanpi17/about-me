@@ -1,18 +1,10 @@
 'use client';
 import React, { createContext, useContext, useState } from 'react';
-import { Dispatch, SetStateAction } from "react";
 
-import { SectionPageElement, CommonWindowProps } from '@/models';
+import { SectionPageElement, CommonWindowProps, CommonWindowElementsContextProps } from '@/models';
 import { WindowElementsType } from '@/const';
 
 import { about, contact, skills, workingExperience } from '@/content/es';
-
-interface CommonWindowElementsContextProps {
-    windowElements: CommonWindowProps[];
-    setWindowElements: Dispatch<SetStateAction<CommonWindowProps[]>>;
-    historyClickedElements: string[];
-    setHistoryClickedElements:  Dispatch<SetStateAction<string[]>>;
-}
 
 // TODO: Remove this when we instantiate the elements dinamically
 export const initialStateElement: SectionPageElement = {

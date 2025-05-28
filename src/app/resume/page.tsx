@@ -13,6 +13,12 @@ import { handleDragEnd, handleDragStart } from '@/events';
 export default function App() {
   const { windowElements, setWindowElements, setHistoryClickedElements } = useWindowElementsContext();
 
+//   useEffect(() => {
+//     const elements = windowElements.slice(1);
+//     setWindowElements(elements);
+//   // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, []);
+
   const customHandleDragEnd = (event: DragEndEvent) => {
     handleDragEnd({event, windowElements, setWindowElements, setHistoryClickedElements});
   };

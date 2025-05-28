@@ -1,5 +1,31 @@
-import React from 'react';
-import { ClientRect } from '@dnd-kit/core';
+import React, { Dispatch, SetStateAction } from 'react';
+import { ClientRect, DragEndEvent, DragStartEvent } from '@dnd-kit/core';
+
+export interface CustomDragEndEvent extends Omit<CommonWindowElementsContextProps, 'historyClickedElements'> {
+  event: DragEndEvent;
+};
+
+export interface CustomDragStartEvent extends Omit<CommonWindowElementsContextProps, 'historyClickedElements' | 'setHistoryClickedElements'> {
+  event: DragStartEvent;
+};
+
+export interface CommonWindowElementsContextProps {
+    windowElements: CommonWindowProps[];
+    setWindowElements: Dispatch<SetStateAction<CommonWindowProps[]>>;
+    historyClickedElements: string[];
+    setHistoryClickedElements:  Dispatch<SetStateAction<string[]>>;
+}
+
+// export interface CustomDragEvent<T> extends CommonWindowElementsContextProps {
+//   event: T;
+// };
+
+// export interface CommonWindowElementsContextProps {
+//     windowElements: CommonWindowProps[];
+//     setWindowElements: Dispatch<SetStateAction<CommonWindowProps[]>>;
+//     historyClickedElements: string[];
+//     setHistoryClickedElements:  Dispatch<SetStateAction<string[]>>;
+// }
 
 export interface CommonWindowProps {
   id: string;
