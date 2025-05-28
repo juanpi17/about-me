@@ -1,7 +1,7 @@
-import { AdditionalProps } from '@/app/models';
+import { SkillProps } from '@/models';
 import React, { useState } from 'react';
 
-export const Accordion = ({ items } : { items: AdditionalProps[] }) => {
+export const Accordion = ({ items } : { items: SkillProps[] }) => {
   const [isActive, setIsActive] = useState({ index: -1, active: false });
 
   const handleClick = (index: number) => {

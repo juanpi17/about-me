@@ -3,11 +3,11 @@ import React from 'react';
 import { DndContext, DragEndEvent, DragStartEvent } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 
-import { DroppableCanvas } from './_components/droppableCanvas';
-import { MakeSection } from './_components/makeSection';
-import { MainMenu } from './_components/mainMenu';
+import { DroppableCanvas } from '@/components/droppableCanvas';
+import { MakeSection } from '@/components/makeSection';
+import { MainMenu } from '@/components/mainMenu';
 
-import { useWindowElementsContext } from './_context/windowElementsContext';
+import { useWindowElementsContext } from './context/windowElementsContext';
 
 export default function App() {
   const { windowElements, setWindowElements, setHistoryClickedElements } = useWindowElementsContext();

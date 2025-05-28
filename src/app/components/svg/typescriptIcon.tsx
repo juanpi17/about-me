@@ -1,4 +1,4 @@
-import { SVGSkillIcons } from "@/app/models";
+import { SVGSkillIcons } from "@/models";
 
 export const TypeScriptIcon = (props: SVGSkillIcons) => (
   <svg

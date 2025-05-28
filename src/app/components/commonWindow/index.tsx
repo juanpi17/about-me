@@ -4,9 +4,9 @@ import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import classNames from 'classnames';
 
-import CloseIcon from '../svg/closeIcon';
-import { CommonWindowProps } from '../../models'
-import { useWindowElementsContext } from '../../_context/windowElementsContext';
+import CloseIcon from '@/components/svg/closeIcon';
+import { CommonWindowProps } from '@/models'
+import { useWindowElementsContext } from '@/context/windowElementsContext';
 
 export const CommonWindow = (props: CommonWindowProps) => {
   const { windowElements, setWindowElements, setHistoryClickedElements } = useWindowElementsContext();

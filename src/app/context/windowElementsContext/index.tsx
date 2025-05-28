@@ -2,10 +2,10 @@
 import React, { createContext, useContext, useState } from 'react';
 import { Dispatch, SetStateAction } from "react";
 
-import { SectionPageElement, CommonWindowProps } from '../../models';
-import { WindowElementsType } from '@/app/_const';
+import { SectionPageElement, CommonWindowProps } from '@/models';
+import { WindowElementsType } from '@/const';
 
-import { about, contact, skills } from '../../_text/es';
+import { about, contact, skills } from '@/content/es';
 
 interface CommonWindowElementsContextProps {
     windowElements: CommonWindowProps[];

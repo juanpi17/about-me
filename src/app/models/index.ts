@@ -16,16 +16,17 @@ export interface SectionPageElement {
   position: ClientRect | null;
 };
 
-export interface AdditionalProps {
+export interface SkillProps {
   name: string;
   icon: React.JSX.Element;
-  description: string;
+  description?: string;
 };
 
 export interface SectionPageElementText {
   title: string;
   description: string;
-  additional?: Array<AdditionalProps>;
+  primarySkills?: Array<SkillProps>;
+  secondarySkills?: Array<SkillProps>;
 };
 
 export interface SVGSkillIcons {

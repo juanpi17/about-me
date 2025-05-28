@@ -1,4 +1,4 @@
-import { useWindowElementsContext } from "@/app/_context/windowElementsContext";
+import { useWindowElementsContext } from "@/context/windowElementsContext";
 
 export const MainMenu = () => {
   const { windowElements, historyClickedElements, setWindowElements } = useWindowElementsContext();
