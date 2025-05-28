@@ -1,51 +1,8 @@
 'use client';
 import React, { createContext, useContext, useState } from 'react';
 
-import { SectionPageElement, CommonWindowProps, CommonWindowElementsContextProps } from '@/models';
-import { WindowElementsType } from '@/const';
-
-import { about, contact, skills, workingExperience } from '@/content/es';
-
-// TODO: Remove this when we instantiate the elements dinamically
-export const initialStateElement: SectionPageElement = {
-  visible: true,
-  onTop: false,
-  position: null,
-};
-
-export const initialStateWindowElement: CommonWindowProps = {
-  id: '',
-  element: initialStateElement,
-};
-
-const startingWindowElements: Array<CommonWindowProps> = 
-  [
-    {
-      id: WindowElementsType.ABOUT,
-      element: initialStateElement,
-      titleName: about.title,
-      info: about,
-    },
-    {
-      id: WindowElementsType.CONTACT,
-      element: initialStateElement,
-      titleName: contact.title,
-      info: contact,
-    },
-    {
-      id: WindowElementsType.SKILLS,
-      element: initialStateElement,
-      titleName: skills.title,
-      info: skills,
-      extendedClasses: ['w-96', 'h-fit'],
-    },{
-      id: WindowElementsType.WORKING_EXPERIENCE,
-      element: initialStateElement,
-      titleName: workingExperience.title,
-      info: workingExperience,
-    },
-  ];
-// END TODO
+import { CommonWindowProps, CommonWindowElementsContextProps } from '@/models';
+import { startingWindowElements } from '@/initialState';
 
 const WindowElements = createContext<CommonWindowElementsContextProps>({ windowElements: [], setWindowElements: () => {}, historyClickedElements: [], setHistoryClickedElements: () => {} });
 
