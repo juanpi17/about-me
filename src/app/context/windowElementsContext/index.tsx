@@ -45,6 +45,7 @@ const startingWindowElements: Array<CommonWindowProps> =
       element: initialStateElement,
       titleName: skills.title,
       info: skills,
+      extendedClasses: ['w-96', 'h-fit'],
     },{
       id: WindowElementsType.WORKING_EXPERIENCE,
       element: initialStateElement,

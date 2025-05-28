@@ -31,27 +31,19 @@ const WorkingExperienceSection = ({ info } : { info: WorkingExperienceSectionTex
 };
 
 export const MakeSection = (props: CommonWindowProps) => {
-  const { id, element, titleName, info } = props;
+  const { id, element, titleName, info, extendedClasses = null } = props;
 
   const isSkillsSection = info && 'primarySkills' in info || false;
   const isWorkingExperienceSection = info && 'jobs' in info || false;
 
-  // const WorkingExperienceSection = () => {
-  //   if (isWorkingExperienceSection && (info as WorkingExperienceSectionText)?.jobs) {
-  //     return (
-  //       (info as WorkingExperienceSectionText).jobs.map((job) => {
-  //         <h4>{job.company}</h4>
-  //       })
-  //     )
-  //   };
-  // };
+  const defaultClasses = ['w-128', 'h-fit'];
 
   return (
       <CommonWindow
         id={id}
         element={element}
         titleName={titleName}
-        extendedClasses={['w-128', 'h-fit']}
+        extendedClasses={extendedClasses ?? defaultClasses}
       >
         {info && (
           <>
