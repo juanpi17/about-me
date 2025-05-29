@@ -23,7 +23,7 @@ export const Accordion = ({ items } : { items: SkillProps[] }) => {
           </div>
         ))}
       </div>
-      <div className={`accordion-content flex flex-row h-fit p-1 ${isActive.active ? 'bg-gray-100' : 'bg-auto'}`}>
+      <div className={`accordion-content flex flex-row px-5 -mx-3 items-center ${isActive.active ? 'bg-gray-100 max-h-24 h-24' : 'max-h-0 h-0 bg-auto'} transition-all easy-out duration-300 overflow-hidden`}>
         {isActive.active && items[isActive.index].description}
       </div>
     </div>

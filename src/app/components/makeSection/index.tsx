@@ -27,7 +27,7 @@ const SkillsSection = ({ info } : { info: SkillsSectionText }) => {
           </div>
           <div className="grid grid-cols-6 justify-items-center justify-between mt-3 px-2">
             {info.secondarySkills.map((item, index) => (
-              <div key={index} className='py-3 not-hover:grayscale'>
+              <div key={index} className='py-3 not-hover:grayscale hover:scale-120'>
                 <Tooltip text={item.name}>
                   {item.icon}
                 </Tooltip>

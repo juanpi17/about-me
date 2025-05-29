@@ -40,7 +40,7 @@ export const skills: SkillsSectionText = {
     description: "A lo largo de mi vida profesional y como hobbista, utilicé diversos stacks tecnológicos según lo que el proyecto demandara. Es por esto, que divido mis habilidades técnicas en dos grandes grupos: principales y secundarias.",
     primarySkillsTitle: {
         key: "Habilidades principales",
-        content: ", las cuales utilicé a lo largo de toda mi carrera profesional",
+        content: " las cuales utilicé a lo largo de toda mi carrera profesional",
     },
     primarySkills: [{
             name: "JavaScript",
