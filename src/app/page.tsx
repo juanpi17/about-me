@@ -8,7 +8,7 @@ import { MakeSection } from '@/components/makeSection';
 import { MainMenu } from '@/components/mainMenu';
 
 import { useWindowElementsContext } from '@/context/windowElementsContext';
-import { handleDragEnd, handleDragStart } from '@/events';
+import { handleDragEnd, handleDragStart } from '@/utils/events';
 
 export default function App() {
   const { windowElements, setWindowElements, setHistoryClickedElements } = useWindowElementsContext();

@@ -27,7 +27,6 @@ export const Accordion = ({ items } : { items: SkillProps[] }) => {
       <div className={`accordion-content flex flex-row h-fit ${isActive.active ? 'bg-gray-300' : 'bg-auto'}`}>
         {isActive.active && items[isActive.index].description}
       </div>
-      {/* {isActive.active && <div className="accordion-content flex flex-row bg-gray-300">{items[isActive.index].description}</div>} */}
     </div>
   );
 };

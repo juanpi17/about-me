@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import CloseIcon from '@/components/svg/closeIcon';
 import { CommonWindowProps } from '@/types'
 import { useWindowElementsContext } from '@/context/windowElementsContext';
-import { handleClose, handleOnTop } from '@/events';
+import { handleClose, handleOnTop } from '@/utils/events';
 
 export const CommonWindow = (props: CommonWindowProps) => {
   const { windowElements, setWindowElements, historyClickedElements, setHistoryClickedElements } = useWindowElementsContext();

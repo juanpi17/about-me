@@ -24,3 +24,10 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.retro-title {
+  color: var(--color-gray-600);
+  padding: calc(var(--spacing) * 1);
+  border-style: var(--tw-border-style);
+  border-width: 1px;
+}

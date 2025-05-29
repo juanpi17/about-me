@@ -71,9 +71,15 @@ export interface ContactSectionText extends BasicSectionText {
 };
 
 export interface SkillsSectionText extends BasicSectionText {
-  primarySkillsTitle: string;
+  primarySkillsTitle: {
+    key: string;
+    content: string;
+  };
   primarySkills: Array<SkillProps>;
-  secondarySkillsTitle: string;
+  secondarySkillsTitle: {
+    key: string;
+    content: string;
+  };
   secondarySkills: Array<SkillProps>;
 };
 

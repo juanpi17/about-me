@@ -37,8 +37,11 @@ export const contact: BasicSectionText = {
 
 export const skills: SkillsSectionText = {
     title: "Habilidades",
-    description: "Habilidades principales y secundarias con las que trabajé a lo largo de mi carrera profesional:",
-    primarySkillsTitle: "Habilidades principales",
+    description: "A lo largo de mi vida profesional y como hobbista, utilicé diversos stacks tecnológicos según lo que el proyecto demandara. Es por esto, que divido mis habilidades técnicas en dos grandes grupos: principales y secundarias.",
+    primarySkillsTitle: {
+        key: "Habilidades principales",
+        content: ", las cuales utilicé a lo largo de toda mi carrera profesional",
+    },
     primarySkills: [{
             name: "JavaScript",
             icon: <JavaScriptIcon {...iconBig} />,
@@ -65,7 +68,10 @@ export const skills: SkillsSectionText = {
             description: '3+ años de experiencia en pruebas unitarias y de integración con Jest, asegurando la calidad y confiabilidad del código.',
         }
     ],
-    secondarySkillsTitle: "Habilidades complementarias",
+    secondarySkillsTitle: {
+        key: "Otras habilidades",
+        content: " (a.k.a. habilidades secundarias) con las que trabajé y de las cuales tengo conocimientos",
+    },
     secondarySkills: [
         {
             name: "Angular",
