@@ -38,7 +38,7 @@ export interface CommonWindowProps {
   children: React.ReactNode;
 };
 
-type SectionText = BasicSectionText | LanguagesSectionText | SkillsSectionText | WorkingExperienceSectionText | ContactSectionText | EducationSectionText | AchievementsSectionText;
+type SectionText = BasicSectionText | LanguagesSectionText | SkillsSectionText | WorkingExperienceSectionText | ContactSectionText | EducationSectionText | AchievementsSectionText | CombinedSectionText;
 
 export interface MakeSectionProps extends Omit<CommonWindowProps, 'children'> {
   content: SectionText;
@@ -112,6 +112,6 @@ export interface AchievementsSectionText extends BasicSectionText {
   achievements: Array<AchievementsSectionProps>;
 }
 
-export interface CombinedSectionText {
+export interface CombinedSectionText extends BasicSectionText {
   sections: Array<SectionText>;
 }

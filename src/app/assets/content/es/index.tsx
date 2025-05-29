@@ -185,7 +185,7 @@ export const workingExperience : WorkingExperienceSectionText = {
     ]
 };
 
-export const education: EducationSectionText = {
+const education: EducationSectionText = {
     title: "Educación",
     description: "",
     studies: [
@@ -216,7 +216,7 @@ export const education: EducationSectionText = {
     ]
 }
 
-export const personalAchievements: AchievementsSectionText = {
+const personalAchievements: AchievementsSectionText = {
     title: "Logros personales",
     description: "",
     achievements: [
@@ -235,7 +235,7 @@ export const personalAchievements: AchievementsSectionText = {
     ]
 }
 
-export const idioms: LanguagesSectionText = {
+const idioms: LanguagesSectionText = {
     title: "Idiomas",
     description: "",
     languages: [
@@ -246,7 +246,9 @@ export const idioms: LanguagesSectionText = {
     ]
 }
 
-export const combined: CombinedSectionText = {
+export const personalInformation: CombinedSectionText = {
+    title: "Información personal",
+    description: "",
     sections: [
         education,
         personalAchievements,

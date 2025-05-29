@@ -1,5 +1,5 @@
 import { CommonWindow } from '@/components/commonWindow';
-import { type SkillsSectionText, type WorkingExperienceSectionText, MakeSectionProps } from '@/types';
+import { type SkillsSectionText, type WorkingExperienceSectionText, CombinedSectionText, MakeSectionProps } from '@/types';
 
 import { Accordion } from '@/components/accordion';
 import Tooltip from '@/components/tooltip';
@@ -64,11 +64,28 @@ const WorkingExperienceSection = ({ info } : { info: WorkingExperienceSectionTex
   )
 };
 
+const PersonalInformationSection = ({ info } : { info: CombinedSectionText }) => {
+  console.log('🚀 ~ PersonalInformationSection ~ info:', info);
+  if (!info.sections) return null;
+  console.log('🚀 ~ PersonalInformationSection ~ info.sections:', info.sections);
+
+  return (
+    <>
+      {info.sections.map((section, index) => (
+        <div key={section.title + index}>
+          <p>{section.title}</p>
+        </div>
+      ))}
+    </>
+  )
+};
+
 export const MakeSection = (props: MakeSectionProps) => {
   const { id, element, titleName, extendedClasses = null, content } = props;
-
-  const isSkillsSection = content && 'primarySkills' in content || false;
-  const isWorkingExperienceSection = content && 'jobs' in content || false;
+  const isSkillsSection = 'primarySkills' in content || false;
+  const isWorkingExperienceSection = 'jobs' in content || false;
+  const isPersonalInformationSection = 'sections' in content || false;
+  console.log('🚀 ~ MakeSection ~ isPersonalInformationSection:', isPersonalInformationSection);
 
   const defaultClasses = ['w-128', 'h-fit'];
 
@@ -84,6 +101,7 @@ export const MakeSection = (props: MakeSectionProps) => {
             <p>{content.description}</p>
             {isSkillsSection && <SkillsSection info={content as SkillsSectionText} />}
             {isWorkingExperienceSection && <WorkingExperienceSection info={content as WorkingExperienceSectionText} />}
+            {isPersonalInformationSection && <PersonalInformationSection info={content as CombinedSectionText} />}
           </>
         )}
       </CommonWindow>

@@ -1,7 +1,7 @@
 import { SectionPageElement, MakeSectionProps } from '@/types';
 import { WindowElementsType } from '@/assets/const';
 
-import { about, contact, skills, workingExperience } from '@/assets/content/es';
+import { about, contact, skills, workingExperience, personalInformation } from '@/assets/content/es';
 import { ClientRect } from '@dnd-kit/core';
 
 const initialPosition: ClientRect = {
@@ -39,11 +39,18 @@ export const startingWindowElements: Array<MakeSectionProps> =
       titleName: skills.title,
       extendedClasses: ['w-128', 'h-fit'],
       content: skills,
-    },{
+    },
+    {
       id: WindowElementsType.WORKING_EXPERIENCE,
       element: initialStateElement,
       titleName: workingExperience.title,
       content: workingExperience,
+    },
+    {
+      id: WindowElementsType.PERSONAL_INFORMATION,
+      element: initialStateElement,
+      titleName: personalInformation.title,
+      content: personalInformation,
     },
   ];
 
@@ -74,10 +81,17 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       titleName: skills.title,
       content: skills,
       extendedClasses: ['w-96', 'h-fit'],
-    },{
+    },
+    {
       id: WindowElementsType.WORKING_EXPERIENCE,
       element: initialStateElement,
       titleName: workingExperience.title,
       content: workingExperience,
+    },
+    {
+      id: WindowElementsType.PERSONAL_INFORMATION,
+      element: initialStateElement,
+      titleName: personalInformation.title,
+      content: personalInformation,
     },
   ];

@@ -3,4 +3,5 @@ export const WindowElementsType = {
     CONTACT: 'contact',
     SKILLS: 'skills',
     WORKING_EXPERIENCE: 'workingExperience',
+    PERSONAL_INFORMATION: 'personalInformation'
 };
