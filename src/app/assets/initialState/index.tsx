@@ -1,7 +1,7 @@
-import { SectionPageElement, CommonWindowProps } from '@/models';
-import { WindowElementsType } from '@/const';
+import { SectionPageElement, CommonWindowProps } from '@/types';
+import { WindowElementsType } from '@/assets/const';
 
-import { about, contact, skills, workingExperience } from '@/content/es';
+import { about, contact, skills, workingExperience } from '@/assets/content/es';
 import { ClientRect } from '@dnd-kit/core';
 
 const initialPosition: ClientRect = {

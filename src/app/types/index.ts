@@ -16,17 +16,6 @@ export interface CommonWindowElementsContextProps {
     setHistoryClickedElements:  Dispatch<SetStateAction<string[]>>;
 }
 
-// export interface CustomDragEvent<T> extends CommonWindowElementsContextProps {
-//   event: T;
-// };
-
-// export interface CommonWindowElementsContextProps {
-//     windowElements: CommonWindowProps[];
-//     setWindowElements: Dispatch<SetStateAction<CommonWindowProps[]>>;
-//     historyClickedElements: string[];
-//     setHistoryClickedElements:  Dispatch<SetStateAction<string[]>>;
-// }
-
 export interface CommonWindowProps {
   id: string;
   element: SectionPageElement;
@@ -48,9 +37,27 @@ export interface SkillProps {
   description?: string;
 };
 
+interface ContactSectionProps {
+  icon: React.JSX.Element;
+  text: string;
+}
+
+interface AchievementsSectionProps {
+  title: string;
+  description: string;
+}
+
 export interface BasicSectionText {
   title: string;
   description: string;
+};
+
+export interface ExtendedSectionText extends BasicSectionText {
+  items: Array<string>;
+}
+
+export interface ContactSectionText extends BasicSectionText {
+  items: Array<ContactSectionProps>;
 };
 
 export interface SkillsSectionText extends BasicSectionText {
@@ -60,16 +67,24 @@ export interface SkillsSectionText extends BasicSectionText {
   secondarySkills: Array<SkillProps>;
 };
 
-export interface WorkingExperienceProps {
-  company: string;
-  position: string;
+export interface FormationProps {
+  title: string;
+  subtitle: string;
   fromTo: string;
   items: Array<string>;
 };
 
 export interface WorkingExperienceSectionText extends BasicSectionText {
-  jobs: Array<WorkingExperienceProps>; 
+  jobs: Array<FormationProps>; 
 };
+
+export interface EducationSectionText extends BasicSectionText {
+  studies: Array<FormationProps>; 
+};
+
+export interface AchievementsSectionText extends BasicSectionText {
+  items: Array<AchievementsSectionProps>;
+}
 
 export interface SVGSkillIcons {
   [key: string]: string;

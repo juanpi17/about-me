@@ -1,8 +1,8 @@
 'use client';
 import React, { createContext, useContext, useState } from 'react';
 
-import { CommonWindowProps, CommonWindowElementsContextProps } from '@/models';
-import { startingWindowElements } from '@/initialState';
+import { CommonWindowProps, CommonWindowElementsContextProps } from '@/types';
+import { startingWindowElements } from '@/assets/initialState';
 
 const WindowElements = createContext<CommonWindowElementsContextProps>({ windowElements: [], setWindowElements: () => {}, historyClickedElements: [], setHistoryClickedElements: () => {} });
 

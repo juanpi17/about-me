@@ -5,7 +5,7 @@ import { CSS } from '@dnd-kit/utilities';
 import classNames from 'classnames';
 
 import CloseIcon from '@/components/svg/closeIcon';
-import { CommonWindowProps } from '@/models'
+import { CommonWindowProps } from '@/types'
 import { useWindowElementsContext } from '@/context/windowElementsContext';
 
 export const CommonWindow = (props: CommonWindowProps) => {

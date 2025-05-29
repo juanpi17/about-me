@@ -1,4 +1,4 @@
-import { SkillProps } from '@/models';
+import { SkillProps } from '@/types';
 import React, { useState } from 'react';
 
 export const Accordion = ({ items } : { items: SkillProps[] }) => {

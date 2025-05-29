@@ -1,4 +1,4 @@
-import { SVGSkillIcons } from "@/models";
+import { SVGSkillIcons } from "@/types";
 
 export const RubyIcon = (props: SVGSkillIcons) => (
   <svg

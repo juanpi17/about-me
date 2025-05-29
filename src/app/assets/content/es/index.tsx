@@ -1,4 +1,4 @@
-import { BasicSectionText, SkillsSectionText, SVGSkillIcons, WorkingExperienceSectionText } from "@/models";
+import { BasicSectionText, SkillsSectionText, SVGSkillIcons, WorkingExperienceSectionText } from "@/types";
 import { JavaScriptIcon } from "@/components/svg/javascriptIcon";
 import { JestIcon } from "@/components/svg/jestIcon";
 import { NodeJsIcon } from "@/components/svg/nodeJsIcon";
@@ -27,7 +27,7 @@ const iconSmall = {
 
 export const about: BasicSectionText = {
     title: "Acerca de mí",
-    description: "Esta es una aplicación de ejemplo creada con Next.js y Tailwind CSS, que además va a contener algo de mi persona y mis intereses. Espero que te guste.",
+    description: "Sólida formación en el desarrollo de soluciones web a medida con énfasis en el diseño visual, con más de 5+ años de experiencia en JavaScript y 3+ años de especialización en TypeScript y tests unitarios.  Enfoque en innovación y mejora de la experiencia del usuario a través de desarrollo de software robusto. Aprendizaje continuo y adaptación a nuevos desafíos.",
 };
 
 export const contact: BasicSectionText = {

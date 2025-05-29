@@ -1,5 +1,5 @@
 import { CommonWindow } from '@/components/commonWindow';
-import { type SkillsSectionText, type WorkingExperienceSectionText, CommonWindowProps } from '@/models';
+import { type SkillsSectionText, type WorkingExperienceSectionText, CommonWindowProps } from '@/types';
 
 import { Accordion } from '@/components/accordion';
 
@@ -22,8 +22,8 @@ const WorkingExperienceSection = ({ info } : { info: WorkingExperienceSectionTex
   return (
     <>
       {info.jobs.map((job) => (
-        <div key={job.company} className='jobs'>
-          <h4>{job.company}</h4>
+        <div key={job.title} className='jobs'>
+          <h4>{job.title}</h4>
         </div>
       ))}
     </>

@@ -1,4 +1,4 @@
-import { CustomDragStartEvent, CustomDragEndEvent } from '@/models';
+import { CustomDragStartEvent, CustomDragEndEvent } from '@/types';
 
 export function handleDragEnd({
   event,

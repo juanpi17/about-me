@@ -1,4 +1,4 @@
-import { SVGSkillIcons } from "@/models";
+import { SVGSkillIcons } from "@/types";
 
 export const JavaScriptIcon = (props: SVGSkillIcons) => (
   <svg
