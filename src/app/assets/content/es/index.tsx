@@ -1,4 +1,4 @@
-import { BasicSectionText, SkillsSectionText, SVGSkillIcons, WorkingExperienceSectionText } from "@/types";
+import { AchievementsSectionText, BasicSectionText, ContactSectionText, EducationSectionText, ExtendedSectionText, SkillsSectionText, SVGSkillIcons, WorkingExperienceSectionText } from "@/types";
 import { JavaScriptIcon } from "@/components/svg/javascriptIcon";
 import { JestIcon } from "@/components/svg/jestIcon";
 import { NodeJsIcon } from "@/components/svg/nodeJsIcon";
@@ -30,9 +30,26 @@ export const about: BasicSectionText = {
     description: "Sólida formación en el desarrollo de soluciones web a medida con énfasis en el diseño visual, con más de 5+ años de experiencia en JavaScript y 3+ años de especialización en TypeScript y tests unitarios.  Enfoque en innovación y mejora de la experiencia del usuario a través de desarrollo de software robusto. Aprendizaje continuo y adaptación a nuevos desafíos.",
 };
 
-export const contact: BasicSectionText = {
+export const contact: ContactSectionText = {
     title: "¿Cómo contactarme?",
-    description: "Para llamarme, podés hacerlo al 1234567890. Para escribirme, puedes hacerlo a mi correo electrónico: juanpi17@gmail.com",
+    description: "Para comunicarte conmigo, podrás hacerlo a través de:",
+    items: [
+        {
+            text: "(+54) 342 4785455",
+            linkType: "tel",
+        },
+        {
+            text: "juanplepore@gmail.com",
+            linkType: "mailto",
+        },
+        {
+            text: "Padilla 2171, Depto. 15C. Santa Fe, C.P.: 3000, Argentina",
+        },
+        {
+            text: "linkedin.com/jplepore",
+            linkType: "href",
+        }
+    ]
 };
 
 export const skills: SkillsSectionText = {
@@ -156,6 +173,75 @@ export const workingExperience : WorkingExperienceSectionText = {
                 "Desarrollo de un sistema web de estadística y seguimiento de enfermedades respiratorias de acceso nacional.",
                 "Desarrollo de un sistema completo de vacunación para menores de edad, con foco en el seguimiento de pacientes. Creado para uso principal en sistemas desktop para los diferentes centros médicos de las localidades de Villa María, Gualeguaychú, Paraná y Concordia, y con funciones web para sincronización de datos y generación de estadísticas.",
             ]
+        },
+        {
+            title: "Instituto Nacional de Enfermedades Respiratorias (INER)",
+            subtitle: "Asesoría informática",
+            fromTo: "2014 - 2015",
+            items: [
+                "Asesoría sobre actualización de equipamientos físicos y automatización de tareas cotidianas",
+            ]
         }
     ]
 };
+
+export const education: EducationSectionText = {
+    title: "Educación",
+    description: "",
+    studies: [
+        {
+            title: "Ingeniería en Informática",
+            subtitle: "Universidad Nacional del Litoral (UNL)",
+            fromTo: "2008 - 2018",
+            items: [
+                "Graduado en la Facultad de Ingeniería y Ciencias Hídricas (FICH) de la Universidad Nacional del Litoral (UNL)",
+            ]
+        },
+        {
+            title: "Analista en Informática Aplicada",
+            subtitle: "Universidad Nacional del Litoral (UNL)",
+            fromTo: "2008 - 2012",
+            items: [
+                "Graduado en la Facultad de Ingeniería y Ciencias Hídricas (FICH) de la Universidad Nacional del Litoral (UNL)",
+            ]
+        },
+        {
+            title: "Bachiller Perito Mercantil",
+            subtitle: 'EEMPI Nro. 8106 "Don Bosco"',
+            fromTo: "1997 - 2001",
+            items: [
+                'Graduado en la Escuela de Enseñanza Media Particular Incorporada Nro. 8106 "Don Bosco"',
+            ]
+        }
+    ]
+}
+
+export const achievements: AchievementsSectionText = {
+    title: "Logros personales",
+    description: "",
+    items: [
+        {
+            title: "Web and Mobile UI Management",
+            description: "Optimización de microservicios y mejora de interfaces mobile y web browser para aumentar la satisfacción de la navegación del usuario en un 25%."
+        },
+        {
+            title: "Vaccination System Rollout",
+            description: "Implementación de un sistema de vacunación en 4 ciudades, mejorando la eficiencia del proceso en un 50%."
+        },
+        {
+            title: "Lottery System Maintenance",
+            description: "Gestión y mantenimiento del sistema de lotería, logrando un tiempo de actividad del 99.9% durante 5 años."
+        }
+    ]
+}
+
+export const languages: ExtendedSectionText = {
+    title: "Idiomas",
+    description: "",
+    items: [
+        "Inglés (Avanzado)",
+        "Español (Nativo)",
+        "Portugués (Básico)",
+        "Japonés (Básico)"
+    ]
+}

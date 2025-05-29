@@ -48,8 +48,9 @@ export interface SkillProps {
 };
 
 interface ContactSectionProps {
-  icon: React.JSX.Element;
+  icon?: React.JSX.Element;
   text: string;
+  linkType?: string;
 }
 
 interface AchievementsSectionProps {
