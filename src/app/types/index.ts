@@ -1,6 +1,10 @@
 import React, { Dispatch, SetStateAction, MouseEvent } from 'react';
 import { ClientRect, DragEndEvent, DragStartEvent } from '@dnd-kit/core';
 
+export interface SVGSkillIcons {
+  [key: string]: string;
+};
+
 export interface CustomCloseEvent extends Omit<CommonWindowElementsContextProps, 'setHistoryClickedElements'> {
   event: MouseEvent<HTMLButtonElement>;
   currentWindowId: string;
@@ -20,8 +24,8 @@ export interface CustomDragStartEvent extends Omit<CommonWindowElementsContextPr
 };
 
 export interface CommonWindowElementsContextProps {
-    windowElements: CommonWindowProps[];
-    setWindowElements: Dispatch<SetStateAction<CommonWindowProps[]>>;
+    windowElements: MakeSectionProps[];
+    setWindowElements: Dispatch<SetStateAction<MakeSectionProps[]>>;
     historyClickedElements: string[];
     setHistoryClickedElements:  Dispatch<SetStateAction<string[]>>;
 }
@@ -30,10 +34,15 @@ export interface CommonWindowProps {
   id: string;
   element: SectionPageElement;
   extendedClasses?: Array<string>;
-  titleName?: string;
-  children?: React.ReactNode;
-  info?: BasicSectionText | SkillsSectionText | WorkingExperienceSectionText;
+  titleName: string;
+  children: React.ReactNode;
 };
+
+type SectionText = BasicSectionText | LanguagesSectionText | SkillsSectionText | WorkingExperienceSectionText | ContactSectionText | EducationSectionText | AchievementsSectionText;
+
+export interface MakeSectionProps extends Omit<CommonWindowProps, 'children'> {
+  content: SectionText;
+}
 
 export interface SectionPageElement {
   visible: boolean;
@@ -63,8 +72,8 @@ export interface BasicSectionText {
   description: string;
 };
 
-export interface ExtendedSectionText extends BasicSectionText {
-  items: Array<string>;
+export interface LanguagesSectionText extends BasicSectionText {
+  languages: Array<string>;
 }
 
 export interface ContactSectionText extends BasicSectionText {
@@ -100,9 +109,9 @@ export interface EducationSectionText extends BasicSectionText {
 };
 
 export interface AchievementsSectionText extends BasicSectionText {
-  items: Array<AchievementsSectionProps>;
+  achievements: Array<AchievementsSectionProps>;
 }
 
-export interface SVGSkillIcons {
-  [key: string]: string;
-};
+export interface CombinedSectionText {
+  sections: Array<SectionText>;
+}

@@ -14,7 +14,7 @@ export const CommonWindow = (props: CommonWindowProps) => {
     id: props.id || 'draggable',
   });
 
-  const { id, titleName, element, extendedClasses = [], children } = props || {};
+  const { id, titleName, element, extendedClasses = [] } = props || {};
   const { onTop, position } = element || {};
 
   const style = {
@@ -55,7 +55,7 @@ export const CommonWindow = (props: CommonWindowProps) => {
           </div>
         </div>
         <div className='content p-5 border-1 bg-white border-[#abacad] rounded-b-lg rounded-tr-lg shadow-lg font-[family-name:var(--font-inconsolata)] max-h-150 overflow-y-auto'>
-          {children}
+          
         </div>
       </div>
     </div>

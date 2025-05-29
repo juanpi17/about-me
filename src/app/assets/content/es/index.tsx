@@ -1,4 +1,4 @@
-import { AchievementsSectionText, BasicSectionText, ContactSectionText, EducationSectionText, ExtendedSectionText, SkillsSectionText, SVGSkillIcons, WorkingExperienceSectionText } from "@/types";
+import { AchievementsSectionText, BasicSectionText, CombinedSectionText, ContactSectionText, EducationSectionText, LanguagesSectionText, SkillsSectionText, SVGSkillIcons, WorkingExperienceSectionText } from "@/types";
 import { JavaScriptIcon } from "@/components/svg/javascriptIcon";
 import { JestIcon } from "@/components/svg/jestIcon";
 import { NodeJsIcon } from "@/components/svg/nodeJsIcon";
@@ -216,10 +216,10 @@ export const education: EducationSectionText = {
     ]
 }
 
-export const achievements: AchievementsSectionText = {
+export const personalAchievements: AchievementsSectionText = {
     title: "Logros personales",
     description: "",
-    items: [
+    achievements: [
         {
             title: "Web and Mobile UI Management",
             description: "Optimización de microservicios y mejora de interfaces mobile y web browser para aumentar la satisfacción de la navegación del usuario en un 25%."
@@ -235,13 +235,21 @@ export const achievements: AchievementsSectionText = {
     ]
 }
 
-export const languages: ExtendedSectionText = {
+export const idioms: LanguagesSectionText = {
     title: "Idiomas",
     description: "",
-    items: [
+    languages: [
         "Inglés (Avanzado)",
         "Español (Nativo)",
         "Portugués (Básico)",
         "Japonés (Básico)"
+    ]
+}
+
+export const combined: CombinedSectionText = {
+    sections: [
+        education,
+        personalAchievements,
+        idioms
     ]
 }

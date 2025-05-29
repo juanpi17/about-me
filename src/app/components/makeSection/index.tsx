@@ -1,5 +1,5 @@
 import { CommonWindow } from '@/components/commonWindow';
-import { type SkillsSectionText, type WorkingExperienceSectionText, CommonWindowProps } from '@/types';
+import { type SkillsSectionText, type WorkingExperienceSectionText, MakeSectionProps } from '@/types';
 
 import { Accordion } from '@/components/accordion';
 import Tooltip from '@/components/tooltip';
@@ -46,15 +46,15 @@ const WorkingExperienceSection = ({ info } : { info: WorkingExperienceSectionTex
   return (
     <>
       {info.jobs.map((job, index) => (
-        <div key={job.title} className={`${index === info.jobs.length - 1 ? `mb-0` : `mb-5`}`}>
+        <div key={job.title + index} className={`${index === info.jobs.length - 1 ? `mb-0` : `mb-5`}`}>
           <span className='retro-title'>{job.title}</span>
           <div className='flex justify-between items-center my-2'>
             <span className='text-sm font-bold'>{job.subtitle}</span>
             <span className='text-sm'>{job.fromTo}</span>
           </div>
           <ul className='ml-6 list-outside list-disc mt-1'>
-            {job.items.map((item) => (
-              <li key={item} className='text-md'>{item}</li>
+            {job.items.map((item, index) => (
+              <li key={item + index} className='text-md'>{item}</li>
             ))}
           </ul>
           <span className={`mt-5 mx-26 border-b border-b-gray-200 ${index === info.jobs.length - 1 ? `hidden` : `block`}`}></span>
@@ -64,11 +64,11 @@ const WorkingExperienceSection = ({ info } : { info: WorkingExperienceSectionTex
   )
 };
 
-export const MakeSection = (props: CommonWindowProps) => {
-  const { id, element, titleName, info, extendedClasses = null } = props;
+export const MakeSection = (props: MakeSectionProps) => {
+  const { id, element, titleName, extendedClasses = null, content } = props;
 
-  const isSkillsSection = info && 'primarySkills' in info || false;
-  const isWorkingExperienceSection = info && 'jobs' in info || false;
+  const isSkillsSection = content && 'primarySkills' in content || false;
+  const isWorkingExperienceSection = content && 'jobs' in content || false;
 
   const defaultClasses = ['w-128', 'h-fit'];
 
@@ -79,11 +79,11 @@ export const MakeSection = (props: CommonWindowProps) => {
         titleName={titleName}
         extendedClasses={extendedClasses ?? defaultClasses}
       >
-        {info && (
+        {content && (
           <>
-            <p>{info.description}</p>
-            {isSkillsSection && <SkillsSection info={info as SkillsSectionText} />}
-            {isWorkingExperienceSection && <WorkingExperienceSection info={info as WorkingExperienceSectionText} />}
+            <p>{content.description}</p>
+            {isSkillsSection && <SkillsSection info={content as SkillsSectionText} />}
+            {isWorkingExperienceSection && <WorkingExperienceSection info={content as WorkingExperienceSectionText} />}
           </>
         )}
       </CommonWindow>

@@ -1,4 +1,4 @@
-import { SectionPageElement, CommonWindowProps } from '@/types';
+import { SectionPageElement, MakeSectionProps } from '@/types';
 import { WindowElementsType } from '@/assets/const';
 
 import { about, contact, skills, workingExperience } from '@/assets/content/es';
@@ -19,35 +19,35 @@ const initialStateElement: SectionPageElement = {
   position: initialPosition,
 };
 
-export const startingWindowElements: Array<CommonWindowProps> = 
+export const startingWindowElements: Array<MakeSectionProps> = 
   [
     {
       id: WindowElementsType.ABOUT,
       element: initialStateElement,
       titleName: about.title,
-      info: about,
+      content: about,
     },
     {
       id: WindowElementsType.CONTACT,
       element: initialStateElement,
       titleName: contact.title,
-      info: contact,
+      content: contact,
     },
     {
       id: WindowElementsType.SKILLS,
       element: initialStateElement,
       titleName: skills.title,
-      info: skills,
       extendedClasses: ['w-128', 'h-fit'],
+      content: skills,
     },{
       id: WindowElementsType.WORKING_EXPERIENCE,
       element: initialStateElement,
       titleName: workingExperience.title,
-      info: workingExperience,
+      content: workingExperience,
     },
   ];
 
-export const startingWindowElementsResume: Array<CommonWindowProps> = 
+export const startingWindowElementsResume: Array<MakeSectionProps> = 
   [
     {
       id: WindowElementsType.ABOUT,
@@ -60,24 +60,24 @@ export const startingWindowElementsResume: Array<CommonWindowProps> =
         },
       },
       titleName: about.title,
-      info: about,
+      content: about,
     },
     {
       id: WindowElementsType.CONTACT,
       element: initialStateElement,
       titleName: contact.title,
-      info: contact,
+      content: contact,
     },
     {
       id: WindowElementsType.SKILLS,
       element: initialStateElement,
       titleName: skills.title,
-      info: skills,
+      content: skills,
       extendedClasses: ['w-96', 'h-fit'],
     },{
       id: WindowElementsType.WORKING_EXPERIENCE,
       element: initialStateElement,
       titleName: workingExperience.title,
-      info: workingExperience,
+      content: workingExperience,
     },
   ];
