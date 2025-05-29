@@ -118,7 +118,7 @@ export const skills: SkillsSectionText = {
 
 export const workingExperience : WorkingExperienceSectionText = {
     title: "Experiencia Laboral",
-    description: "Experiencias laborales destacadas de los últimos años",
+    description: "",
     jobs: [
         {
             title: "Mercado Libre",
@@ -132,7 +132,7 @@ export const workingExperience : WorkingExperienceSectionText = {
         },
         {
             title: "Serfe S.A.",
-            subtitle: "Full Stack SSR Developer",
+            subtitle: "Full Stack SSR developer",
             fromTo: "2017 - 2021",
             items: [
                 "Desarrollo de sistemas web a medida para clientes procedentes del exterior.",
@@ -142,7 +142,7 @@ export const workingExperience : WorkingExperienceSectionText = {
         },
         {
             title: "AcrilPal S.A.",
-            subtitle: "Freelance development",
+            subtitle: "Freelance developer",
             fromTo: "2016 - 2023",
             items: [
                 "Diseño e implementación de un sistema de lotería para utilización en diferentes entes provinciales (Entre Ríos, Formosa, Chaco), con la capacidad de controlar PLCs para el manejo de bolillas, generación de estadísticas y visualización multi-dispositivos.",
@@ -150,7 +150,7 @@ export const workingExperience : WorkingExperienceSectionText = {
         },
         {
             title: "Instituto Nacional de Enfermedades Respiratorias (INER)",
-            subtitle: "Freelance development",
+            subtitle: "Freelance developer",
             fromTo: "2015 - 2023",
             items: [
                 "Desarrollo de un sistema web de estadística y seguimiento de enfermedades respiratorias de acceso nacional.",

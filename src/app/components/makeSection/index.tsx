@@ -45,9 +45,19 @@ const WorkingExperienceSection = ({ info } : { info: WorkingExperienceSectionTex
 
   return (
     <>
-      {info.jobs.map((job) => (
-        <div key={job.title} className='jobs'>
-          <h4>{job.title}</h4>
+      {info.jobs.map((job, index) => (
+        <div key={job.title} className={`${index === info.jobs.length - 1 ? `mb-0` : `mb-5`}`}>
+          <span className='retro-title'>{job.title}</span>
+          <div className='flex justify-between items-center my-2'>
+            <span className='text-sm font-bold'>{job.subtitle}</span>
+            <span className='text-sm'>{job.fromTo}</span>
+          </div>
+          <ul className='ml-6 list-outside list-disc mt-1'>
+            {job.items.map((item) => (
+              <li key={item} className='text-md'>{item}</li>
+            ))}
+          </ul>
+          <span className={`mt-5 mx-26 border-b border-b-gray-200 ${index === info.jobs.length - 1 ? `hidden` : `block`}`}></span>
         </div>
       ))}
     </>
@@ -74,26 +84,8 @@ export const MakeSection = (props: CommonWindowProps) => {
             <p>{info.description}</p>
             {isSkillsSection && <SkillsSection info={info as SkillsSectionText} />}
             {isWorkingExperienceSection && <WorkingExperienceSection info={info as WorkingExperienceSectionText} />}
-            {/* {<SkillsSection isSkillsSection={isSkillsSection} info={(info as SkillsSectionText)} />} */}
-            {/* {SkillsSection()} */}
-            {/* { isSkillsSection && (
-              <Accordion items={(info as SkillsSectionText).primarySkills} />
-            )} */}
-            {/* { (info as SkillsSectionText)?.primarySkills && (
-              <Accordion items={(info as SkillsSectionText).primarySkills} />
-            )} */}
           </>
         )}
       </CommonWindow>
     );
 }
-
-
-// {info && (
-//           <>
-//           <p className="text-lg">{info.description}</p>
-//           { (info as SkillsSectionText)?.primarySkills && (
-//             <Accordion items={(info as SkillsSectionText).primarySkills} />
-//           )}
-//           </>
-//         )}

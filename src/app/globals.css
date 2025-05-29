@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --color-topbar: #f5efe1;
 }
 
 @theme inline {
@@ -30,4 +31,30 @@ body {
   padding: calc(var(--spacing) * 1);
   border-style: var(--tw-border-style);
   border-width: 1px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--color-gray-100);
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: var(--color-gray-300);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--color-gray-300);
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: var(--color-gray-300);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    border-color: var(--color-gray-400);
 }
