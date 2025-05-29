@@ -1,8 +1,18 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, MouseEvent } from 'react';
 import { ClientRect, DragEndEvent, DragStartEvent } from '@dnd-kit/core';
+
+export interface CustomCloseEvent extends Omit<CommonWindowElementsContextProps, 'setHistoryClickedElements'> {
+  event: MouseEvent<HTMLButtonElement>;
+  currentWindowId: string;
+};
+
+export interface CustomOnTopEvent extends Omit<CommonWindowElementsContextProps, 'historyClickedElements'> {
+  currentWindowId: string;
+};
 
 export interface CustomDragEndEvent extends Omit<CommonWindowElementsContextProps, 'historyClickedElements'> {
   event: DragEndEvent;
+  canvasId: string;
 };
 
 export interface CustomDragStartEvent extends Omit<CommonWindowElementsContextProps, 'historyClickedElements' | 'setHistoryClickedElements'> {

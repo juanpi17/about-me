@@ -16,7 +16,6 @@ export const MainMenu = () => {
 
             if (!current) return;
 
-            // Si el elemento es visible pero no está onTop, solo lo ponemos onTop y quitamos onTop a los demás visibles
             if (current.element.visible && !current.element.onTop) {
               const updatedElements = windowElements.map((w) => {
                 if (w.id === current.id) {
@@ -40,20 +39,6 @@ export const MainMenu = () => {
                 return w;
               });
               setWindowElements(updatedElements);
-
-              // setHistoryClickedElements((prev) => {
-              //   const newHistory = [...prev];
-              //   if (newHistory[0] === current.id) {
-              //     return newHistory; // No need to update if the same element is clicked
-              //   }
-
-              //   newHistory.unshift(current.id);
-              //   if (newHistory.length > 5) {
-              //     newHistory.pop();
-              //   }
-
-              //   return newHistory;
-              // });
               return;
             }
 
@@ -90,20 +75,6 @@ export const MainMenu = () => {
             });
 
             setWindowElements(updatedElements);
-
-            // setHistoryClickedElements((prev) => {
-            //   const newHistory = [...prev];
-            //   if (newHistory[0] === current.id) {
-            //     return newHistory; // No need to update if the same element is clicked
-            //   }
-
-            //   newHistory.unshift(current.id);
-            //   if (newHistory.length > 5) {
-            //     newHistory.pop();
-            //   }
-
-            //   return newHistory;
-            // });
           }}
         >
           <p className="text-sm">{element.titleName}</p>

@@ -12,6 +12,7 @@ import { handleDragEnd, handleDragStart } from '@/events';
 
 export default function App() {
   const { windowElements, setWindowElements, setHistoryClickedElements } = useWindowElementsContext();
+  const canvasId = 'droppableCanvas';
 
 //   useEffect(() => {
 //     const elements = windowElements.slice(1);
@@ -20,7 +21,7 @@ export default function App() {
 //   }, []);
 
   const customHandleDragEnd = (event: DragEndEvent) => {
-    handleDragEnd({event, windowElements, setWindowElements, setHistoryClickedElements});
+    handleDragEnd({event, canvasId, windowElements, setWindowElements, setHistoryClickedElements});
   };
 
   const customHandleDragStart = (event: DragStartEvent) => {

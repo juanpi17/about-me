@@ -1,13 +1,14 @@
-import { CustomDragStartEvent, CustomDragEndEvent } from '@/types';
+import { CustomDragStartEvent, CustomDragEndEvent, CustomCloseEvent, CustomOnTopEvent } from '@/types';
 
 export function handleDragEnd({
   event,
+  canvasId = 'droppableCanvas',
   windowElements,
   setWindowElements,
   setHistoryClickedElements,
 } : CustomDragEndEvent
 ) {
-  if (event.over && event.over.id === 'droppableCanvas') {
+  if (event.over && event.over.id === canvasId) {
     const current = windowElements.find((w) => w.id === event.active.id);
     setWindowElements(windowElements.map((w) => {
       return {
@@ -49,3 +50,72 @@ export function handleDragStart({
     }
   }));
 }
+
+export const handleClose = ({
+  event,
+  currentWindowId,
+  windowElements,
+  setWindowElements,
+  historyClickedElements,
+} : CustomCloseEvent
+) => {
+  event.stopPropagation();
+  event.preventDefault();
+
+  const current = windowElements.find((w) => w.id === currentWindowId);
+  const elementsClicked = historyClickedElements.length > 1 ? historyClickedElements.filter(item => item !== current?.id) : undefined;
+  let lastOnTopId: string | undefined;
+
+  if (elementsClicked) {
+    for (const id of elementsClicked) {
+      const activeWindowsId = windowElements.map((w) => w.element.visible ? w.id : {});
+      if (activeWindowsId.includes(id)) {
+        lastOnTopId = id;
+        break;
+      }
+    }
+  }
+
+  setWindowElements(windowElements.map((w) => {
+    return {
+      ...w,
+      element: {
+        ...w.element,
+        visible: w.id === current?.id ? false : w.element.visible,
+        onTop: w.id === lastOnTopId ? true : w.element.onTop,
+      },
+    }
+  }));
+};
+
+export const handleOnTop = ({
+  currentWindowId,
+  windowElements,
+  setWindowElements,
+  setHistoryClickedElements,
+} : CustomOnTopEvent
+) => {
+  setWindowElements(windowElements.map((w) => {
+    return {
+      ...w,
+      element: {
+        ...w.element,
+        onTop: w.id === currentWindowId ? true : false,
+      },
+    }
+  }));
+
+  setHistoryClickedElements((prev) => {
+    const newHistory = [...prev];
+    if (newHistory[0] === currentWindowId) {
+      return newHistory; // No need to update if the same element is clicked
+    }
+
+    newHistory.unshift(currentWindowId);
+    if (newHistory.length > 5) {
+      newHistory.pop();
+    }
+
+    return newHistory;
+  });
+};
