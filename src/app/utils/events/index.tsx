@@ -1,4 +1,4 @@
-import { CustomDragStartEvent, CustomDragEndEvent, CustomCloseEvent, CustomOnTopEvent } from '@/types';
+import { CustomDragStartEvent, CustomDragEndEvent, CustomCloseEvent, CustomOnTopEvent, CustomOnClickItemMenuEvent } from '@/types';
 
 export function handleDragEnd({
   event,
@@ -118,4 +118,77 @@ export const handleOnTop = ({
 
     return newHistory;
   });
+};
+
+export const handleOnClickItemMenu = ({
+  currentWindowId,
+  windowElements,
+  setWindowElements,
+  historyClickedElements,
+} : CustomOnClickItemMenuEvent
+) => {
+  const current = windowElements.find((w) => w.id === currentWindowId);
+  const lastOnTopId = historyClickedElements.length > 1 ? historyClickedElements.filter(item => item !== current?.id)[0] : undefined;
+
+  if (!current) return;
+
+  if (current.element.visible && !current.element.onTop) {
+    const updatedElements = windowElements.map((w) => {
+      if (w.id === current.id) {
+        return {
+          ...w,
+          element: {
+            ...w.element,
+            onTop: true,
+          },
+        };
+      }
+      if (w.element.visible) {
+        return {
+          ...w,
+          element: {
+            ...w.element,
+            onTop: false,
+          },
+        };
+      }
+      return w;
+    });
+    setWindowElements(updatedElements);
+    return;
+  }
+
+  const willBeVisible = !current.element.visible;
+
+  const updatedElements = windowElements.map((w) => {
+    if (w.id === current.id) {
+      return {
+        ...w,
+        element: {
+          ...w.element,
+          visible: willBeVisible,
+          onTop: willBeVisible,
+        },
+      };
+    }
+
+    if (!willBeVisible && w.id === lastOnTopId) {
+      return {
+        ...w,
+        element: {
+          ...w.element,
+          onTop: true,
+        },
+      };
+    }
+    return {
+      ...w,
+      element: {
+        ...w.element,
+        onTop: false,
+      },
+    };
+  });
+
+  setWindowElements(updatedElements);
 };

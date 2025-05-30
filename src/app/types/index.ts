@@ -24,6 +24,10 @@ export interface CustomDragStartEvent extends Omit<CommonWindowElementsContextPr
   event: DragStartEvent;
 };
 
+export interface CustomOnClickItemMenuEvent extends Omit<CommonWindowElementsContextProps, 'setHistoryClickedElements'> {
+  currentWindowId: string;
+};
+
 export interface CommonWindowElementsContextProps {
     windowElements: MakeSectionProps[];
     setWindowElements: Dispatch<SetStateAction<MakeSectionProps[]>>;
