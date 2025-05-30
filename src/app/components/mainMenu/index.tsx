@@ -9,17 +9,18 @@ export const MainMenu = () => {
   };
 
   return (
-    <div className="absolute w-48 top-0 right-0 shadow-lg p-4 px-2 bg-[#d8d8d8] font-[family-name:var(--font-inconsolata)]">
-      <h2 className="text-lg font-semibold mb-2 text-center">Juan Pablo Lepore</h2>
+    <div className="absolute w-52 top-1 right-1 border border-gray-800 shadow-lg bg-[#d8d8d8] font-[family-name:var(--font-inconsolata)]">
+      <p className="text-lg font-semibold p-2 mb-2 text-center uppercase">Juan Pablo Lepore</p>
+      <span className="p-1 w-full block bg-gray-200 border border-gray-400 text-sm text-center border-dashed">Interactive CV</span>
       {windowElements.map((element) => (
         <div
           key={element.id}
-          className={`p-2 m-1 border border-gray-300 rounded-lg hover:bg-gray-100 cursor-pointer ${element.element.onTop ? 'bg-blue-100' : ''}`}
+          className={`p-2 m-2 w-full max-w-46 hover:bg-gray-200 cursor-pointer hover:transition-all duration-300 ${element.element.onTop ? 'bg-gray-100 outline outline-gray-800 font-bold' : ''}`}
           onClick={() => customHandleOnClickItemMenu(element.id)}
         >
-          <span className="border border-gray-800">{element.titleName}</span>
-      </div>
-    ))}
-  </div>
+          <span className="">{element.titleName}</span>
+        </div>
+      ))}
+    </div>
   );
 }
