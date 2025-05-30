@@ -1,6 +1,6 @@
-import { SVGSkillIcons } from "@/types";
+import { SVGIcons } from "@/types";
 
-export const MongoDbIcon = (props: SVGSkillIcons) => (
+export const MongoDbIcon = (props: SVGIcons) => (
   <svg
     width={1024}
     height={1024}

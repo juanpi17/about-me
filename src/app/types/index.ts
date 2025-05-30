@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, MouseEvent } from 'react';
 import { ClientRect, DragEndEvent, DragStartEvent } from '@dnd-kit/core';
 
-export interface SVGSkillIcons {
+export interface SVGIcons {
   [key: string]: string;
 };
 
@@ -113,5 +113,9 @@ export interface AchievementsSectionText extends BasicSectionText {
 }
 
 export interface CombinedSectionText extends BasicSectionText {
-  sections: Array<SectionText>;
+  sections: {
+    education: EducationSectionText;
+    idioms: LanguagesSectionText;
+    personalAchievements: AchievementsSectionText;
+  }
 }

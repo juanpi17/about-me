@@ -1,6 +1,6 @@
-import { SVGSkillIcons } from "@/types";
+import { SVGIcons } from "@/types";
 
-export const TailwindCssIcon = (props: SVGSkillIcons) => (
+export const TailwindCssIcon = (props: SVGIcons) => (
   <svg
     width={256}
     height={256}

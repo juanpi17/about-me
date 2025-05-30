@@ -1,6 +1,6 @@
-import { SVGSkillIcons } from "@/types";
+import { SVGIcons } from "@/types";
 
-export const JestIcon = (props: SVGSkillIcons) => (
+export const JestIcon = (props: SVGIcons) => (
   <svg
     width={800}
     height={800}

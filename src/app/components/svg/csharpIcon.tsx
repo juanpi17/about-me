@@ -1,6 +1,6 @@
-import { SVGSkillIcons } from "@/types";
+import { SVGIcons } from "@/types";
 
-export const CSharpIcon = (props: SVGSkillIcons) => (
+export const CSharpIcon = (props: SVGIcons) => (
   <svg
     width={800}
     height={800}

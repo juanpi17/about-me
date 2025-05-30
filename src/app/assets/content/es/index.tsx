@@ -1,4 +1,4 @@
-import { AchievementsSectionText, BasicSectionText, CombinedSectionText, ContactSectionText, EducationSectionText, LanguagesSectionText, SkillsSectionText, SVGSkillIcons, WorkingExperienceSectionText } from "@/types";
+import { AchievementsSectionText, BasicSectionText, CombinedSectionText, ContactSectionText, EducationSectionText, LanguagesSectionText, SkillsSectionText, SVGIcons, WorkingExperienceSectionText } from "@/types";
 import { JavaScriptIcon } from "@/components/svg/javascriptIcon";
 import { JestIcon } from "@/components/svg/jestIcon";
 import { NodeJsIcon } from "@/components/svg/nodeJsIcon";
@@ -14,8 +14,13 @@ import { NextJsIcon } from "@/components/svg/nextjsIcon";
 import { PostgreSQLIcon } from "@/components/svg/postgresqlIcon";
 import { RubyIcon } from "@/components/svg/rubyIcon";
 import { TailwindCssIcon } from "@/components/svg/tailwindcssIcon";
+import { LinksType } from "@/assets/const";
+import { PhoneIcon } from "@/components/svg/phoneIcon";
+import { EmailIcon } from "@/components/svg/emailIcon";
+import { AddressIcon } from "@/components/svg/addressIcon";
+import { InternetIcon } from "@/components/svg/internetIcon";
 
-const iconBig: SVGSkillIcons = {
+const iconBig: SVGIcons = {
     width: '48',
     height: '48',
 };
@@ -23,6 +28,11 @@ const iconBig: SVGSkillIcons = {
 const iconSmall = {
     width: '32',
     height: '32',
+};
+
+const iconExtraSmall = {
+    width: '18',
+    height: '18',
 };
 
 export const about: BasicSectionText = {
@@ -36,18 +46,22 @@ export const contact: ContactSectionText = {
     items: [
         {
             text: "(+54) 342 4785455",
-            linkType: "tel",
+            linkType: LinksType.TEL,
+            icon: <PhoneIcon {...iconExtraSmall} />
         },
         {
             text: "juanplepore@gmail.com",
-            linkType: "mailto",
+            linkType: LinksType.MAIL_TO,
+            icon: <EmailIcon {...iconExtraSmall} />
         },
         {
             text: "Padilla 2171, Depto. 15C. Santa Fe, C.P.: 3000, Argentina",
+            icon: <AddressIcon {...iconExtraSmall} />
         },
         {
-            text: "linkedin.com/jplepore",
-            linkType: "href",
+            text: "linkedin.com/in/jplepore",
+            linkType: LinksType.HTTPS,
+            icon: <InternetIcon {...iconExtraSmall} />
         }
     ]
 };
@@ -249,9 +263,10 @@ const idioms: LanguagesSectionText = {
 export const personalInformation: CombinedSectionText = {
     title: "Información personal",
     description: "",
-    sections: [
+    sections: {
         education,
+        idioms,
         personalAchievements,
-        idioms
-    ]
+    }
+    
 }

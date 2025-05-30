@@ -1,6 +1,6 @@
-import { SVGSkillIcons } from "@/types";
+import { SVGIcons } from "@/types";
 
-export const DockerIcon = (props: SVGSkillIcons) => (
+export const DockerIcon = (props: SVGIcons) => (
   <svg
     width={800}
     height={800}

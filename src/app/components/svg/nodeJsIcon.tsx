@@ -1,6 +1,6 @@
-import { SVGSkillIcons } from "@/types";
+import { SVGIcons } from "@/types";
 
-export const NodeJsIcon = (props: SVGSkillIcons) => (
+export const NodeJsIcon = (props: SVGIcons) => (
   <svg
     width={800}
     height={800}

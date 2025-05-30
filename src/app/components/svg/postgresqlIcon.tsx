@@ -1,6 +1,6 @@
-import { SVGSkillIcons } from "@/types";
+import { SVGIcons } from "@/types";
 
-export const PostgreSQLIcon = (props: SVGSkillIcons) => (
+export const PostgreSQLIcon = (props: SVGIcons) => (
   <svg
     width={264}
     height={264}

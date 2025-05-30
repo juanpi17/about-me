@@ -1,6 +1,6 @@
-import { SVGSkillIcons } from "@/types";
+import { SVGIcons } from "@/types";
 
-export const TypeScriptIcon = (props: SVGSkillIcons) => (
+export const TypeScriptIcon = (props: SVGIcons) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     aria-label="TypeScript"

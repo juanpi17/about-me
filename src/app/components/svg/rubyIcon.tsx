@@ -1,6 +1,6 @@
-import { SVGSkillIcons } from "@/types";
+import { SVGIcons } from "@/types";
 
-export const RubyIcon = (props: SVGSkillIcons) => (
+export const RubyIcon = (props: SVGIcons) => (
   <svg
     width={800}
     height={800}

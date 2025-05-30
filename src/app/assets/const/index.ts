@@ -5,3 +5,9 @@ export const WindowElementsType = {
     WORKING_EXPERIENCE: 'workingExperience',
     PERSONAL_INFORMATION: 'personalInformation'
 };
+
+export const LinksType = {
+    HTTPS: 'https://',
+    TEL: 'tel:',
+    MAIL_TO: 'mailto:',
+}

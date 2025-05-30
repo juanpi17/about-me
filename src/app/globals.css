@@ -33,6 +33,26 @@ body {
   border-width: 1px;
 }
 
+.retro-main-title {
+  color: var(--color-gray-800);
+  padding: calc(var(--spacing) * 1);
+  border-style: var(--tw-border-style);
+  border-width: 2px;
+}
+
+fieldset.title {
+    border-top: 1px solid var(--color-gray-300);
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    display: block;
+    text-align: center;
+}
+
+fieldset.title legend {
+    padding: 5px 10px;
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 20px;
