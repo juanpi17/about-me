@@ -47,14 +47,14 @@ export const CommonWindow = (props: CommonWindowProps) => {
     <div onClick={customHandleOnTop} ref={setNodeRef} style={style} className={`absolute ${classNames(extendedClasses)}`}>
       <div className={`flex flex-col`}>
         <div className={`header flex flex-row items-center gap-2 ${onTop ? 'bg-[#fec902]' : 'bg-[#abacad]' } border border-[#abacad] rounded-t-lg border-b-0 w-2/5 px-1 hover:cursor-grab`}>
-          <button onClick={customHandleClose} className={`w-auto ${onTop ? 'bg-[#fab503]' : 'bg-[#abacad]' } focus:outline-none rounded-xs hover:bg-red-700`}>
+          <button onClick={customHandleClose} className={`w-auto ${onTop ? 'bg-[#fab503]' : 'bg-[#abacad]' } focus:outline-none rounded-xs hover:bg-red-600`}>
             <CloseIcon />
           </button>
           <div ref={setActivatorNodeRef} {...listeners} {...attributes} className='flex-grow p-1'>
             <span className="title text-md font-bold text-black font-[family-name:var(--font-inconsolata)]">{titleName}</span>
           </div>
         </div>
-        <div className='content p-5 border-1 bg-white border-[#abacad] rounded-b-lg rounded-tr-lg shadow-lg font-[family-name:var(--font-inconsolata)] max-h-150 overflow-y-auto'>
+        <div className={`content p-5 border-1 bg-white border-[#abacad] rounded-b-lg rounded-tr-lg shadow-lg font-[family-name:var(--font-inconsolata)] max-h-150 overflow-y-auto ${onTop ? '' : 'grayscale'}`}>
           {children}
         </div>
       </div>

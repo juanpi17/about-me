@@ -25,6 +25,7 @@ export const startingWindowElements: Array<MakeSectionProps> =
       id: WindowElementsType.ABOUT,
       element: initialStateElement,
       titleName: about.title,
+      extendedClasses: ['w-140', 'h-fit'],
       content: about,
     },
     {

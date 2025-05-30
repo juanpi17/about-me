@@ -1,4 +1,4 @@
-import { AchievementsSectionText, BasicSectionText, CombinedSectionText, ContactSectionText, EducationSectionText, LanguagesSectionText, SkillsSectionText, SVGIcons, WorkingExperienceSectionText } from "@/types";
+import { AboutMeSectionText, AchievementsSectionText, CombinedSectionText, ContactSectionText, EducationSectionText, LanguagesSectionText, SkillsSectionText, SVGIcons, WorkingExperienceSectionText } from "@/types";
 import { JavaScriptIcon } from "@/components/svg/javascriptIcon";
 import { JestIcon } from "@/components/svg/jestIcon";
 import { NodeJsIcon } from "@/components/svg/nodeJsIcon";
@@ -19,6 +19,8 @@ import { PhoneIcon } from "@/components/svg/phoneIcon";
 import { EmailIcon } from "@/components/svg/emailIcon";
 import { InternetIcon } from "@/components/svg/internetIcon";
 
+import Me from '@/assets/images/me_1.jpg';
+
 const iconBig: SVGIcons = {
     width: '48',
     height: '48',
@@ -34,9 +36,16 @@ const iconExtraSmall = {
     height: '18',
 };
 
-export const about: BasicSectionText = {
+export const about: AboutMeSectionText = {
     title: "Acerca de mí",
-    description: "Sólida formación en el desarrollo de soluciones web a medida con énfasis en el diseño visual, con más de 5+ años de experiencia en JavaScript y 3+ años de especialización en TypeScript y tests unitarios.  Enfoque en innovación y mejora de la experiencia del usuario a través de desarrollo de software robusto. Aprendizaje continuo y adaptación a nuevos desafíos.",
+    description: "",
+    information: [
+        "Sólida formación en el desarrollo de soluciones web a medida con énfasis en el diseño visual, con más de 5+ años de experiencia en JavaScript y 3+ años de especialización en TypeScript y tests unitarios.",
+        "Enfoque en innovación y mejora de la experiencia del usuario a través de desarrollo de software robusto. Aprendizaje continuo y adaptación a nuevos desafíos.",
+    ],
+    images: [
+        Me,
+    ]
 };
 
 export const contact: ContactSectionText = {

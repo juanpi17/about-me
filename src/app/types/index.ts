@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, MouseEvent } from 'react';
 import { ClientRect, DragEndEvent, DragStartEvent } from '@dnd-kit/core';
+import { StaticImageData } from 'next/image';
 
 export interface SVGIcons {
   [key: string]: string;
@@ -118,4 +119,9 @@ export interface CombinedSectionText extends BasicSectionText {
     idioms: LanguagesSectionText;
     personalAchievements: AchievementsSectionText;
   }
+}
+
+export interface AboutMeSectionText extends BasicSectionText {
+  information: Array<string>;
+  images: Array<StaticImageData>;
 }

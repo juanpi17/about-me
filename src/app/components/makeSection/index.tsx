@@ -1,9 +1,10 @@
 import { CommonWindow } from '@/components/commonWindow';
+import { type SkillsSectionText, type WorkingExperienceSectionText, AboutMeSectionText, CombinedSectionText, ContactSectionText, MakeSectionProps } from '@/types';
 import { SkillsSection } from './skills';
 import { WorkingExperienceSection } from './workingExperience';
 import { PersonalInformationSection } from './personalInformation';
 import { ContactMeSection } from './contactMe';
-import { type SkillsSectionText, type WorkingExperienceSectionText, CombinedSectionText, ContactSectionText, MakeSectionProps } from '@/types';
+import { AboutMeSection } from './aboutMe';
 
 export const MakeSection = (props: MakeSectionProps) => {
   const { id, element, titleName, extendedClasses = null, content } = props;
@@ -11,6 +12,7 @@ export const MakeSection = (props: MakeSectionProps) => {
   const isWorkingExperienceSection = 'jobs' in content || false;
   const isPersonalInformationSection = 'sections' in content || false;
   const isContactMeSection = 'items' in content || false;
+  const isAboutMeSection = 'images' in content || false;
 
   const defaultClasses = ['w-128', 'h-fit'];
 
@@ -28,6 +30,7 @@ export const MakeSection = (props: MakeSectionProps) => {
             {isWorkingExperienceSection && <WorkingExperienceSection info={content as WorkingExperienceSectionText} />}
             {isPersonalInformationSection && <PersonalInformationSection info={content as CombinedSectionText} />}
             {isContactMeSection && <ContactMeSection info={content as ContactSectionText} />}
+            {isAboutMeSection && <AboutMeSection info={content as AboutMeSectionText} />}
           </>
         )}
       </CommonWindow>
