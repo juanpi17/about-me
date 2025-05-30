@@ -14,7 +14,7 @@ const initialPosition: ClientRect = {
 };
 
 const initialStateElement: SectionPageElement = {
-  visible: true,
+  visible: false,
   onTop: false,
   position: initialPosition,
 };
@@ -62,37 +62,73 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       id: WindowElementsType.ABOUT,
       element: {
         ...initialStateElement,
+        onTop: true,
+        visible: true,
         position: {
             ...initialPosition,
-            top: 62,
-            right: 589,
+            left: 22,
+            top: 28,
         },
       },
       titleName: about.title,
+      extendedClasses: ['w-140', 'h-fit'],
       content: about,
     },
     {
       id: WindowElementsType.CONTACT,
-      element: initialStateElement,
+      element: {
+        ...initialStateElement,
+        visible: true,
+        position: {
+            ...initialPosition,
+            left: 590,
+            top: 632,
+        },
+      },
       titleName: contact.title,
+      extendedClasses: ['w-96', 'h-fit'],
       content: contact,
     },
     {
       id: WindowElementsType.SKILLS,
-      element: initialStateElement,
+      element: {
+        ...initialStateElement,
+        visible: true,
+        position: {
+            ...initialPosition,
+            left: 610,
+            top: 28,
+        },
+      },
       titleName: skills.title,
+      extendedClasses: ['w-128', 'h-fit'],
       content: skills,
-      extendedClasses: ['w-96', 'h-fit'],
     },
     {
       id: WindowElementsType.WORKING_EXPERIENCE,
-      element: initialStateElement,
+      element: {
+        ...initialStateElement,
+        visible: true,
+        position: {
+            ...initialPosition,
+            left: 31,
+            top: 400,
+        },
+      },
       titleName: workingExperience.title,
       content: workingExperience,
     },
     {
       id: WindowElementsType.PERSONAL_INFORMATION,
-      element: initialStateElement,
+      element: {
+        ...initialStateElement,
+        visible: true,
+        position: {
+            ...initialPosition,
+            left: 1150,
+            top: 28,
+        },
+      },
       titleName: personalInformation.title,
       content: personalInformation,
     },

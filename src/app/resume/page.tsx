@@ -14,12 +14,6 @@ export default function App() {
   const { windowElements, setWindowElements, setHistoryClickedElements } = useWindowElementsContext();
   const canvasId = 'droppableCanvas';
 
-//   useEffect(() => {
-//     const elements = windowElements.slice(1);
-//     setWindowElements(elements);
-//   // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, []);
-
   const customHandleDragEnd = (event: DragEndEvent) => {
     handleDragEnd({event, canvasId, windowElements, setWindowElements, setHistoryClickedElements});
   };
@@ -32,10 +26,10 @@ export default function App() {
     <DndContext onDragEnd={customHandleDragEnd} onDragStart={customHandleDragStart} modifiers={[restrictToWindowEdges]}>
         <div className="relative h-screen">
           <DroppableCanvas>
-          <MainMenu />
-            {windowElements.map((w) => {
-              return <MakeSection key={w.id} {...w} />;
-            })}
+            <MainMenu />
+                {windowElements.map((w) => {
+                return <MakeSection key={w.id} {...w} />;
+                })}
           </DroppableCanvas>
         </div>
     </DndContext>
