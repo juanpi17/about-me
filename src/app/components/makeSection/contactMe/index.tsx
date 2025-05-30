@@ -4,16 +4,17 @@ export const ContactMeSection = ({ info } : { info: ContactSectionText }) => {
   if (!info.items) return null;
 
   return (
-    <ul className='ml-6 list-outside list-disc mt-1'>
+    <div className='mt-5'>
       {info.items.map((item, index) => (
-        <li key={item.text + index} className='text-md'>
+        <div key={item.text + index} className={`flex flex-row gap-5 align-middle items-center ${index === info.items.length - 1 ? `mb-0` : `mb-4`} not-hover:grayscale hover:transition-all p-0 hover:pl-5 hover:scale-110 easy-out duration-300 hover:overflow-hidden`}>
+          <span>{item.icon}</span>
           {item.linkType ? (
-              <a href={`${item.linkType}${item.text}`} target='_blank' rel='noopener noreferrer'>{item.icon} {item.text}</a>
+              <a href={`${item.linkType}${item.text}`} target='_blank' rel='noopener noreferrer' className="w-full hover:cursor-pointer">{item.text}</a>
             ) : (
-              <span className='text-md'>{item.icon} {item.text}</span>
+              <span className="w-full">{item.text}</span>
             )}
-        </li>
+        </div>
       ))}
-    </ul>
+    </div>
   )
 };

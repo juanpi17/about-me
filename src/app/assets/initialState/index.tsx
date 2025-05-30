@@ -31,6 +31,7 @@ export const startingWindowElements: Array<MakeSectionProps> =
       id: WindowElementsType.CONTACT,
       element: initialStateElement,
       titleName: contact.title,
+      extendedClasses: ['w-96', 'h-fit'],
       content: contact,
     },
     {

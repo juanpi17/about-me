@@ -17,7 +17,6 @@ import { TailwindCssIcon } from "@/components/svg/tailwindcssIcon";
 import { LinksType } from "@/assets/const";
 import { PhoneIcon } from "@/components/svg/phoneIcon";
 import { EmailIcon } from "@/components/svg/emailIcon";
-import { AddressIcon } from "@/components/svg/addressIcon";
 import { InternetIcon } from "@/components/svg/internetIcon";
 
 const iconBig: SVGIcons = {
@@ -41,8 +40,8 @@ export const about: BasicSectionText = {
 };
 
 export const contact: ContactSectionText = {
-    title: "¿Cómo contactarme?",
-    description: "Para comunicarte conmigo, podrás hacerlo a través de:",
+    title: "Contactame",
+    description: "Para comunicarte conmigo, podés hacerlo mediante:",
     items: [
         {
             text: "(+54) 342 4785455",
@@ -53,10 +52,6 @@ export const contact: ContactSectionText = {
             text: "juanplepore@gmail.com",
             linkType: LinksType.MAIL_TO,
             icon: <EmailIcon {...iconExtraSmall} />
-        },
-        {
-            text: "Padilla 2171, Depto. 15C. Santa Fe, C.P.: 3000, Argentina",
-            icon: <AddressIcon {...iconExtraSmall} />
         },
         {
             text: "linkedin.com/in/jplepore",
