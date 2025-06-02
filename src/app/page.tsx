@@ -6,11 +6,12 @@ import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { DroppableCanvas } from '@/components/droppableCanvas';
 import { MakeSection } from '@/components/makeSection';
 import { MainMenu } from '@/components/mainMenu';
-import { Help } from '@/components/help';
+// import { Help } from '@/components/help';
 
 import { useShowHelpContext } from '@/context/helpContext';
 import { useWindowElementsContext } from '@/context/windowElementsContext';
 import { handleDragEnd, handleDragStart } from '@/utils/events';
+import { DesktopIconsList } from './components/desktopIconsList';
 
 export default function App() {
   const { windowElements, setWindowElements, setHistoryClickedElements } = useWindowElementsContext();
@@ -39,7 +40,13 @@ export default function App() {
         <div className="relative h-screen">
           <DroppableCanvas>
             <MainMenu />
-            {showHelp && <Help />}
+            {/* <AboutMeFolder />
+            <ContactMeFolder />
+            <PersonalInformationFolder />
+            <SkillsFolder />
+            <WorkingExperienceFolder /> */}
+            <DesktopIconsList />
+            {/* {showHelp && <Help />} */}
             {windowElements.map((w) => {
               return <MakeSection key={w.id} {...w} />;
             })}
