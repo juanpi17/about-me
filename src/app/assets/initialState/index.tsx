@@ -4,7 +4,7 @@ import { WindowElementsType } from '@/assets/const';
 import { about, contact, skills, workingExperience, personalInformation } from '@/assets/content/es';
 import { ClientRect } from '@dnd-kit/core';
 
-const initialPosition: ClientRect = {
+export const initialPosition: ClientRect = {
     left: 0,
     right: 0,
     top: 0,
@@ -13,7 +13,7 @@ const initialPosition: ClientRect = {
     height: 0,
 };
 
-const initialStateElement: SectionPageElement = {
+export const initialStateElement: SectionPageElement = {
   visible: false,
   onTop: false,
   position: initialPosition,
@@ -21,13 +21,13 @@ const initialStateElement: SectionPageElement = {
 
 export const startingWindowElements: Array<MakeSectionProps> = 
   [
-    {
-      id: WindowElementsType.ABOUT,
-      element: initialStateElement,
-      titleName: about.title,
-      extendedClasses: ['w-140', 'h-fit'],
-      content: about,
-    },
+    // {
+    //   id: WindowElementsType.ABOUT,
+    //   element: initialStateElement,
+    //   titleName: about.title,
+    //   extendedClasses: ['w-140', 'h-fit'],
+    //   content: about,
+    // },
     {
       id: WindowElementsType.CONTACT,
       element: initialStateElement,

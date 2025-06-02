@@ -40,11 +40,6 @@ export default function App() {
         <div className="relative h-screen">
           <DroppableCanvas>
             <MainMenu />
-            {/* <AboutMeFolder />
-            <ContactMeFolder />
-            <PersonalInformationFolder />
-            <SkillsFolder />
-            <WorkingExperienceFolder /> */}
             <DesktopIconsList />
             {/* {showHelp && <Help />} */}
             {windowElements.map((w) => {
