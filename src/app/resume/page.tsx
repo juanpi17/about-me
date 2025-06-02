@@ -27,9 +27,9 @@ export default function App() {
         <div className="relative h-screen">
           <DroppableCanvas>
             <MainMenu />
-                {windowElements.map((w) => {
-                return <MakeSection key={w.id} {...w} />;
-                })}
+              {windowElements.map((w,index) => {
+                return <MakeSection key={w.id + index} {...w} />;
+              })}
           </DroppableCanvas>
         </div>
     </DndContext>

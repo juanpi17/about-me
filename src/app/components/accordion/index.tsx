@@ -16,7 +16,7 @@ export const Accordion = ({ items } : { items: SkillProps[] }) => {
     <div className="accordion-container flex flex-col mt-4">
       <div className="flex flex-row justify-between mt-2">
         {items.map((item, index) => (
-          <div key={index} className={`flex flex-col cursor-pointer ${isActive.active && isActive.index === index ? 'bg-gray-100' : 'bg-auto not-hover:grayscale'}`}>
+          <div key={index} className={`flex flex-col cursor-pointer ${isActive.active && isActive.index === index ? 'bg-gray-100' : 'bg-auto'}`}>
             <div className={`p-3 pb-6 -mb-2`} onClick={() => handleClick(index)}>
               {item.icon}
             </div>

@@ -53,6 +53,7 @@ export interface SectionPageElement {
   visible: boolean;
   onTop: boolean;
   position: ClientRect | null;
+  isLoaded: boolean;
 };
 
 export interface SkillProps {

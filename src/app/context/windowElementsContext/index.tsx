@@ -17,8 +17,7 @@ export function WindowElementsProvider({ children } : { children: React.ReactNod
     config = startingWindowElements;
   }
 
-  const [windowElements, setWindowElements] = useState<Array<MakeSectionProps>>([]);
-  // const [windowElements, setWindowElements] = useState<Array<MakeSectionProps>>(config);
+  const [windowElements, setWindowElements] = useState<Array<MakeSectionProps>>(config);
   const [historyClickedElements, setHistoryClickedElements] = useState<string[]>([]);
 
   return (

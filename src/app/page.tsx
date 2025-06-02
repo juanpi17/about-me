@@ -25,7 +25,7 @@ export default function App() {
       setShowHelp(false);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [windowElements]);
 
   const customHandleDragEnd = (event: DragEndEvent) => {
     handleDragEnd({event, canvasId, windowElements, setWindowElements, setHistoryClickedElements});
@@ -42,8 +42,8 @@ export default function App() {
             <MainMenu />
             <DesktopIconsList />
             {/* {showHelp && <Help />} */}
-            {windowElements.map((w) => {
-              return <MakeSection key={w.id} {...w} />;
+            {windowElements.map((w,index) => {
+              return <MakeSection key={w.id + index} {...w} />;
             })}
           </DroppableCanvas>
         </div>

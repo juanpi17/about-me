@@ -1,12 +1,7 @@
 import { MouseEvent } from "react";
 
 import { useWindowElementsContext } from "@/context/windowElementsContext";
-import { isWindowLoaded } from "@/utils/windows";
-import { WindowElementsType } from "@/assets/const";
-
-import { initialStateElement } from '@/assets/initialState';
-import { about } from '@/assets/content/es';
-
+import { getWindowElement, isWindowLoaded, setWIndowsOnTopFalse } from "@/utils/windows";
 
 export const DesktopIconHolder = ({ id, icon, legend, scale = 'scale-85' } : { id:string, icon: React.JSX.Element, legend: string, scale?: string }) => {
   const { windowElements, setWindowElements } = useWindowElementsContext();
@@ -18,23 +13,30 @@ export const DesktopIconHolder = ({ id, icon, legend, scale = 'scale-85' } : { i
     if (e.detail === 2) {
       console.log("double click");
       console.log('windows is visible? ', isWindowLoaded(id, windowElements));
-      if (!isWindowLoaded(id, windowElements)) {
-        setWindowElements(
-          [
-            ...windowElements,
-            {
-              id: WindowElementsType.ABOUT,
-              element: {
-                ...initialStateElement,
-                visible: true,
-                onTop: true,
-              },
-              titleName: about.title,
-              extendedClasses: ['w-140', 'h-fit'],
-              content: about,
-            },
-          ]
-        );
+
+      const isLoaded = isWindowLoaded(id, windowElements);
+
+      if (!isLoaded) {
+        setWIndowsOnTopFalse(windowElements);
+
+        const windowElement = getWindowElement(id, windowElements);
+        console.log('🚀 ~ handleIconClick ~ windowElement:', windowElement);
+        if (windowElement) {
+          setWindowElements(
+            [
+              ...windowElements,
+              {
+                ...windowElement,
+                element: {
+                  ...windowElement.element,
+                  visible: true,
+                  onTop: true,
+                  isLoaded: true,
+                }
+              }
+            ]
+          );
+        }
       }
     }
   }
