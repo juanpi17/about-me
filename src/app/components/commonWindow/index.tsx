@@ -46,8 +46,8 @@ export const CommonWindow = (props: CommonWindowProps) => {
   return (
     <div onClick={customHandleOnTop} ref={setNodeRef} style={style} className={`absolute ${classNames(extendedClasses)}`}>
       <div className={`flex flex-col`}>
-        <div className={`header flex flex-row items-center gap-2 ${onTop ? 'bg-[#fec902]' : 'bg-[#abacad]' } border border-[#abacad] rounded-t-lg border-b-0 w-2/5 px-1 hover:cursor-grab`}>
-          <button onClick={customHandleClose} className={`w-auto ${onTop ? 'bg-[#fab503]' : 'bg-[#abacad]' } focus:outline-none rounded-xs hover:bg-red-600`}>
+        <div className={`header flex flex-row items-center gap-2 ${onTop ? 'bg-(--default-yellow-soft)' : 'bg-[#abacad]' } border border-[#abacad] rounded-t-lg border-b-0 w-2/5 px-1 hover:cursor-grab`}>
+          <button onClick={customHandleClose} className={`w-auto ${onTop ? 'bg-(--default-yellow)' : 'bg-[#abacad]' } focus:outline-none rounded-xs hover:bg-red-600`}>
             <CloseIcon />
           </button>
           <div ref={setActivatorNodeRef} {...listeners} {...attributes} className='flex-grow p-1'>
