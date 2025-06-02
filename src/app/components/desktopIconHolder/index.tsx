@@ -1,7 +1,7 @@
 import { MouseEvent } from "react";
 
 import { useWindowElementsContext } from "@/context/windowElementsContext";
-import { getWindowElement, isWindowLoaded, setWIndowsOnTopFalse } from "@/utils/windows";
+import { getWindowElement, isWindowLoaded, setWIndowsOnTopFalse, updateWindowElement } from "@/utils/windows";
 
 export const DesktopIconHolder = ({ id, icon, legend, scale = 'scale-85' } : { id:string, icon: React.JSX.Element, legend: string, scale?: string }) => {
   const { windowElements, setWindowElements } = useWindowElementsContext();
@@ -20,22 +20,20 @@ export const DesktopIconHolder = ({ id, icon, legend, scale = 'scale-85' } : { i
         setWIndowsOnTopFalse(windowElements);
 
         const windowElement = getWindowElement(id, windowElements);
-        console.log('🚀 ~ handleIconClick ~ windowElement:', windowElement);
         if (windowElement) {
-          setWindowElements(
-            [
-              ...windowElements,
-              {
-                ...windowElement,
+          const updatedElements = updateWindowElement(
+            {
+              ...windowElement,
                 element: {
                   ...windowElement.element,
                   visible: true,
                   onTop: true,
                   isLoaded: true,
                 }
-              }
-            ]
+            }, windowElements
           );
+
+          setWindowElements(updatedElements);
         }
       }
     }

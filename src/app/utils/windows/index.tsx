@@ -8,6 +8,21 @@ export const getWindowElement = (windowElementId: string, windowElements: MakeSe
     return windowElements.find(w => w.id === windowElementId);
 }
 
+export const updateWindowElement = (windowElement: MakeSectionProps, windowElements: MakeSectionProps[]) => {
+    return windowElements.map((w) => (
+        w.id === windowElement.id ? windowElement : w
+    ))
+}
+
+// export const updateWindowElement = (windowElement: MakeSectionProps, windowElements: MakeSectionProps[]) => {
+//     windowElements.map((w) => {
+//         if (w.id === windowElement.id) {
+//             return windowElement;
+//         }
+//         return w;
+//     })
+// }
+
 export const setWIndowsOnTopFalse = (windowElements: MakeSectionProps[]) => {
     return windowElements.map(w => w.element.onTop = false);
 }

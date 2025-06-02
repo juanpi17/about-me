@@ -3,6 +3,11 @@ import { WindowElementsType } from '@/assets/const';
 
 import { about, contact, skills, workingExperience, personalInformation } from '@/assets/content/es';
 import { ClientRect } from '@dnd-kit/core';
+import { AboutMeFolder } from '@/components/svg/aboutMeFolder';
+import { ContactMeFolder } from '@/components/svg/contactMeFolder';
+import { SkillsFolder } from '@/components/svg/skillsFolder';
+import { WorkingExperienceFolder } from '@/components/svg/workingExperienceFolder';
+import { PersonalInformationFolder } from '@/components/svg/personalInformationFolder';
 
 const initialPosition: ClientRect = {
     left: 0,
@@ -28,6 +33,7 @@ export const startingWindowElements: Array<MakeSectionProps> =
       titleName: about.title,
       extendedClasses: ['w-140', 'h-fit'],
       content: about,
+      icon: <AboutMeFolder />,
     },
     {
       id: WindowElementsType.CONTACT,
@@ -35,6 +41,7 @@ export const startingWindowElements: Array<MakeSectionProps> =
       titleName: contact.title,
       extendedClasses: ['w-96', 'h-fit'],
       content: contact,
+      icon: <ContactMeFolder />,
     },
     {
       id: WindowElementsType.SKILLS,
@@ -42,18 +49,21 @@ export const startingWindowElements: Array<MakeSectionProps> =
       titleName: skills.title,
       extendedClasses: ['w-128', 'h-fit'],
       content: skills,
+      icon: <SkillsFolder />,
     },
     {
       id: WindowElementsType.WORKING_EXPERIENCE,
       element: initialStateElement,
       titleName: workingExperience.title,
       content: workingExperience,
+      icon: <WorkingExperienceFolder />,
     },
     {
       id: WindowElementsType.PERSONAL_INFORMATION,
       element: initialStateElement,
       titleName: personalInformation.title,
       content: personalInformation,
+      icon: <PersonalInformationFolder />,
     },
   ];
 
@@ -74,6 +84,7 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       titleName: about.title,
       extendedClasses: ['w-140', 'h-fit'],
       content: about,
+      icon: <AboutMeFolder />,
     },
     {
       id: WindowElementsType.CONTACT,
@@ -89,6 +100,7 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       titleName: contact.title,
       extendedClasses: ['w-96', 'h-fit'],
       content: contact,
+      icon: <ContactMeFolder />,
     },
     {
       id: WindowElementsType.SKILLS,
@@ -104,6 +116,7 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       titleName: skills.title,
       extendedClasses: ['w-128', 'h-fit'],
       content: skills,
+      icon: <SkillsFolder />,
     },
     {
       id: WindowElementsType.WORKING_EXPERIENCE,
@@ -118,6 +131,7 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       },
       titleName: workingExperience.title,
       content: workingExperience,
+      icon: <WorkingExperienceFolder />,
     },
     {
       id: WindowElementsType.PERSONAL_INFORMATION,
@@ -132,5 +146,6 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       },
       titleName: personalInformation.title,
       content: personalInformation,
+      icon: <PersonalInformationFolder />,
     },
   ];

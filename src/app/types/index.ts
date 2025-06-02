@@ -47,6 +47,7 @@ type SectionText = BasicSectionText | LanguagesSectionText | SkillsSectionText |
 
 export interface MakeSectionProps extends Omit<CommonWindowProps, 'children'> {
   content: SectionText;
+  icon: React.JSX.Element;
 }
 
 export interface SectionPageElement {
