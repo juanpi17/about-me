@@ -10,6 +10,7 @@ import {
   useSensors,
 } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
+import { limitOnTopYAxis } from '@/assets/modifiers';
 
 import { DroppableCanvas } from '@/components/droppableCanvas';
 import { MakeSection } from '@/components/makeSection';
@@ -52,7 +53,7 @@ export default function App() {
   };
 
   return (
-    <DndContext onDragEnd={customHandleDragEnd} onDragStart={customHandleDragStart} modifiers={[restrictToWindowEdges]} sensors={sensors}>
+    <DndContext onDragEnd={customHandleDragEnd} onDragStart={customHandleDragStart} modifiers={[restrictToWindowEdges, limitOnTopYAxis]} sensors={sensors}>
         <div className="relative h-screen">
           {showHelp && <Help />}
           <DroppableCanvas>
