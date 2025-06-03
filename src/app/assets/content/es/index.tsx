@@ -45,6 +45,7 @@ export const iconSizeDesktop: SVGIcons = {
 export const noWindowsTitle = "Ventanas activas";
 export const noWindowsActive = "Ninguna ventana activa";
 export const clickToStart = "Haz click sobre un ícono para acceder a las distintas secciones";
+export const touchToStart = "Toca sobre un ícono para acceder a las distintas secciones";
 
 export const about: AboutMeSectionText = {
     title: "Acerca de mí",
