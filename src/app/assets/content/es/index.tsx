@@ -21,19 +21,24 @@ import { InternetIcon } from "@/components/svg/internetIcon";
 
 import Me from '@/assets/images/me_1.jpg';
 
-const iconBig: SVGIcons = {
+const iconSizeBig: SVGIcons = {
     width: '48',
     height: '48',
 };
 
-const iconSmall = {
+const iconSizeSmall = {
     width: '32',
     height: '32',
 };
 
-const iconExtraSmall = {
+const iconSizeExtraSmall = {
     width: '18',
     height: '18',
+};
+
+export const iconSizeDesktop: SVGIcons = {
+    width: '56',
+    height: '56',
 };
 
 export const about: AboutMeSectionText = {
@@ -55,17 +60,17 @@ export const contact: ContactSectionText = {
         {
             text: "(+54) 342 4785455",
             linkType: LinksType.TEL,
-            icon: <PhoneIcon {...iconExtraSmall} />
+            icon: <PhoneIcon {...iconSizeExtraSmall} />
         },
         {
             text: "juanplepore@gmail.com",
             linkType: LinksType.MAIL_TO,
-            icon: <EmailIcon {...iconExtraSmall} />
+            icon: <EmailIcon {...iconSizeExtraSmall} />
         },
         {
             text: "linkedin.com/in/jplepore",
             linkType: LinksType.HTTPS,
-            icon: <InternetIcon {...iconExtraSmall} />
+            icon: <InternetIcon {...iconSizeExtraSmall} />
         }
     ]
 };
@@ -79,27 +84,27 @@ export const skills: SkillsSectionText = {
     },
     primarySkills: [{
             name: "JavaScript",
-            icon: <JavaScriptIcon {...iconBig} />,
+            icon: <JavaScriptIcon {...iconSizeBig} />,
             description: '5+ años de experiencia en desarrollo web con JavaScript, incluyendo la creación de aplicaciones interactivas y dinámicas.',
         },
         {
             name: "TypeScript",
-            icon: <TypeScriptIcon {...iconBig} />,
+            icon: <TypeScriptIcon {...iconSizeBig} />,
             description: '3+ años de experiencia en desarrollo web con TypeScript, mejorando la calidad del código y la mantenibilidad de las aplicaciones.',
         },
         {
             name: "React",
-            icon: <ReactIcon {...iconBig} />,
+            icon: <ReactIcon {...iconSizeBig} />,
             description: '5+ años de experiencia en desarrollo de aplicaciones web/webview/nativas con React: implementación "vanilla" y uso del framework Next.js.',
         },
         {
             name: "Node.js",
-            icon: <NodeJsIcon {...iconBig} />,
+            icon: <NodeJsIcon {...iconSizeBig} />,
             description: '5+ años de experiencia en desarrollo de aplicaciones middle-end/back-end con Node.js, incluyendo la creación de APIs RESTful y servicios en tiempo real.',
         },
         {
             name: "Jest",
-            icon: <JestIcon {...iconBig} />,
+            icon: <JestIcon {...iconSizeBig} />,
             description: '3+ años de experiencia en pruebas unitarias y de integración con Jest, asegurando la calidad y confiabilidad del código.',
         }
     ],
@@ -110,43 +115,43 @@ export const skills: SkillsSectionText = {
     secondarySkills: [
         {
             name: "Angular",
-            icon: <AngularIcon {...iconSmall} />,
+            icon: <AngularIcon {...iconSizeSmall} />,
         },
         {
             name: "C#",
-            icon: <CSharpIcon {...iconSmall} />,
+            icon: <CSharpIcon {...iconSizeSmall} />,
         },
         {
             name: "Docker",
-            icon: <DockerIcon {...iconSmall} />,
+            icon: <DockerIcon {...iconSizeSmall} />,
         },
         {
             name: "Git / GitHub",
-            icon: <GitIcon {...iconSmall} />,
+            icon: <GitIcon {...iconSizeSmall} />,
         },
         {
             name: "Java",
-            icon: <JavaIcon {...iconSmall} />,
+            icon: <JavaIcon {...iconSizeSmall} />,
         },
         {
             name: "MongoDB",
-            icon: <MongoDbIcon {...iconSmall} />,
+            icon: <MongoDbIcon {...iconSizeSmall} />,
         },
         {
             name: "Next.js",
-            icon: <NextJsIcon {...iconSmall} />,
+            icon: <NextJsIcon {...iconSizeSmall} />,
         },
         {
             name: "PostgreSQL",
-            icon: <PostgreSQLIcon {...iconSmall} />,
+            icon: <PostgreSQLIcon {...iconSizeSmall} />,
         },
         {
             name: "Ruby / Ruby On Rails",
-            icon: <RubyIcon {...iconSmall} />,
+            icon: <RubyIcon {...iconSizeSmall} />,
         },
         {
             name: "TailwindCSS",
-            icon: <TailwindCssIcon {...iconSmall} />,
+            icon: <TailwindCssIcon {...iconSizeSmall} />,
         }
     ]
 };

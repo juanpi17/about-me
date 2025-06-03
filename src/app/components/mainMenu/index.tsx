@@ -1,3 +1,5 @@
+import React from "react";
+
 import { useShowHelpContext } from "@/context/helpContext";
 import { useWindowElementsContext } from "@/context/windowElementsContext";
 import { handleOnClickItemMenu } from "@/utils/events";
@@ -17,11 +19,10 @@ export const MainMenu = () => {
     <div className="absolute w-52 top-1 right-1 border border-gray-800 shadow-lg bg-[#d8d8d8] font-[family-name:var(--font-inconsolata)] z-5">
       <p className="text-lg font-semibold p-2 mb-2 text-center uppercase">Juan Pablo Lepore</p>
       <div className="flex flex-col p-1 w-full bg-gray-200 border border-gray-400 text-sm text-center">
-        {/* <p className="text-center">Interactive CV</p> */}
-        <div className="flex flex-row flex-wrap w-full h-8 gap-2 justify-center">
+        <div className="flex flex-row flex-wrap w-full gap-2 justify-center">
           {windowElements.map((el) => (
               el.element.isLoaded ? (
-                <span key={el.id + 'tray-icon'} className="w-8 h-8 scale-30">{el.icon}</span>
+                <div key={el.id + 'tray-icon'} className="w-fit h-fit">{React.cloneElement(el.icon, { width: 22, height: 22 })}</div>
                ) : null
               )
             )}
