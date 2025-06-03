@@ -26,7 +26,7 @@ export const CommonWindow = (props: CommonWindowProps) => {
       }
       : {}),
     ...(onTop 
-      ? { zIndex: 1 } 
+      ? { zIndex: 2 } 
       : { zIndex: 0 }
     ),
   };

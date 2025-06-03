@@ -20,6 +20,7 @@ import { EmailIcon } from "@/components/svg/emailIcon";
 import { InternetIcon } from "@/components/svg/internetIcon";
 
 import Me from '@/assets/images/me_1.jpg';
+import { WordpressIcon } from "@/components/svg/wordpressIcon";
 
 const iconSizeBig: SVGIcons = {
     width: '48',
@@ -43,6 +44,7 @@ export const iconSizeDesktop: SVGIcons = {
 
 export const noWindowsTitle = "Ventanas activas";
 export const noWindowsActive = "Ninguna ventana activa";
+export const clickToStart = "Haz click sobre un ícono para acceder a las distintas secciones";
 
 export const about: AboutMeSectionText = {
     title: "Acerca de mí",
@@ -121,16 +123,24 @@ export const skills: SkillsSectionText = {
             icon: <AngularIcon {...iconSizeSmall} />,
         },
         {
-            name: "C#",
-            icon: <CSharpIcon {...iconSizeSmall} />,
+            name: "Wordpress",
+            icon: <WordpressIcon {...iconSizeSmall} />,
         },
         {
-            name: "Docker",
-            icon: <DockerIcon {...iconSizeSmall} />,
+            name: "TailwindCSS",
+            icon: <TailwindCssIcon {...iconSizeSmall} />,
+        },
+        {
+            name: "Next.js",
+            icon: <NextJsIcon {...iconSizeSmall} />,
         },
         {
             name: "Git / GitHub",
             icon: <GitIcon {...iconSizeSmall} />,
+        },
+        {
+            name: "Docker",
+            icon: <DockerIcon {...iconSizeSmall} />,
         },
         {
             name: "Java",
@@ -141,10 +151,6 @@ export const skills: SkillsSectionText = {
             icon: <MongoDbIcon {...iconSizeSmall} />,
         },
         {
-            name: "Next.js",
-            icon: <NextJsIcon {...iconSizeSmall} />,
-        },
-        {
             name: "PostgreSQL",
             icon: <PostgreSQLIcon {...iconSizeSmall} />,
         },
@@ -153,9 +159,9 @@ export const skills: SkillsSectionText = {
             icon: <RubyIcon {...iconSizeSmall} />,
         },
         {
-            name: "TailwindCSS",
-            icon: <TailwindCssIcon {...iconSizeSmall} />,
-        }
+            name: "C#",
+            icon: <CSharpIcon {...iconSizeSmall} />,
+        },
     ]
 };
 

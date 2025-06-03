@@ -13,7 +13,7 @@ export const MainMenu = () => {
   };
 
   return (
-    <div className="absolute w-52 top-1 right-1 border border-gray-800 shadow-lg bg-[#d8d8d8] rounded-sm font-[family-name:var(--font-inconsolata)] z-3">
+    <div className="absolute w-52 top-1 right-1 border border-gray-800 shadow-lg bg-[#d8d8d8] rounded-sm font-[family-name:var(--font-inconsolata)] z-1">
       <div className="flex flex-row my-3 justify-center cursor-default">
         <span className="bg-(--default-yellow-soft) p-2 pl-3 text-gray-800 font-bold border rounded-r-3xl border-gray-800 uppercase z-1">Juan Pablo</span>
         <span className="bg-gray-600 p-2 pr-3 text-white border border-l-0 border-gray-800 -ml-5 pl-7 z-0">Lepore</span>

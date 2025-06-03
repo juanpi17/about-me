@@ -75,6 +75,7 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
         ...initialStateElement,
         onTop: true,
         visible: true,
+        isLoaded: true,
         position: {
             ...initialPosition,
             left: 22,
@@ -91,6 +92,7 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       element: {
         ...initialStateElement,
         visible: true,
+        isLoaded: true,
         position: {
             ...initialPosition,
             left: 590,
@@ -107,6 +109,7 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       element: {
         ...initialStateElement,
         visible: true,
+        isLoaded: true,
         position: {
             ...initialPosition,
             left: 610,
@@ -123,6 +126,7 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       element: {
         ...initialStateElement,
         visible: true,
+        isLoaded: true,
         position: {
             ...initialPosition,
             left: 31,
@@ -138,6 +142,7 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       element: {
         ...initialStateElement,
         visible: true,
+        isLoaded: true,
         position: {
             ...initialPosition,
             left: 1150,
