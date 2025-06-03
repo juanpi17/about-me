@@ -54,7 +54,7 @@ export const CommonWindow = (props: CommonWindowProps) => {
             <span className="title text-md font-bold text-black font-[family-name:var(--font-inconsolata)]">{titleName}</span>
           </div>
         </div>
-        <div className={`content touch-auto overflow-x-hidden p-4 border-1 bg-white border-(--default-light-gray) border-t rounded-b-lg rounded-tr-lg shadow-lg font-[family-name:var(--font-inconsolata)] max-h-150 ${props.overflow} ${onTop ? '' : 'grayscale'}`}>
+        <div className={`content touch-auto overflow-x-hidden p-4 border-1 bg-white border-(--default-light-gray) border-t rounded-b-lg rounded-tr-lg shadow-lg font-[family-name:var(--font-inconsolata)] max-h-160 ${props.overflow} ${onTop ? '' : 'grayscale'}`}>
           {children}
         </div>
       </div>

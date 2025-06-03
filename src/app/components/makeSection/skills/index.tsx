@@ -25,7 +25,7 @@ export const SkillsSection = ({ info, onTop } : { info: SkillsSectionText, onTop
           </div>
           <div className="grid grid-cols-6 justify-items-center justify-between mt-3 px-2">
             {info.secondarySkills.map((item, index) => (
-              <div key={index} className='py-3 not-hover:grayscale hover:scale-120'>
+              <div key={index} className='py-3 md:not-hover:grayscale md:hover:scale-120'>
                 <Tooltip text={item.name}>
                   {item.icon}
                 </Tooltip>
