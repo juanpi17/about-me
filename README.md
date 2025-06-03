@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Juan Pablo Lepore's CV 
+
+This is an interactive POC about my professional career and my knowledge.
+
+Created with React and TypeScript, using as core the [Next.js](https://nextjs.org) project.
 
 ## Getting Started
 
