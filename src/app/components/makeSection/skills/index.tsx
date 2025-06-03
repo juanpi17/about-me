@@ -2,7 +2,7 @@ import { Accordion } from '@/components/accordion';
 import Tooltip from '@/components/tooltip';
 import type { SkillsSectionText } from "@/types";
 
-export const SkillsSection = ({ info } : { info: SkillsSectionText }) => {
+export const SkillsSection = ({ info, onTop } : { info: SkillsSectionText, onTop: boolean }) => {
   if (!info.primarySkills && !info.secondarySkills) return null;
   
   return (
@@ -13,7 +13,7 @@ export const SkillsSection = ({ info } : { info: SkillsSectionText }) => {
             <span className='retro-title'>{info.primarySkillsTitle.key}</span>
             <span>{info.primarySkillsTitle.content}</span>
           </div>
-          <Accordion items={info.primarySkills} />
+          <Accordion items={info.primarySkills} enabled={onTop} />
         </div>
       )}
 

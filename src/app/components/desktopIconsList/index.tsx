@@ -1,7 +1,6 @@
 import { DesktopIconHolder } from '@/components/desktopIconHolder';
 import { useWindowElementsContext } from '@/context/windowElementsContext';
 
-
 export const DesktopIconsList = () => {
   const { windowElements } = useWindowElementsContext();
 

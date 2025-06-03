@@ -1,4 +1,5 @@
 import { CustomDragStartEvent, CustomDragEndEvent, CustomCloseEvent, CustomOnTopEvent, CustomOnClickItemMenuEvent } from '@/types';
+import { getWindowElement, updateWindowElement } from '@/utils/windows';
 
 export function handleDragEnd({
   event,
@@ -64,28 +65,34 @@ export const handleClose = ({
 
   const current = windowElements.find((w) => w.id === currentWindowId);
   const elementsClicked = historyClickedElements.length > 1 ? historyClickedElements.filter(item => item !== current?.id) : undefined;
-  let lastOnTopId: string | undefined;
+
+  let updatedElements = windowElements;
+
+  if (current) {
+    updatedElements = updateWindowElement({
+      ...current,
+      element: {
+        ...current!.element,
+        isLoaded : false,
+      }
+    }, updatedElements);
+  }
 
   if (elementsClicked) {
-    for (const id of elementsClicked) {
-      const activeWindowsId = windowElements.map((w) => w.element.visible ? w.id : {});
-      if (activeWindowsId.includes(id)) {
-        lastOnTopId = id;
-        break;
-      }
+    const nextElement = getWindowElement(elementsClicked[0], updatedElements);
+
+    if (nextElement) {
+      updatedElements = updateWindowElement({
+        ...nextElement,
+        element: {
+          ...nextElement.element,
+          onTop: true,
+        }
+      }, updatedElements);
     }
   }
 
-  setWindowElements(windowElements.map((w) => {
-    return {
-      ...w,
-      element: {
-        ...w.element,
-        visible: w.id === current?.id ? false : w.element.visible,
-        onTop: w.id === lastOnTopId ? true : w.element.onTop,
-      },
-    }
-  }));
+  setWindowElements(updatedElements);
 };
 
 export const handleOnTop = ({

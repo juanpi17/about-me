@@ -10,9 +10,9 @@ import { WorkingExperienceFolder } from '@/components/svg/workingExperienceFolde
 import { PersonalInformationFolder } from '@/components/svg/personalInformationFolder';
 
 const initialPosition: ClientRect = {
-    left: 0,
+    left: 50,
     right: 0,
-    top: 0,
+    top: 30,
     bottom: 0,
     width: 0,
     height: 0,

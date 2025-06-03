@@ -1,10 +1,12 @@
 import { SkillProps } from '@/types';
 import React, { useState } from 'react';
 
-export const Accordion = ({ items } : { items: SkillProps[] }) => {
+export const Accordion = ({ items, enabled } : { items: SkillProps[], enabled: boolean }) => {
   const [isActive, setIsActive] = useState({ index: -1, active: false });
 
   const handleClick = (index: number) => {
+    if (!enabled) return;
+
     if (isActive.index !== index) {
       setIsActive({ index, active: true });
     } else {

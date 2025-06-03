@@ -5,14 +5,9 @@ import { WorkingExperienceSection } from './workingExperience';
 import { PersonalInformationSection } from './personalInformation';
 import { ContactMeSection } from './contactMe';
 import { AboutMeSection } from './aboutMe';
-import { useEffect } from 'react';
 
 export const MakeSection = (props: MakeSectionProps) => {
   const { id, element, titleName, extendedClasses = null, content } = props;
-
-  useEffect(() => {
-    console.log('element modificado', element);
-  }, [element]);
 
   if (!element.isLoaded) {
     return null;
@@ -36,11 +31,11 @@ export const MakeSection = (props: MakeSectionProps) => {
       {content && (
         <>
           <p>{content.description}</p>
-          {isSkillsSection && <SkillsSection info={content as SkillsSectionText} />}
+          {isSkillsSection && <SkillsSection info={content as SkillsSectionText} onTop={element.onTop} />}
           {isWorkingExperienceSection && <WorkingExperienceSection info={content as WorkingExperienceSectionText} />}
           {isPersonalInformationSection && <PersonalInformationSection info={content as CombinedSectionText} />}
-          {isContactMeSection && <ContactMeSection info={content as ContactSectionText} />}
-          {isAboutMeSection && <AboutMeSection info={content as AboutMeSectionText} />}
+          {isContactMeSection && <ContactMeSection info={content as ContactSectionText} onTop={element.onTop} />}
+          {isAboutMeSection && <AboutMeSection info={content as AboutMeSectionText} onTop={element.onTop} />}
         </>
       )}
     </CommonWindow>

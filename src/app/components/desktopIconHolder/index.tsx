@@ -11,30 +11,24 @@ export const DesktopIconHolder = ({ id, icon, legend } : { id:string, icon: Reac
     e.stopPropagation();
 
     if (e.detail === 2) {
-      console.log("double click");
-      console.log('windows is visible? ', isWindowLoaded(id, windowElements));
-
       const isLoaded = isWindowLoaded(id, windowElements);
 
-      if (!isLoaded) {
-        setWIndowsOnTopFalse(windowElements);
+      setWIndowsOnTopFalse(windowElements);
 
-        const windowElement = getWindowElement(id, windowElements);
-        if (windowElement) {
-          const updatedElements = updateWindowElement(
-            {
-              ...windowElement,
-                element: {
-                  ...windowElement.element,
-                  visible: true,
-                  onTop: true,
-                  isLoaded: true,
-                }
-            }, windowElements
-          );
-
-          setWindowElements(updatedElements);
-        }
+      const windowElement = getWindowElement(id, windowElements);
+      if (windowElement) {
+        const newWindowElement = 
+        {
+          ...windowElement,
+            element: {
+              ...windowElement.element,
+              visible: true,
+              onTop: true,
+              ...(!isLoaded && { isLoaded: true }),
+            }
+        };
+        const updatedElements = updateWindowElement(newWindowElement, windowElements);
+        setWindowElements(updatedElements);
       }
     }
   }
