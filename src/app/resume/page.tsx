@@ -1,5 +1,14 @@
 'use client';
-import { DndContext, DragEndEvent, DragStartEvent } from '@dnd-kit/core';
+import React from 'react';
+import {
+  DndContext,
+  DragEndEvent,
+  DragStartEvent,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 
 import { DroppableCanvas } from '@/components/droppableCanvas';
@@ -11,8 +20,17 @@ import { handleDragEnd, handleDragStart } from '@/utils/events';
 import { DesktopIconsList } from '@/components/desktopIconsList';
 
 export default function App() {
+  const mouseSensor = useSensor(MouseSensor);
+  const touchSensor = useSensor(TouchSensor);
+  
+  const sensors = useSensors(
+    mouseSensor,
+    touchSensor,
+  );
+
   const { windowElements, setWindowElements, setHistoryClickedElements } = useWindowElementsContext();
   const canvasId = 'droppableCanvas';
+
 
   const customHandleDragEnd = (event: DragEndEvent) => {
     handleDragEnd({event, canvasId, windowElements, setWindowElements, setHistoryClickedElements});
@@ -23,7 +41,7 @@ export default function App() {
   };
 
   return (
-    <DndContext onDragEnd={customHandleDragEnd} onDragStart={customHandleDragStart} modifiers={[restrictToWindowEdges]}>
+    <DndContext onDragEnd={customHandleDragEnd} onDragStart={customHandleDragStart} modifiers={[restrictToWindowEdges]} sensors={sensors}>
         <div className="relative h-screen">
           <DroppableCanvas>
             <MainMenu />

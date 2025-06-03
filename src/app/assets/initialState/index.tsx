@@ -12,7 +12,7 @@ import { PersonalInformationFolder } from '@/components/svg/personalInformationF
 const initialPosition: ClientRect = {
     left: 0,
     right: 0,
-    top: 30,
+    top: 0,
     bottom: 0,
     width: 0,
     height: 0,
