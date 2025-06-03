@@ -40,6 +40,7 @@ export interface CommonWindowProps {
   element: SectionPageElement;
   extendedClasses?: Array<string>;
   titleName: string;
+  overflow?: string;
   children: React.ReactNode;
 };
 

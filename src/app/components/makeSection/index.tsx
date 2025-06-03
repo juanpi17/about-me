@@ -27,6 +27,7 @@ export const MakeSection = (props: MakeSectionProps) => {
       element={element}
       titleName={titleName}
       extendedClasses={extendedClasses ?? defaultClasses}
+      overflow={isSkillsSection ? 'overflow-y-hidden' : 'overflow-y-auto'}
     >
       {content && (
         <>

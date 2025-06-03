@@ -46,7 +46,7 @@ export const CommonWindow = (props: CommonWindowProps) => {
   return (
     <div onClick={customHandleOnTop} ref={setNodeRef} style={style} className={`absolute ${classNames(extendedClasses)}`}>
       <div className={`flex flex-col`}>
-        <div className={`header flex flex-row items-center gap-2 ${onTop ? 'bg-(--default-yellow-soft)' : 'bg-(--default-light-gray)' } border border-(--default-light-gray) rounded-t-lg border-b-0 w-2/5 px-1 hover:cursor-grab`}>
+        <div className={`header flex flex-row items-center gap-2 ${onTop ? 'bg-(--default-yellow-soft)' : 'bg-(--default-light-gray)' } border border-(--default-light-gray) rounded-t-lg border-b-0 w-fit px-1 pr-3 hover:cursor-grab`}>
           <button onClick={customHandleClose} className={`w-auto ${onTop ? 'bg-(--default-yellow)' : 'bg-(--default-light-gray)' } focus:outline-none rounded-xs hover:bg-red-600`}>
             <CloseIcon />
           </button>
@@ -54,7 +54,7 @@ export const CommonWindow = (props: CommonWindowProps) => {
             <span className="title text-md font-bold text-black font-[family-name:var(--font-inconsolata)]">{titleName}</span>
           </div>
         </div>
-        <div className={`content overflow-x-hidden p-4 border-1 bg-white border-(--default-light-gray) border-t rounded-b-lg rounded-tr-lg shadow-lg font-[family-name:var(--font-inconsolata)] max-h-150 overflow-y-auto ${onTop ? '' : 'grayscale'}`}>
+        <div className={`content overflow-x-hidden p-4 border-1 bg-white border-(--default-light-gray) border-t rounded-b-lg rounded-tr-lg shadow-lg font-[family-name:var(--font-inconsolata)] max-h-150 ${props.overflow} ${onTop ? '' : 'grayscale'}`}>
           {children}
         </div>
       </div>
