@@ -1,5 +1,4 @@
 'use client';
-import React from 'react';
 import { DndContext, DragEndEvent, DragStartEvent } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 
@@ -9,6 +8,7 @@ import { MainMenu } from '@/components/mainMenu';
 
 import { useWindowElementsContext } from '@/context/windowElementsContext';
 import { handleDragEnd, handleDragStart } from '@/utils/events';
+import { DesktopIconsList } from '@/components/desktopIconsList';
 
 export default function App() {
   const { windowElements, setWindowElements, setHistoryClickedElements } = useWindowElementsContext();
@@ -27,9 +27,10 @@ export default function App() {
         <div className="relative h-screen">
           <DroppableCanvas>
             <MainMenu />
-              {windowElements.map((w,index) => {
-                return <MakeSection key={w.id + index} {...w} />;
-              })}
+            <DesktopIconsList />
+            {windowElements.map((w,index) => {
+              return <MakeSection key={w.id + index} {...w} />;
+            })}
           </DroppableCanvas>
         </div>
     </DndContext>

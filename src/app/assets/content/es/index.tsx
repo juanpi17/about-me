@@ -41,6 +41,9 @@ export const iconSizeDesktop: SVGIcons = {
     height: '56',
 };
 
+export const noWindowsTitle = "Ventanas activas";
+export const noWindowsActive = "Ninguna ventana activa";
+
 export const about: AboutMeSectionText = {
     title: "Acerca de mí",
     description: "",

@@ -11,7 +11,7 @@ import { MainMenu } from '@/components/mainMenu';
 import { useShowHelpContext } from '@/context/helpContext';
 import { useWindowElementsContext } from '@/context/windowElementsContext';
 import { handleDragEnd, handleDragStart } from '@/utils/events';
-import { DesktopIconsList } from './components/desktopIconsList';
+import { DesktopIconsList } from '@/components/desktopIconsList';
 
 export default function App() {
   const { windowElements, setWindowElements, setHistoryClickedElements } = useWindowElementsContext();
@@ -40,8 +40,8 @@ export default function App() {
         <div className="relative h-screen">
           <DroppableCanvas>
             <MainMenu />
-            <DesktopIconsList />
             {/* {showHelp && <Help />} */}
+            <DesktopIconsList />
             {windowElements.map((w,index) => {
               return <MakeSection key={w.id + index} {...w} />;
             })}

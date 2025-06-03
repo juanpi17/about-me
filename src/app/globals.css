@@ -6,6 +6,7 @@
   --color-topbar: #f5efe1;
   --custom-yellow: #fab503;
   --custom-yellow-soft: #fec902;
+  --custom-light-gray: #abacad;
 }
 
 @theme inline {
@@ -16,6 +17,7 @@
   --font-mono: var(--font-geist-mono);
   --default-yellow: var(--custom-yellow);
   --default-yellow-soft: var(--custom-yellow-soft);
+  --default-light-gray: var(--custom-light-gray);
 }
 
 @media (prefers-color-scheme: dark) {
