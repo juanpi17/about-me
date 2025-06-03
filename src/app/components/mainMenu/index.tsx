@@ -1,24 +1,19 @@
 import React from "react";
 
 import { noWindowsTitle, noWindowsActive } from "@/assets/content/es";
-import { useShowHelpContext } from "@/context/helpContext";
 import { useWindowElementsContext } from "@/context/windowElementsContext";
 import { handleOnClickItemMenu } from "@/utils/events";
 import { isAnyWindowLoaded } from "@/utils/windows";
 
 export const MainMenu = () => {
   const { windowElements, historyClickedElements, setWindowElements } = useWindowElementsContext();
-  const { showHelp, setShowHelp } = useShowHelpContext();
 
   const customHandleOnClickItemMenu = (currentWindowId: string) => {
-    if (showHelp) {
-      setShowHelp(false);
-    }
     handleOnClickItemMenu({ currentWindowId, windowElements, setWindowElements, historyClickedElements});
   };
 
   return (
-    <div className="absolute w-52 top-1 right-1 border border-gray-800 shadow-lg bg-[#d8d8d8] rounded-sm font-[family-name:var(--font-inconsolata)] z-5">
+    <div className="absolute w-52 top-1 right-1 border border-gray-800 shadow-lg bg-[#d8d8d8] rounded-sm font-[family-name:var(--font-inconsolata)] z-3">
       <div className="flex flex-row my-3 justify-center cursor-default">
         <span className="bg-(--default-yellow-soft) p-2 pl-3 text-gray-800 font-bold border rounded-r-3xl border-gray-800 uppercase z-1">Juan Pablo</span>
         <span className="bg-gray-600 p-2 pr-3 text-white border border-l-0 border-gray-800 -ml-5 pl-7 z-0">Lepore</span>

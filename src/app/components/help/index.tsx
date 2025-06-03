@@ -1,16 +1,17 @@
-import { ArrowIcon } from "@/components/svg/arrowIcon";
+
+import { ArrowIcon } from "../svg/arrowIcon";
 
 export const Help = () => {
   return (
-    <div className="relative z-0">
-      <div className="absolute left-0 top-0 flex justify-center bg-black w-screen h-screen"></div>
-      <div className='absolute left-0 top-20 flex flex-col items-center justify-start text-white w-screen h-screen font-[family-name:var(--font-inconsolata)]'>
-        <div className='flex flex-col items-end w-2/3 gap-8'>
-          <span className='block animate-bounce -mb-8'>
-            <ArrowIcon width={'150'} height={'150'} fill={'#fff'}/>
-          </span>
-          <span className='block text-5xl text-center border-dashed border-white border-9 p-8 rounded-4xl'>Haz click sobre un elemento del menú para acceder a las distintas secciones</span>
-        </div>
+    <div className="absolute flex justify-center items-center w-screen h-screen z-4">
+      <div className="absolute w-screen h-screen bg-black opacity-40"></div>
+      <div className="relative flex flex-row gap-3 justify-center w-160 h-fit border-dashed border-white border-4 p-6 rounded-3xl">
+        <span className="">
+          <ArrowIcon width={'70'} height={'70'} />
+        </span>
+        <p className='text-4xl text-center text-white'>
+          Haz click sobre un ícono para acceder a las distintas secciones
+        </p>
       </div>
     </div>
   );

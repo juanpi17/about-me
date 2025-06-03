@@ -1,11 +1,19 @@
 import { DesktopIconHolder } from '@/components/desktopIconHolder';
+import { useShowHelpContext } from '@/context/helpContext';
 import { useWindowElementsContext } from '@/context/windowElementsContext';
 
 export const DesktopIconsList = () => {
   const { windowElements } = useWindowElementsContext();
+  const { showHelp, setShowHelp } = useShowHelpContext();
+
+  const handleOnClick = () => {
+    if (showHelp) {
+      setShowHelp(false);
+    }
+  }
 
   return (
-    <div className='flex flex-col m-2 w-fit'>
+    <div onClick={handleOnClick} className='flex flex-col m-2 w-fit'>
         {windowElements.map((shortcut) => {
           return (
             <div key={shortcut.id + 'icon'} className='mb-2'>
