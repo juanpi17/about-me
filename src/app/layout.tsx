@@ -1,19 +1,13 @@
 import type { Metadata } from "next";
-import { Inconsolata, Jersey_10 } from "next/font/google";
+import { Electrolize } from "next/font/google";
 import "./globals.css";
 
 import { WindowElementsProvider } from '@/context/windowElementsContext';
 import { ShowHelpProvider } from "@/context/helpContext";
 
-const inconsolata = Inconsolata({
-  variable: "--font-inconsolata",
-  weight: "400",
-  subsets: ["latin"],
-});
-
-const jersey = Jersey_10({
-  variable: "--font-jersey",
-  weight: "400",
+const custom = Electrolize({
+  variable: "--font-custom",
+  weight: '400',
   subsets: ["latin"],
 });
 
@@ -30,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inconsolata.variable} ${jersey.variable} antialiased`}
+        className={`${custom.variable} antialiased`}
       >
         <WindowElementsProvider>
           <ShowHelpProvider>

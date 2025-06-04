@@ -45,8 +45,8 @@ export const DesktopIconHolder = ({ id, icon, legend } : { id:string, icon: Reac
   }
   
   return (
-    <button type='button' onClick={(e) => handleIconClick(e, id)} onTouchStart={(e) => handleIconTouch(e, id)} className='flex flex-col wrap w-30 items-center m-3 font-[family-name:var(--font-inconsolata)] cursor-default focus:bg-gray-400'>
-      <div className='w-fit h-fit'>
+    <button type='button' onClick={(e) => handleIconClick(e, id)} onTouchStart={(e) => handleIconTouch(e, id)} className='flex flex-col wrap w-30 items-center m-3 font-[family-name:var(--font-custom)] cursor-default focus:bg-gray-400'>
+      <div className='w-fit h-fit mb-1'>
         {icon}
       </div>
       <p className='text-center text-sm text-white'>{legend}.txt</p>
