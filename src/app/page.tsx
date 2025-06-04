@@ -15,12 +15,14 @@ import { limitOnTopYAxis } from '@/assets/modifiers';
 import { DroppableCanvas } from '@/components/droppableCanvas';
 import { MakeSection } from '@/components/makeSection';
 import { MainMenu } from '@/components/mainMenu';
-import { Help } from '@/components/help';
+// import { Help } from '@/components/help';
 
 import { useShowHelpContext } from '@/context/helpContext';
 import { useWindowElementsContext } from '@/context/windowElementsContext';
 import { handleDragEnd, handleDragStart } from '@/utils/events';
 import { DesktopIconsList } from '@/components/desktopIconsList';
+
+import MusicPlayer from './components/player';
 
 export default function App() {
   const mouseSensor = useSensor(MouseSensor);
@@ -55,13 +57,16 @@ export default function App() {
   return (
     <DndContext onDragEnd={customHandleDragEnd} onDragStart={customHandleDragStart} modifiers={[restrictToWindowEdges, limitOnTopYAxis]} sensors={sensors}>
         <div className="relative h-screen">
-          {showHelp && <Help />}
+          {/* {showHelp && <Help />} */}
           <DroppableCanvas>
             <MainMenu />
             <DesktopIconsList />
             {windowElements.map((w,index) => {
               return <MakeSection key={w.id + index} {...w} />;
             })}
+
+            <MusicPlayer src="https://g2.vxral-slo.transport.edge-access.net/nx-beta/nx.hor.livetx.01/60a2b23eaf8c7e00145e64e0_240p/index.m3u8" />
+
           </DroppableCanvas>
         </div>
     </DndContext>
