@@ -10,7 +10,7 @@ export function DroppableCanvas(props: React.PropsWithChildren) {
   };
   
   return (
-    <div ref={setNodeRef} style={style} className='relative h-screen overflow-hidden'>
+    <div ref={setNodeRef} style={style} className='relative h-svh overflow-hidden'>
       {props.children}
     </div>
   );

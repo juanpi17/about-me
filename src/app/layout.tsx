@@ -5,6 +5,8 @@ import "./globals.css";
 import { WindowElementsProvider } from '@/context/windowElementsContext';
 import { ShowHelpProvider } from "@/context/helpContext";
 
+import { isBrowser } from 'react-device-detect';
+
 const custom = Electrolize({
   variable: "--font-custom",
   weight: '400',
@@ -26,7 +28,7 @@ export default function RootLayout({
       <body
         className={`${custom.variable} antialiased`}
       >
-        <WindowElementsProvider>
+        <WindowElementsProvider isMobile={!isBrowser}>
           <ShowHelpProvider>
             {children}
           </ShowHelpProvider>
