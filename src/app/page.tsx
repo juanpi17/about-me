@@ -1,5 +1,5 @@
 import { MainCanvas } from '@/components/mainCanvas';
 
-export default function App() {
+export default async function App() {
   return <MainCanvas />
 }

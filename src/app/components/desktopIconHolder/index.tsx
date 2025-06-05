@@ -29,7 +29,6 @@ export const DesktopIconHolder = ({ id, icon, legend } : { id:string, icon: Reac
   };
 
   const handleIconClick = (e: MouseEvent<HTMLButtonElement>, id: string) => {
-    e.preventDefault();
     e.stopPropagation();
 
     if (e.detail === 2) {
@@ -38,7 +37,6 @@ export const DesktopIconHolder = ({ id, icon, legend } : { id:string, icon: Reac
   }
 
   const handleIconTouch = (e: TouchEvent<HTMLButtonElement>, id: string) => {
-    e.preventDefault();
     e.stopPropagation();
 
     loadSection(id);
