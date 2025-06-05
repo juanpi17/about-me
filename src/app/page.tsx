@@ -23,6 +23,7 @@ import { handleDragEnd, handleDragStart } from '@/utils/events';
 import { DesktopIconsList } from '@/components/desktopIconsList';
 
 import MusicPlayer from './components/player';
+// import IPTVPlayer from './components/iptvPlayer';
 
 export default function App() {
   const mouseSensor = useSensor(MouseSensor);
@@ -65,7 +66,10 @@ export default function App() {
               return <MakeSection key={w.id + index} {...w} />;
             })}
 
-            <MusicPlayer src="https://g2.vxral-slo.transport.edge-access.net/nx-beta/nx.hor.livetx.01/60a2b23eaf8c7e00145e64e0_240p/index.m3u8" />
+            {/* <MusicPlayer src="https://unlimited1-us.dps.live/airedesantafetv/airedesantafetv.smil/playlist.m3u8" /> */}
+            <MusicPlayer src="https://stream.rcast.net/m3u/71552" />
+
+            {/* <IPTVPlayer playlistUrl='https://iptv-org.github.io/iptv/countries/ar.m3u' /> */}
 
           </DroppableCanvas>
         </div>
