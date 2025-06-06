@@ -36,6 +36,7 @@ export const changeWindowInitialPositionsForMobile = (isMobile: boolean, windowE
                 position: {
                     ...initialPosition,
                     left: 0,
+                    top: 150,
                 }
             }
         }

@@ -1,5 +1,20 @@
-import { CustomDragStartEvent, CustomDragEndEvent, CustomCloseEvent, CustomOnTopEvent, CustomOnClickItemMenuEvent } from '@/types';
-import { getWindowElement, updateWindowElement } from '@/utils/windows';
+import { CustomDragStartEvent, CustomDragEndEvent, CustomCloseEvent, CustomOnTopEvent, CustomOnClickItemMenuEvent, CommonWindowElementsContextProps } from '@/types';
+
+export function updateClickedElements(id: string, setHistoryClickedElements: CommonWindowElementsContextProps['setHistoryClickedElements']) {
+  setHistoryClickedElements((prev) => {
+    const newHistory = [...prev];
+    if (newHistory[0] === id) {
+      return newHistory; // No need to update if the same element is clicked
+    }
+
+    newHistory.unshift(id);
+    if (newHistory.length > 5) {
+      newHistory.pop();
+    }
+
+    return newHistory;
+  });
+}
 
 export function handleDragEnd({
   event,
@@ -21,17 +36,7 @@ export function handleDragEnd({
       }
     }));
 
-    setHistoryClickedElements!((prev) => {
-      const newHistory = [...prev];
-      if (newHistory[0] === event.active.id) {
-        return newHistory;
-      }
-      newHistory.unshift(String(event.active.id));
-      if (newHistory.length > 5) {
-        newHistory.pop();
-      }
-      return newHistory;
-    });
+    updateClickedElements(String(event.active.id), setHistoryClickedElements);
   }
 }
 
@@ -65,34 +70,28 @@ export const handleClose = ({
 
   const current = windowElements.find((w) => w.id === currentWindowId);
   const elementsClicked = historyClickedElements.length > 1 ? historyClickedElements.filter(item => item !== current?.id) : undefined;
-
-  let updatedElements = windowElements;
-
-  if (current) {
-    updatedElements = updateWindowElement({
-      ...current,
-      element: {
-        ...current!.element,
-        isLoaded : false,
-      }
-    }, updatedElements);
-  }
+  let lastOnTopId: string | undefined;
 
   if (elementsClicked) {
-    const nextElement = getWindowElement(elementsClicked[0], updatedElements);
-
-    if (nextElement) {
-      updatedElements = updateWindowElement({
-        ...nextElement,
-        element: {
-          ...nextElement.element,
-          onTop: true,
-        }
-      }, updatedElements);
+    for (const id of elementsClicked) {
+      const activeWindowsId = windowElements.map((w) => w.element.visible ? w.id : {});
+      if (activeWindowsId.includes(id)) {
+        lastOnTopId = id;
+        break;
+      }
     }
   }
 
-  setWindowElements(updatedElements);
+  setWindowElements(windowElements.map((w) => {
+    return {
+      ...w,
+      element: {
+        ...w.element,
+        visible: w.id === current?.id ? false : w.element.visible,
+        onTop: w.id === lastOnTopId ? true : w.element.onTop,
+      },
+    }
+  }));
 };
 
 export const handleOnTop = ({
@@ -112,19 +111,7 @@ export const handleOnTop = ({
     }
   }));
 
-  setHistoryClickedElements((prev) => {
-    const newHistory = [...prev];
-    if (newHistory[0] === currentWindowId) {
-      return newHistory; // No need to update if the same element is clicked
-    }
-
-    newHistory.unshift(currentWindowId);
-    if (newHistory.length > 5) {
-      newHistory.pop();
-    }
-
-    return newHistory;
-  });
+  updateClickedElements(currentWindowId, setHistoryClickedElements);
 };
 
 export const handleOnClickItemMenu = ({
