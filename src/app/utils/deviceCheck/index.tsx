@@ -1,8 +1,8 @@
-import { headers } from 'next/headers';
+import { cookies } from 'next/headers';
 
 import { DeviceType } from '@/assets/const';
 
 export async function isMobileType() {
-  const userAgent = (await headers()).get('x-device-type');
-  return userAgent && userAgent === DeviceType.MOBILE ? true : false;
+  const userAgent = (await cookies()).get('device-type');
+  return userAgent ? ( userAgent.value === DeviceType.MOBILE ? true : false ) : true;
 }

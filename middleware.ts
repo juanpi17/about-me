@@ -8,7 +8,7 @@ export function middleware(request: NextRequest) {
   const viewport = device.type || DeviceType.DESKTOP;
 
   const response = NextResponse.next();
-  response.headers.set('x-device-type', viewport === DeviceType.DESKTOP ? DeviceType.DESKTOP : DeviceType.MOBILE);
+  response.cookies.set('device-type', viewport !== DeviceType.DESKTOP ? DeviceType.MOBILE : DeviceType.DESKTOP);
 
   return response;
 }
