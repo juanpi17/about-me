@@ -89,6 +89,7 @@ export const handleClose = ({
         ...w.element,
         visible: w.id === current?.id ? false : w.element.visible,
         onTop: w.id === lastOnTopId ? true : w.element.onTop,
+        isLoaded: w.id === current?.id ? false : w.element.visible,
       },
     }
   }));
