@@ -14,13 +14,11 @@ export function WindowElementsProvider({ isMobile, children } : { isMobile: bool
   let config: Array<MakeSectionProps>;
 
   if (pathname === '/resume') {
-    config = startingWindowElementsResume;
+  // Adjust positions for mobile to prevent overlapping
+    config = changeWindowInitialPositionsForMobile(isMobile, startingWindowElementsResume);
   } else {
     config = startingWindowElements;
   }
-
-  // Adjust positions for mobile to prevent overlapping
-  config = changeWindowInitialPositionsForMobile(isMobile, config);
 
   const [windowElements, setWindowElements] = useState<Array<MakeSectionProps>>(config);
   const [historyClickedElements, setHistoryClickedElements] = useState<string[]>([]);

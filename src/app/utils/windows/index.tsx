@@ -25,7 +25,7 @@ export const setWIndowsOnTopFalse = (windowElements: MakeSectionProps[]) => {
 }
 
 export const changeWindowInitialPositionsForMobile = (isMobile: boolean, windowElements: MakeSectionProps[]) => {
-    if (isMobile) return windowElements;
+    if (!isMobile) return windowElements;
 
     return windowElements.map(w => (
         w = {
@@ -35,7 +35,7 @@ export const changeWindowInitialPositionsForMobile = (isMobile: boolean, windowE
                 isLoaded: w.id === WindowElementsType.ABOUT ? true : false,
                 position: {
                     ...initialPosition,
-                    left: 200,
+                    left: 0,
                 }
             }
         }
