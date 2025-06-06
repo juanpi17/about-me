@@ -11,3 +11,8 @@ export const LinksType = {
     TEL: 'tel:',
     MAIL_TO: 'mailto:',
 }
+
+export const DeviceType = {
+    MOBILE: 'mobile',
+    DESKTOP: 'desktop',
+}

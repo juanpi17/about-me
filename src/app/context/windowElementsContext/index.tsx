@@ -1,7 +1,6 @@
 'use client';
 import React, { createContext, useContext, useState } from 'react';
 import { usePathname } from 'next/navigation';
-// import { isMobile } from 'react-device-detect';
 
 import { CommonWindowElementsContextProps, MakeSectionProps } from '@/types';
 import { startingWindowElements, startingWindowElementsResume } from '@/assets/initialState';

@@ -1,4 +1,5 @@
 'use client';
+import { usePathname } from 'next/navigation';
 import React, { createContext, Dispatch, SetStateAction, useContext, useState } from 'react';
 
 interface ShowHelpContextProps {
@@ -9,7 +10,8 @@ interface ShowHelpContextProps {
 const ShowHelp = createContext<ShowHelpContextProps>({ showHelp: true, setShowHelp: () => {} });
 
 export function ShowHelpProvider({ children } : { children: React.ReactNode }) {
-  const [showHelp, setShowHelp] = useState<boolean>(true);
+  const pathname = usePathname();
+  const [showHelp, setShowHelp] = useState<boolean>(pathname !== '/resume');
 
   return (
     <ShowHelp value={{ showHelp, setShowHelp }}>

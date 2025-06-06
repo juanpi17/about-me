@@ -158,3 +158,4 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       icon: <PersonalInformationFolder {...iconSizeDesktop} />,
     },
   ];
+  
