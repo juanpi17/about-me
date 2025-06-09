@@ -9,7 +9,7 @@ export const SkillsSection = ({ info, onTop } : { info: SkillsSectionText, onTop
     <div className='mt-3'>
       {info.primarySkillsTitle && info.primarySkills && (
         <div className="primary-skills flex flex-col">
-          <div className='mt-1'>
+          <div className='mt-1 leading-[1.8]'>
             <span className='retro-title'>{info.primarySkillsTitle.key}</span>
             <span>{info.primarySkillsTitle.content}</span>
           </div>
@@ -19,7 +19,7 @@ export const SkillsSection = ({ info, onTop } : { info: SkillsSectionText, onTop
 
       {info.secondarySkillsTitle && info.secondarySkills && (
         <div className="secondary-skills flex flex-col mt-4">
-          <div className='mt-1'>
+          <div className='mt-1 leading-[1.8]'>
             <span className='retro-title'>{info.secondarySkillsTitle.key}</span>
             <span>{info.secondarySkillsTitle.content}</span>
           </div>

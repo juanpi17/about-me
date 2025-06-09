@@ -1,3 +1,5 @@
+import { WindowElementsType } from "@/assets/const";
+import { initialPosition } from "@/assets/initialState";
 import { MakeSectionProps } from "@/types"
 
 export const isWindowLoaded = (windowElementId: string, windowElements: MakeSectionProps[]) => {
@@ -20,4 +22,35 @@ export const updateWindowElement = (windowElement: MakeSectionProps, windowEleme
 
 export const setWIndowsOnTopFalse = (windowElements: MakeSectionProps[]) => {
     return windowElements.map(w => w.element.onTop = false);
+}
+
+export const changeWindowInitialPositionsForMobile = (isMobile: boolean, windowElements: MakeSectionProps[]) => {
+    if (!isMobile) return windowElements;
+
+    return windowElements.map(w => (
+        w = {
+            ...w,
+            element: {
+                ...w.element,
+                position: {
+                    ...initialPosition,
+                    left: 0,
+                },
+            }
+        }
+    ))
+}
+
+export const hideWindowInitialStateForMobile = (isMobile: boolean, windowElements: MakeSectionProps[]) => {
+    if (!isMobile) return windowElements;
+
+    return windowElements.map(w => (
+        w = {
+            ...w,
+            element: {
+                ...w.element,
+                isLoaded: w.id === WindowElementsType.ABOUT ? true : false,
+            }
+        }
+    ))
 }
