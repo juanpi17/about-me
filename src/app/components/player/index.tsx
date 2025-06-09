@@ -1,69 +1,64 @@
 import React, { useEffect, useRef, useState } from "react";
 import Hls from "hls.js";
-import { BsPlayFill, BsPauseFill } from "react-icons/bs";
+import { BsPlayFill, BsPauseFill, BsSkipBackwardFill, BsSkipForwardFill } from "react-icons/bs";
 import { ImSpinner } from "react-icons/im";
-import { RiReplay10Fill, RiForward10Fill } from "react-icons/ri";
 
-interface MusicPlayerProps {
-  src: string; // URL del archivo M3U8
+interface Track {
+  title: string;
+  url: string;
+  type: "mp3" | "m3u8";
 }
 
-const MusicPlayer: React.FC<MusicPlayerProps> = ({ src }) => {
+const MusicPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [tracks, setTracks] = useState<Track[]>([]);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [isMetadataLoading, setIsMetadataLoading] = useState(true);
-  const [isBuffering, setIsBuffering] = useState(false);
 
   useEffect(() => {
-    if (Hls.isSupported() && audioRef.current) {
-      const hls = new Hls();
-      hls.loadSource(src);
-      hls.attachMedia(audioRef.current);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        console.log("M3U8 cargado correctamente");
-        setIsLoading(false);
-      });
+    const fetchTracks = async () => {
+      try {
+        const response = await fetch("/tracks.json");
+        const data = await response.json();
+        setTracks(data);
+      } catch (error) {
+        console.error("Error al cargar las canciones:", error);
+      }
+    };
 
-      hls.on(Hls.Events.ERROR, (event, data) => {
-        if (data.details === Hls.ErrorDetails.BUFFER_STALLED_ERROR) {
-          console.log("Buffering...");
-          setIsBuffering(true);
-        }
-      });
+    fetchTracks();
+  }, []);
 
-      hls.on(Hls.Events.BUFFER_APPENDED, () => setIsBuffering(false));
+  useEffect(() => {
+    if (audioRef.current && tracks.length > 0) {
+      const track = tracks[currentTrackIndex];
 
-      return () => {
-        hls.destroy();
-      };
-    } else if (audioRef.current?.canPlayType("application/vnd.apple.mpegurl")) {
-      audioRef.current.src = src;
+      if (track.type === "m3u8" && Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(track.url);
+        hls.attachMedia(audioRef.current);
+      } else {
+        audioRef.current.src = track.url;
+      }
+
       audioRef.current.addEventListener("canplay", () => setIsLoading(false));
     }
-  }, [src]);
+  }, [currentTrackIndex, tracks]);
 
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) {
-      const updateTime = () => {
-        setCurrentTime(audio.currentTime);
-        setDuration(audio.duration || currentTime + 1);
-      };
-
+      const updateTime = () => setCurrentTime(audio.currentTime);
       audio.addEventListener("timeupdate", updateTime);
-      audio.addEventListener("loadedmetadata", () => {
-        setDuration(audio.duration);
-        setIsMetadataLoading(false);
-      });
+      audio.addEventListener("loadedmetadata", () => setDuration(audio.duration));
 
       return () => {
         audio.removeEventListener("timeupdate", updateTime);
       };
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const togglePlayPause = () => {
@@ -78,25 +73,11 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ src }) => {
   };
 
   const skipForward = () => {
-    if (audioRef.current) {
-      audioRef.current.currentTime += 10;
-    }
+    setCurrentTrackIndex((prevIndex) => (prevIndex + 1) % tracks.length);
   };
 
   const skipBackward = () => {
-    if (audioRef.current) {
-      audioRef.current.currentTime -= 10;
-    }
-  };
-
-  const handleProgressClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (audioRef.current) {
-      const { left, width } = event.currentTarget.getBoundingClientRect();
-      const clickX = event.clientX - left;
-      const newTime = (clickX / width) * duration;
-      audioRef.current.currentTime = newTime;
-      setCurrentTime(newTime);
-    }
+    setCurrentTrackIndex((prevIndex) => (prevIndex - 1 + tracks.length) % tracks.length);
   };
 
   const formatTime = (time: number) => {
@@ -114,42 +95,37 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ src }) => {
           <ImSpinner className="animate-spin text-white text-4xl mb-2" />
           <p>Cargando audio...</p>
         </div>
-      ) : isMetadataLoading ? (
-        <div className="flex flex-col items-center">
-          <ImSpinner className="animate-spin text-white text-4xl mb-2" />
-          <p>Cargando metadata...</p>
-        </div>
-      ) : isBuffering ? (
-        <div className="flex flex-col items-center">
-          <ImSpinner className="animate-spin text-white text-4xl mb-2" />
-          <p>Buffering...</p>
-        </div>
       ) : (
         <>
           <div className="mb-4 text-lg">
             {formatTime(currentTime)} / {formatTime(duration)}
           </div>
 
-          <div
-            className="w-full h-2 bg-gray-600 rounded cursor-pointer relative"
-            onClick={handleProgressClick}
-          >
-            <div
-              className="h-2 bg-blue-500 rounded absolute top-0 left-0"
-              style={{ width: `${(currentTime / duration) * 100}%` }}
-            />
-          </div>
-
           <div className="flex justify-center items-center gap-4 mt-4">
             <button className="text-gray-300 hover:text-white transition" onClick={skipBackward}>
-              <RiReplay10Fill size={24} />
+              <BsSkipBackwardFill size={24} />
             </button>
             <button className="bg-blue-500 p-3 rounded-full text-white hover:bg-blue-600 transition" onClick={togglePlayPause}>
               {isPlaying ? <BsPauseFill size={28} /> : <BsPlayFill size={28} />}
             </button>
             <button className="text-gray-300 hover:text-white transition" onClick={skipForward}>
-              <RiForward10Fill size={24} />
+              <BsSkipForwardFill size={24} />
             </button>
+          </div>
+
+          <div className="mt-4">
+            <h3 className="text-lg font-semibold">Lista de Canciones</h3>
+            <ul className="mt-2">
+              {tracks.map((track, index) => (
+                <li
+                  key={index}
+                  className={`cursor-pointer p-2 ${index === currentTrackIndex ? "bg-blue-500 text-white" : "hover:bg-gray-700"}`}
+                  onClick={() => setCurrentTrackIndex(index)}
+                >
+                  {track.title}
+                </li>
+              ))}
+            </ul>
           </div>
         </>
       )}
