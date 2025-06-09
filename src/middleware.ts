@@ -6,7 +6,6 @@ export function middleware(request: NextRequest) {
   const { device } = userAgent(request);
 
   const viewport = device.type || DeviceType.DESKTOP;
-  console.log('🚀 ~ middleware ~ viewport:', viewport);
 
   const response = NextResponse.next();
   response.headers.set('x-device-type', viewport === DeviceType.DESKTOP ? DeviceType.DESKTOP : DeviceType.MOBILE);
