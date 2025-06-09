@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 
 import { CommonWindowElementsContextProps, MakeSectionProps } from '@/types';
 import { startingWindowElements, startingWindowElementsResume } from '@/assets/initialState';
-import { changeWindowInitialPositionsForMobile } from '@/utils/windows';
+import { hideWindowInitialStateForMobile, changeWindowInitialPositionsForMobile } from '@/utils/windows';
 
 const WindowElements = createContext<CommonWindowElementsContextProps>({ windowElements: [], setWindowElements: () => {}, historyClickedElements: [], setHistoryClickedElements: () => {} });
 
@@ -14,11 +14,14 @@ export function WindowElementsProvider({ isMobile, children } : { isMobile: bool
   let config: Array<MakeSectionProps>;
 
   if (pathname === '/resume') {
-  // Adjust positions for mobile to prevent overlapping
-    config = changeWindowInitialPositionsForMobile(isMobile, startingWindowElementsResume);
+  // Hide all displayed windows in mobile to avoid filling up the screen
+    config = hideWindowInitialStateForMobile(isMobile, startingWindowElementsResume);
   } else {
     config = startingWindowElements;
   }
+  
+  // Adjust positions for mobile to prevent overlapping
+  config = changeWindowInitialPositionsForMobile(isMobile, config);
 
   const [windowElements, setWindowElements] = useState<Array<MakeSectionProps>>(config);
   const [historyClickedElements, setHistoryClickedElements] = useState<string[]>([]);

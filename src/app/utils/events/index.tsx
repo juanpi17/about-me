@@ -74,7 +74,7 @@ export const handleClose = ({
 
   if (elementsClicked) {
     for (const id of elementsClicked) {
-      const activeWindowsId = windowElements.map((w) => w.element.visible ? w.id : {});
+      const activeWindowsId = windowElements.map((w) => w.element.isLoaded && w.element.visible ? w.id : {});
       if (activeWindowsId.includes(id)) {
         lastOnTopId = id;
         break;
@@ -89,7 +89,7 @@ export const handleClose = ({
         ...w.element,
         visible: w.id === current?.id ? false : w.element.visible,
         onTop: w.id === lastOnTopId ? true : w.element.onTop,
-        isLoaded: w.id === current?.id ? false : w.element.visible,
+        isLoaded: w.id === current?.id ? false : w.element.isLoaded,
       },
     }
   }));

@@ -32,11 +32,24 @@ export const changeWindowInitialPositionsForMobile = (isMobile: boolean, windowE
             ...w,
             element: {
                 ...w.element,
-                isLoaded: w.id === WindowElementsType.ABOUT ? true : false,
                 position: {
                     ...initialPosition,
                     left: 0,
-                }
+                },
+            }
+        }
+    ))
+}
+
+export const hideWindowInitialStateForMobile = (isMobile: boolean, windowElements: MakeSectionProps[]) => {
+    if (!isMobile) return windowElements;
+
+    return windowElements.map(w => (
+        w = {
+            ...w,
+            element: {
+                ...w.element,
+                isLoaded: w.id === WindowElementsType.ABOUT ? true : false,
             }
         }
     ))
