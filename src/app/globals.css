@@ -18,6 +18,7 @@
   --default-yellow: var(--custom-yellow);
   --default-yellow-soft: var(--custom-yellow-soft);
   --default-light-gray: var(--custom-light-gray);
+  --text-shadow-stream-type: 0 1px 2px #ffffff, 0 1 5px #1db731;
 }
 
 body {
@@ -77,4 +78,48 @@ fieldset.title legend {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     border-color: var(--color-gray-400);
+}
+
+.custom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #C6C6C6;
+  outline: 2px solid black;
+  cursor: pointer;
+  border: 3px solid;
+  border-color: #fefefe #848484 #848484 #fefefe;
+}
+
+.custom-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #C6C6C6;
+  outline: 2px solid black;
+  cursor: pointer;
+  border: 3px solid;
+  border-color: #fefefe #848484 #848484 #fefefe;
+}
+
+.custom-progress-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 45px;
+  height: 20px;
+  background: radial-gradient(circle,rgba(181, 161, 51, 1) 0%, rgba(171, 156, 100, 1) 100%);
+  outline: 2px solid black;
+  cursor: pointer;
+  border: 3px solid;
+  border-color: #e5dfbb #9f9975 #9f9975 #e5dfbb;
+}
+
+.custom-progress-slider::-moz-range-thumb {
+  width: 45px;
+  height: 20px;
+  background: radial-gradient(circle,rgba(181, 161, 51, 1) 0%, rgba(171, 156, 100, 1) 100%);
+  outline: 2px solid black;
+  cursor: pointer;
+  border: 3px solid;
+  border-color: #e5dfbb #9f9975 #9f9975 #e5dfbb;
 }
