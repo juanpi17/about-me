@@ -6,6 +6,12 @@
     "home": "https://www.fmvida.com.ar/"
   },
   {
+    "title": "FM Sol 91.5",
+    "url": "https://stream.arcast.tv:8443/fmsol/fmsol.stream/chunklist_w1574121610.m3u8",
+    "type": "stream",
+    "home": "https://www.sol915.com.ar/"
+  },
+  {
     "artist": "Public Free Audio",
     "title": "Tokyo Cafe",
     "url": "public_free-audio_tokyo cafe.mp3",

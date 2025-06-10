@@ -118,7 +118,10 @@ const MusicPlayer: React.FC = () => {
   const togglePlay = () => {
     if (audioRef.current) {
       if (!isPlaying) {
-        audioRef.current.play();
+        audioRef.current.play().catch(error => {
+            console.error("Error al intentar reproducir:", error);
+            setIsPlaying(false);
+        });
       }
       setIsPlaying(!isPlaying);
     }
@@ -178,18 +181,19 @@ const MusicPlayer: React.FC = () => {
     }
   };
 
-  // const handleProgressClick = (event: React.MouseEvent<HTMLDivElement>) => {
-  //   if (audioRef.current) {
-  //     const { left, width } = event.currentTarget.getBoundingClientRect();
-  //     const clickX = event.clientX - left;
-  //     const newTime = (clickX / width) * duration;
-  //     audioRef.current.currentTime = newTime;
-  //     setCurrentTime(newTime);
-  //   }
-  // };
+  const handleClickPlaylist = (index: number) => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        setIsPlaying(false);
+      }
+    }
+    setCurrentTrackIndex(index);
+    togglePlay();
+  }
+
   
   return (
-    <div className="absolute left-50 top-30 flex flex-col items-center p-2 bg-[#27283d] w-120">
+    <div className="absolute left-50 top-10 flex flex-col items-center p-2 bg-[#27283d] w-120">
       <audio ref={audioRef} />
 
       {isLoading ? (
@@ -248,71 +252,51 @@ const MusicPlayer: React.FC = () => {
         </div>
         
         {isPlaylistEnabled ? (
-          <div className="mt-4">
-            <h3 className="text-lg font-semibold">Lista de Canciones</h3>
-            <ul className="mt-2">
-              {tracks.map((track, index) => (
-                <li
-                  key={index}
-                  className={`cursor-pointer p-2 ${index === currentTrackIndex ? "bg-blue-500 text-white" : "hover:bg-gray-700"}`}
-                  onClick={() => setCurrentTrackIndex(index)}
-                >
-                  {track.title}
-                </li>
-              ))}
-            </ul>
+          <div className="flex flex-col w-full text-white mt-3 m-1">
+            <h4 className="font-semibold mt-2 px-2">Streamings</h4>
+            <div className="flex flex-col border-3 border-[#3a3846] bg-black">
+              <div className="flex flex-row w-full gap-5 p-2">
+                <ul className="flex mt-2">
+                  {tracks.map((track, index) => {
+                    if (track.type !== 'stream') return;
+                    return (
+                      <li
+                        key={index}
+                        className={`cursor-pointer p-2 ${index === currentTrackIndex ? "bg-blue-500 text-white" : "hover:bg-gray-700"}`}
+                        onClick={() => handleClickPlaylist(index)}
+                      >
+                        {track.title}
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
+            </div>
+            <h4 className="font-semibold mt-4 px-2">Lista de Canciones</h4>
+            <div className="flex flex-col border-3 border-[#3a3846] bg-black">
+              <div className="flex flex-row w-full gap-3 p-2">
+                <ul className="flex flex-col mt-2 w-full">
+                  {tracks.map((track, index) => {
+                    if (track.type !== 'mp3') return;
+                    return (
+                      <li
+                        key={index}
+                        className={`cursor-pointer p-2 ${index === currentTrackIndex ? "bg-blue-500 text-white" : "hover:bg-gray-700"}`}
+                        onClick={() => handleClickPlaylist(index)}
+                      >
+                        {track.title}
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
+            </div>
           </div>
         ) : null}
         </>
       )}
     </div>
   );
-
-  // return (
-  //   <div className="absolute left-50 top-30 flex flex-col items-center p-6 bg-gray-800 text-white rounded-lg shadow-lg w-96">
-  //     <audio ref={audioRef} />
-
-  //     {isLoading ? (
-  //       <div className="flex flex-col items-center">
-  //         <ImSpinner className="animate-spin text-white text-4xl mb-2" />
-  //         <p>Cargando audio...</p>
-  //       </div>
-  //     ) : (
-  //       <>
-  //         <div className="mb-4 text-lg">
-  //           {formatTime(currentTime)} / {formatTime(duration)}
-  //         </div>
-
-  //         <div className="flex justify-center items-center gap-4 mt-4">
-  //           <button className="text-gray-300 hover:text-white transition" onClick={skipBackward}>
-  //             <BsSkipBackwardFill size={24} />
-  //           </button>
-  //           <button className="bg-blue-500 p-3 rounded-full text-white hover:bg-blue-600 transition" onClick={togglePlayPause}>
-  //             {isPlaying ? <BsPauseFill size={28} /> : <BsPlayFill size={28} />}
-  //           </button>
-  //           <button className="text-gray-300 hover:text-white transition" onClick={skipForward}>
-  //             <BsSkipForwardFill size={24} />
-  //           </button>
-  //         </div>
-
-  //         <div className="mt-4">
-  //           <h3 className="text-lg font-semibold">Lista de Canciones</h3>
-  //           <ul className="mt-2">
-  //             {tracks.map((track, index) => (
-  //               <li
-  //                 key={index}
-  //                 className={`cursor-pointer p-2 ${index === currentTrackIndex ? "bg-blue-500 text-white" : "hover:bg-gray-700"}`}
-  //                 onClick={() => setCurrentTrackIndex(index)}
-  //               >
-  //                 {track.title}
-  //               </li>
-  //             ))}
-  //           </ul>
-  //         </div>
-  //       </>
-  //     )}
-  //   </div>
-  // );
 };
 
 export default MusicPlayer;
