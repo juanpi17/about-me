@@ -4,6 +4,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Hls from "hls.js";
 import { BsPlayFill, BsPauseFill, BsStopFill, BsSkipBackwardFill, BsSkipForwardFill } from "react-icons/bs";
 import { ImSpinner } from "react-icons/im";
+import { ClientRect, useDraggable } from "@dnd-kit/core";
+import { CSS } from '@dnd-kit/utilities';
 
 interface Track {
   title: string;
@@ -36,7 +38,16 @@ const getGradientColor = (normalizedPosition: number, firstColor: string = '#61d
   return `rgb(${pixelData[0]}, ${pixelData[1]}, ${pixelData[2]})`;
 };
 
-const MusicPlayer: React.FC = () => {
+export const MusicPlayer = () => {
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: 'draggablePlayer',
+  });
+
+  const [position, setPosition] = useState<Partial<ClientRect>>({
+    left: 100,
+    top: 50,
+  });
+
   const audioRef = useRef<HTMLAudioElement>(null);
   const [tracks, setTracks] = useState<Track[]>([]);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
@@ -50,6 +61,15 @@ const MusicPlayer: React.FC = () => {
   const [currentColorVolume, setCurrentColorVolume] = useState(getGradientColor(volume));
 
   const currentTrack = tracks[currentTrackIndex];
+
+  // useEffect(() => {
+  //   setPosition(() => (
+  //     {
+  //       left: (transform?.x ? transform.x : 0),
+  //       top: (transform?.y ? transform.y : 0),
+  //     }
+  //   ));
+  // }, [transform])
 
   useEffect(() => {
     const fetchTracks = async () => {
@@ -191,9 +211,25 @@ const MusicPlayer: React.FC = () => {
     togglePlay();
   }
 
+  console.log('🚀 ~ MusicPlayer ~ attributes:', attributes);
+
+  const style = {
+    transform: CSS.Translate.toString(transform),
+    ...(position
+      ? {
+        left: position.left,
+        top: position.top,
+      } : {}),
+    //   : {}),
+    // ...(onTop 
+    //   ? { zIndex: 2 } 
+    //   : { zIndex: 0 }
+    // ),
+  };
+  console.log('🚀 ~ MusicPlayer ~ style.transform:', style.transform);
   
   return (
-    <div className="absolute left-50 top-10 flex flex-col items-center p-2 bg-[#27283d] w-120">
+    <div ref={setNodeRef} style={style} {...listeners} {...attributes} className="absolute flex flex-col items-center p-2 bg-[#27283d] w-120">
       <audio ref={audioRef} />
 
       {isLoading ? (
@@ -298,5 +334,3 @@ const MusicPlayer: React.FC = () => {
     </div>
   );
 };
-
-export default MusicPlayer;
