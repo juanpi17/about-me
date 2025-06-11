@@ -13,6 +13,7 @@ import { useWindowElementsContext } from "@/context/windowElementsContext";
 import CloseIcon from "@/components/svg/closeIcon";
 import { handleClose, handleOnTop } from "@/utils/events";
 import classNames from "classnames";
+import WaveForm from "./WaveForm";
 
 interface Track {
   title: string;
@@ -20,6 +21,12 @@ interface Track {
   type: "mp3" | "stream";
   home?: string;
   cover?: StaticImageData;
+}
+
+interface AnalyserDataType {
+  analyser: AnalyserNode;
+  bufferLength: number;
+  dataArray: Uint8Array;
 }
 
 const getGradientColor = (normalizedPosition: number, firstColor: string = '#61de36', lastColor: string = '#c02638', defaultColor: string = '#000'): string => {
@@ -92,6 +99,32 @@ export const MusicPlayer = (props: CommonWindowProps) => {
 
   const currentTrack = tracks[currentTrackIndex];
 
+  const [analyserData, setAnalyserData] = useState<AnalyserDataType | null>(null);
+
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const audioCtxRef = useRef<AudioContext | null>(null);
+
+  const audioAnalyzer = () => {
+    if (!audioRef.current) return;
+
+    // Crear el contexto de audio
+    audioCtxRef.current = new AudioContext();
+    analyserRef.current = audioCtxRef.current.createAnalyser();
+
+    // Crear la fuente de audio
+    const source = audioCtxRef.current.createMediaElementSource(audioRef.current);
+    source.connect(analyserRef.current);
+    analyserRef.current.connect(audioCtxRef.current.destination);
+
+    // Configurar el `AnalyserNode`
+    analyserRef.current.fftSize = 256;
+    const analyser = analyserRef.current;
+    const bufferLength = analyserRef.current.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+
+    setAnalyserData({ analyser, bufferLength, dataArray });
+  };
+
   useEffect(() => {
     const fetchTracks = async () => {
       try {
@@ -163,6 +196,7 @@ export const MusicPlayer = (props: CommonWindowProps) => {
             console.error("Error al intentar reproducir:", error);
             setIsPlaying(false);
         });
+        audioAnalyzer();
       }
       setIsPlaying(!isPlaying);
     }
@@ -264,6 +298,7 @@ export const MusicPlayer = (props: CommonWindowProps) => {
           <div className="flex flex-col w-full border-2 border-[#3a3846] bg-gradient-to-br from-[#292a3d] via-[#343752] to-[#292a3d]">
             <div className="grid grid-cols-2 grid-rows-3 w-full gap-x-3">
               <div className="flex row-span-3 bg-black items-center justify-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
+                {analyserData && <WaveForm analyserData={analyserData} />}
                 <p className="text-3xl text-center text-white">{formatTime(currentTime)} / {formatTime(duration)}</p>
               </div>
               <div className="flex col-start-2 bg-black items-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
