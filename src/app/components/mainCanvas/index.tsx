@@ -22,6 +22,7 @@ import { useWindowElementsContext } from '@/context/windowElementsContext';
 import { handleDragEnd, handleDragStart } from '@/utils/events';
 import { DesktopIconsList } from '@/components/desktopIconsList';
 import { MusicPlayer } from '../player';
+import { WindowsType } from '@/assets/const';
 
 export function MainCanvas() {
   const mouseSensor = useSensor(MouseSensor);
@@ -61,9 +62,11 @@ export function MainCanvas() {
             <MainMenu />
             <DesktopIconsList />
             {windowElements.map((w,index) => {
+              if (w.type === WindowsType.APP) {
+                return <MusicPlayer key={w.id + index} {...w} />;
+              }
               return <MakeSection key={w.id + index} {...w} />;
             })}
-            <MusicPlayer />
           </DroppableCanvas>
         </div>
     </DndContext>

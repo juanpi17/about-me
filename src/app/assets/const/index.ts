@@ -3,7 +3,8 @@ export const WindowElementsType = {
     CONTACT: 'contact',
     SKILLS: 'skills',
     WORKING_EXPERIENCE: 'workingExperience',
-    PERSONAL_INFORMATION: 'personalInformation'
+    PERSONAL_INFORMATION: 'personalInformation',
+    MUSIC_PLAYER: 'musicPlayer',
 };
 
 export const LinksType = {
@@ -15,4 +16,9 @@ export const LinksType = {
 export const DeviceType = {
     MOBILE: 'mobile',
     DESKTOP: 'desktop',
+}
+
+export const WindowsType = {
+    SECTION: 'section',
+    APP: 'app',
 }

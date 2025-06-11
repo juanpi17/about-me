@@ -1,16 +1,25 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, MouseEvent } from "react";
 import Hls from "hls.js";
 import { BsPlayFill, BsPauseFill, BsStopFill, BsSkipBackwardFill, BsSkipForwardFill } from "react-icons/bs";
 import { ImSpinner } from "react-icons/im";
-import { ClientRect, useDraggable } from "@dnd-kit/core";
+import { useDraggable } from "@dnd-kit/core";
 import { CSS } from '@dnd-kit/utilities';
+import { StaticImageData } from 'next/image';
+
+import { CommonWindowProps } from "@/types";
+import { useWindowElementsContext } from "@/context/windowElementsContext";
+import CloseIcon from "@/components/svg/closeIcon";
+import { handleClose, handleOnTop } from "@/utils/events";
+import classNames from "classnames";
 
 interface Track {
   title: string;
   url: string;
   type: "mp3" | "stream";
+  home?: string;
+  cover?: StaticImageData;
 }
 
 const getGradientColor = (normalizedPosition: number, firstColor: string = '#61de36', lastColor: string = '#c02638', defaultColor: string = '#000'): string => {
@@ -38,15 +47,36 @@ const getGradientColor = (normalizedPosition: number, firstColor: string = '#61d
   return `rgb(${pixelData[0]}, ${pixelData[1]}, ${pixelData[2]})`;
 };
 
-export const MusicPlayer = () => {
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: 'draggablePlayer',
+export const MusicPlayer = (props: CommonWindowProps) => {
+  const { windowElements, setWindowElements, historyClickedElements, setHistoryClickedElements } = useWindowElementsContext();
+  const { attributes, listeners, setNodeRef, transform, setActivatorNodeRef } = useDraggable({
+    id: props.id || 'draggable',
   });
 
-  const [position, setPosition] = useState<Partial<ClientRect>>({
-    left: 100,
-    top: 50,
-  });
+  const { id, element, titleName = 'Music Player', extendedClasses = [] } = props || {};
+  const { onTop, position } = element || {};
+
+  const style = {
+    transform: CSS.Translate.toString(transform),
+    ...(position
+      ? {
+        left: position.left,
+        top: position.top,
+      }
+      : {}),
+    ...(onTop 
+      ? { zIndex: 2 } 
+      : { zIndex: 0 }
+    ),
+  };
+
+  const customHandleClose = (event: MouseEvent<HTMLButtonElement>) => {
+    handleClose({event, currentWindowId: id, windowElements, setWindowElements, historyClickedElements});
+  };
+
+  const customHandleOnTop = () => {
+    handleOnTop({ currentWindowId: id, windowElements, setWindowElements, setHistoryClickedElements});
+  };
 
   const audioRef = useRef<HTMLAudioElement>(null);
   const [tracks, setTracks] = useState<Track[]>([]);
@@ -61,15 +91,6 @@ export const MusicPlayer = () => {
   const [currentColorVolume, setCurrentColorVolume] = useState(getGradientColor(volume));
 
   const currentTrack = tracks[currentTrackIndex];
-
-  // useEffect(() => {
-  //   setPosition(() => (
-  //     {
-  //       left: (transform?.x ? transform.x : 0),
-  //       top: (transform?.y ? transform.y : 0),
-  //     }
-  //   ));
-  // }, [transform])
 
   useEffect(() => {
     const fetchTracks = async () => {
@@ -211,126 +232,123 @@ export const MusicPlayer = () => {
     togglePlay();
   }
 
-  console.log('🚀 ~ MusicPlayer ~ attributes:', attributes);
-
-  const style = {
-    transform: CSS.Translate.toString(transform),
-    ...(position
-      ? {
-        left: position.left,
-        top: position.top,
-      } : {}),
-    //   : {}),
-    // ...(onTop 
-    //   ? { zIndex: 2 } 
-    //   : { zIndex: 0 }
-    // ),
-  };
-  console.log('🚀 ~ MusicPlayer ~ style.transform:', style.transform);
+  if (!element || !element.visible) {
+    return null;
+  }
   
   return (
-    <div ref={setNodeRef} style={style} {...listeners} {...attributes} className="absolute flex flex-col items-center p-2 bg-[#27283d] w-120">
-      <audio ref={audioRef} />
+    <div onClick={customHandleOnTop} ref={setNodeRef} style={style} className={`absolute ${classNames(extendedClasses)}`}>
+      <div className={`absolute left-0 top-[-2rem] h-[2rem] header flex flex-row items-center gap-2 ${onTop ? 'bg-(--default-yellow-soft)' : 'bg-(--default-light-gray)'} border border-(--default-light-gray) rounded-t-lg border-b-0 w-fit px-1 pr-3 hover:cursor-grab`}>
+        <button type='button' onClick={customHandleClose} className={`w-auto ${onTop ? 'bg-(--default-yellow)' : 'bg-(--default-light-gray)' } focus:outline-none rounded-xs hover:bg-red-600`}>
+          <CloseIcon />
+        </button>
+        <div ref={setActivatorNodeRef} {...listeners} {...attributes} className='flex-grow p-1'>
+          <span className="title text-md font-bold text-black font-[family-name:var(--font-custom)]">{titleName}</span>
+        </div>
+      </div>
+      <div className="flex flex-col items-center p-2 bg-[#27283d] w-120">
+        <audio ref={audioRef} />
 
-      {isLoading ? (
-        <div className="flex flex-col items-center">
-          <ImSpinner className="animate-spin text-white text-4xl mb-2" />
-          <p>Cargando audio...</p>
-        </div>
-      ) : isBuffering ? (
-        <div className="flex flex-col items-center">
-          <ImSpinner className="animate-spin text-white text-4xl mb-2" />
-          <p>Buffering...</p>
-        </div>
-      ) : (
-        <>
-        <div className="flex flex-col w-full border-2 border-[#3a3846] bg-gradient-to-br from-[#292a3d] via-[#343752] to-[#292a3d]">
-          <div className="grid grid-cols-2 grid-rows-3 w-full gap-x-3">
-            <div className="flex row-span-3 bg-black items-center justify-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
-              <p className="text-3xl text-center text-white">{formatTime(currentTime)} / {formatTime(duration)}</p>
+        {isLoading ? (
+          <div className="flex flex-col items-center">
+            <ImSpinner className="animate-spin text-white text-4xl mb-2" />
+            <p>Cargando audio...</p>
+          </div>
+        ) : isBuffering ? (
+          <div className="flex flex-col items-center">
+            <ImSpinner className="animate-spin text-white text-4xl mb-2" />
+            <p>Buffering...</p>
+          </div>
+        ) : (
+          <>
+          <div className="flex flex-col w-full border-2 border-[#3a3846] bg-gradient-to-br from-[#292a3d] via-[#343752] to-[#292a3d]">
+            <div className="grid grid-cols-2 grid-rows-3 w-full gap-x-3">
+              <div className="flex row-span-3 bg-black items-center justify-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
+                <p className="text-3xl text-center text-white">{formatTime(currentTime)} / {formatTime(duration)}</p>
+              </div>
+              <div className="flex col-start-2 bg-black items-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
+                <p className="text-white p-1 px-2">{currentTrack.title}</p>
+              </div>
+              <div className="flex w-full justify-end gap-4 px-2 items-center row-start-2 col-start-2 text-[#f0fdfe] text-xs font-black">
+                <p className={`${currentTrack.type === 'stream' ? 'text-green-200 text-shadow-md text-shadow-green-500' : '' }`}>streaming</p>
+                <p className={`${currentTrack.type === 'stream' ? '' : 'text-green-200 text-shadow-md text-shadow-green-500' }`}>local</p>
+              </div>
+              <div className="flex row-start-3 col-start-2 items-center gap-3 pr-1">
+                <input type="range" min={0} max={1} step="any" value={volume} style={volumeBarStyle} onChange={handleVolumeChange} className="custom-slider appearance-none w-full h-2 bg-amber-500 rounded-2xl" />
+                <button className="flex text-sm justify-between items-center gap-2 text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-1 active:translate-1/25 active:shadow-2xl"
+                  onClick={handlePlaylist}>
+                  <span className={`border border-[#3a3846] p-1 ${isPlaylistEnabled ? 'bg-green-500 outline-1 outline-gray-200' : ''}`}></span>
+                  <span className="font-bold">PL</span>
+                </button>
+              </div>
             </div>
-            <div className="flex col-start-2 bg-black items-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
-              <p className="text-white p-1 px-2">{currentTrack.title}</p>
+            <div className="flex w-full p-1 my-1 h-fit">
+              <input type="range" min={0} max={1} step="any" value={currentTime / duration} onChange={handleProgressClick} disabled={currentTrack.type === 'stream'} className="custom-progress-slider appearance-none w-full h-6 bg-black border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]" />
             </div>
-            <div className="flex w-full justify-end gap-4 px-2 items-center row-start-2 col-start-2 text-[#f0fdfe] text-xs font-black">
-              <p className={`${currentTrack.type === 'stream' ? 'text-green-200 text-shadow-md text-shadow-green-500' : '' }`}>streaming</p>
-              <p className={`${currentTrack.type === 'stream' ? '' : 'text-green-200 text-shadow-md text-shadow-green-500' }`}>local</p>
-            </div>
-            <div className="flex row-start-3 col-start-2 items-center gap-3 pr-1">
-              <input type="range" min={0} max={1} step="any" value={volume} style={volumeBarStyle} onChange={handleVolumeChange} className="custom-slider appearance-none w-full h-2 bg-amber-500 rounded-2xl" />
-              <button className="flex text-sm justify-between items-center gap-2 text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-1 active:translate-1/25 active:shadow-2xl"
-                onClick={handlePlaylist}>
-                <span className={`border border-[#3a3846] p-1 ${isPlaylistEnabled ? 'bg-green-500 outline-1 outline-gray-200' : ''}`}></span>
-                <span className="font-bold">PL</span>
+            <div className="flex w-full p-1 gap-1">
+              <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={skipBackward}>
+                <BsSkipBackwardFill size={28} />
+              </button>
+              <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={togglePlay}>
+                <BsPlayFill size={28} />
+              </button>
+              <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={togglePause}>
+                <BsPauseFill size={28} />
+              </button>
+              <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={toggleStop}>
+                <BsStopFill size={28} />
+              </button>
+              <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={skipForward}>
+                <BsSkipForwardFill size={28} />
               </button>
             </div>
           </div>
-          <div className="flex w-full p-1 my-1 h-fit">
-            <input type="range" min={0} max={1} step="any" value={currentTime / duration} onChange={handleProgressClick} disabled={currentTrack.type === 'stream'} className="custom-progress-slider appearance-none w-full h-6 bg-black border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]" />
-          </div>
-          <div className="flex w-full p-1 gap-1">
-            <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={skipBackward}>
-              <BsSkipBackwardFill size={28} />
-            </button>
-            <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={togglePlay}>
-              <BsPlayFill size={28} />
-            </button>
-            <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={togglePause}>
-              <BsPauseFill size={28} />
-            </button>
-            <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={toggleStop}>
-              <BsStopFill size={28} />
-            </button>
-            <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={skipForward}>
-              <BsSkipForwardFill size={28} />
-            </button>
-          </div>
-        </div>
-        
-        {isPlaylistEnabled ? (
-          <div className="flex flex-col w-full text-white mt-3 m-1">
-            <h4 className="font-semibold mt-2 px-2">Streamings</h4>
-            <div className="flex flex-col border-3 border-[#3a3846] bg-black">
-              <div className="flex flex-row w-full gap-5 p-2">
-                <ul className="flex mt-2">
-                  {tracks.map((track, index) => {
-                    if (track.type !== 'stream') return;
-                    return (
-                      <li
-                        key={index}
-                        className={`cursor-pointer p-2 ${index === currentTrackIndex ? "bg-blue-500 text-white" : "hover:bg-gray-700"}`}
-                        onClick={() => handleClickPlaylist(index)}
-                      >
-                        {track.title}
-                      </li>
-                    )
-                  })}
-                </ul>
+          
+          {isPlaylistEnabled ? (
+            <div className="flex flex-col w-full text-white mt-3 m-1">
+              <h4 className="font-semibold mt-2 px-2">Streamings</h4>
+              <div className="flex flex-col border-3 border-[#3a3846] bg-black">
+                <div className="flex flex-row w-full gap-5 p-2">
+                  <ul className="flex mt-2">
+                    {tracks.map((track, index) => {
+                      if (track.type !== 'stream') return;
+                      return (
+                        <li
+                          key={index}
+                          className={`cursor-pointer p-2 ${index === currentTrackIndex ? "bg-blue-500 text-white" : "hover:bg-gray-700"}`}
+                          onClick={() => handleClickPlaylist(index)}
+                        >
+                          {track.title}
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </div>
+              </div>
+              <h4 className="font-semibold mt-4 px-2">Lista de Canciones</h4>
+              <div className="flex flex-col border-3 border-[#3a3846] bg-black">
+                <div className="flex flex-row w-full gap-3 p-2">
+                  <ul className="flex flex-col mt-2 w-full">
+                    {tracks.map((track, index) => {
+                      if (track.type !== 'mp3') return;
+                      return (
+                        <li
+                          key={index}
+                          className={`cursor-pointer p-2 ${index === currentTrackIndex ? "bg-blue-500 text-white" : "hover:bg-gray-700"}`}
+                          onClick={() => handleClickPlaylist(index)}
+                        >
+                          {track.title}
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </div>
               </div>
             </div>
-            <h4 className="font-semibold mt-4 px-2">Lista de Canciones</h4>
-            <div className="flex flex-col border-3 border-[#3a3846] bg-black">
-              <div className="flex flex-row w-full gap-3 p-2">
-                <ul className="flex flex-col mt-2 w-full">
-                  {tracks.map((track, index) => {
-                    if (track.type !== 'mp3') return;
-                    return (
-                      <li
-                        key={index}
-                        className={`cursor-pointer p-2 ${index === currentTrackIndex ? "bg-blue-500 text-white" : "hover:bg-gray-700"}`}
-                        onClick={() => handleClickPlaylist(index)}
-                      >
-                        {track.title}
-                      </li>
-                    )
-                  })}
-                </ul>
-              </div>
-            </div>
-          </div>
-        ) : null}
-        </>
-      )}
+          ) : null}
+          </>
+        )}
+      </div>
     </div>
   );
 };

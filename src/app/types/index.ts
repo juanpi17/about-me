@@ -41,7 +41,8 @@ export interface CommonWindowProps {
   extendedClasses?: Array<string>;
   titleName: string;
   overflow?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  type?: string;
 };
 
 type SectionText = BasicSectionText | LanguagesSectionText | SkillsSectionText | WorkingExperienceSectionText | ContactSectionText | EducationSectionText | AchievementsSectionText | CombinedSectionText;
