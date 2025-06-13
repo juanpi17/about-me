@@ -343,11 +343,11 @@ export const MusicPlayer = (props: CommonWindowProps) => {
             <div className="grid grid-cols-2 grid-rows-3 w-full gap-x-3">
               <div className="flex row-span-3 bg-black items-center justify-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
                 <div className="flex flex-col w-full h-full">
-                  <div className="flex flex-row w-full h-full items-center justify-start gap-8 py-2 px-4">
+                  <div className="flex flex-row w-full h-full items-center justify-start gap-8 px-4">
                     <CurrentStateIcon size={20}/>
-                    <p className="text-xl text-center text-white">{formatTime(currentTime)} / {formatTime(duration)}</p>
+                    <p className="text-2xl text-center text-white">{formatTime(currentTime)} / {formatTime(duration)}</p>
                   </div>
-                  <div className="relative w-full h-full my-1">
+                  <div className="relative flex flex-row h-full mx-2 mb-2">
                     {analyserData && <WaveForm analyserData={analyserData} />}
                   </div>
                 </div>

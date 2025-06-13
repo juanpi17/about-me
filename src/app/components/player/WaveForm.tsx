@@ -33,22 +33,47 @@ function animateBars({
 
   canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const HEIGHT = canvas.height * 2;
+  const HEIGHT = canvas.height;
   const barWidth = Math.ceil(canvas.width / bufferLength) * 2.5;
-  let barHeight: number;
   let x = 0;
 
+  const yellowThreshold = HEIGHT * 0.4;
+  const redThreshold = HEIGHT * 0.7;
+
   for (let i = 0; i < bufferLength; i++) {
-    barHeight = (dataArray[i] / 255) * HEIGHT;
+    const barHeight = (dataArray[i] / 255) * HEIGHT;
 
-    const gradient = canvasCtx.createLinearGradient(
-      x, HEIGHT - barHeight, x, HEIGHT
-    );
-    gradient.addColorStop(0, "#ff0000"); // Rojo en la parte alta
-    gradient.addColorStop(1, "#00ff00"); // Verde en la base
+    const greenHeight = Math.min(barHeight, yellowThreshold);
+    if (greenHeight > 0) {
+      canvasCtx.fillStyle = "#00ff00";
+      canvasCtx.fillRect(x, HEIGHT - greenHeight, barWidth - 1, greenHeight);
+    }
 
-    canvasCtx.fillStyle = gradient;
-    canvasCtx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
+    if (barHeight > yellowThreshold) {
+      const yellowHeight = Math.min(barHeight, redThreshold) - yellowThreshold;
+      if (yellowHeight > 0) {
+        canvasCtx.fillStyle = "#ffff00";
+        canvasCtx.fillRect(
+          x,
+          HEIGHT - (greenHeight + yellowHeight),
+          barWidth - 1,
+          yellowHeight
+        );
+      }
+    }
+
+    if (barHeight > redThreshold) {
+      const redHeight = barHeight - redThreshold;
+      if (redHeight > 0) {
+        canvasCtx.fillStyle = "#ff0000";
+        canvasCtx.fillRect(
+          x,
+          HEIGHT - barHeight,
+          barWidth - 1,
+          redHeight
+        );
+      }
+    }
 
     x += barWidth + 1;
   }
@@ -67,7 +92,7 @@ const WaveForm = ({ analyserData }: WaveFormProps) => {
     const animate = () => {
       requestAnimationFrame(animate);
       canvas.width = canvas.width;
-      canvasCtx.translate(0, canvas.offsetHeight / 2 - 115);
+      canvasCtx.translate(0, canvas.offsetHeight / 2);
       animateBars({analyser, canvas, canvasCtx, dataArray, bufferLength});
     };
 
@@ -81,7 +106,7 @@ const WaveForm = ({ analyserData }: WaveFormProps) => {
   return (
     <div className="absolute bottom-0 left-0 w-full h-full overflow-hidden">
       <canvas
-        className="w-full h-full mx-3"
+        className="w-full h-full"
         style={{
           position: "absolute",
           top: "0",
