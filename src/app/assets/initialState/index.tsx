@@ -1,14 +1,9 @@
+import Image from 'next/image';
+
 import { SectionPageElement, MakeSectionProps } from '@/types';
 import { WindowElementsType, WindowsType } from '@/assets/const';
-
 import { about, contact, skills, workingExperience, personalInformation, iconSizeDesktop, musicPlayer } from '@/assets/content/es';
 import { ClientRect } from '@dnd-kit/core';
-import { AboutMeFolder } from '@/components/svg/aboutMeFolder';
-import { ContactMeFolder } from '@/components/svg/contactMeFolder';
-import { SkillsFolder } from '@/components/svg/skillsFolder';
-import { WorkingExperienceFolder } from '@/components/svg/workingExperienceFolder';
-import { PersonalInformationFolder } from '@/components/svg/personalInformationFolder';
-import { MusicPlayerApp } from '@/components/svg/musicPlayerApp';
 
 export const initialPosition: ClientRect = {
     left: 200,
@@ -34,7 +29,7 @@ export const startingWindowElements: Array<MakeSectionProps> =
       titleName: about.title,
       extendedClasses: ['w-screen', 'md:w-140', 'h-fit'],
       content: about,
-      icon: <AboutMeFolder {...iconSizeDesktop} />,
+      icon: <Image src="/aboutMeIcon.png" alt="About Me Icon" {...iconSizeDesktop} />,
     },
     {
       id: WindowElementsType.CONTACT,
@@ -42,7 +37,7 @@ export const startingWindowElements: Array<MakeSectionProps> =
       titleName: contact.title,
       extendedClasses: ['w-screen', 'md:w-90', 'h-fit'],
       content: contact,
-      icon: <ContactMeFolder {...iconSizeDesktop} />,
+      icon: <Image src="/contactMeIcon.png" alt="Contact Me Icon" {...iconSizeDesktop} />,
     },
     {
       id: WindowElementsType.SKILLS,
@@ -50,7 +45,7 @@ export const startingWindowElements: Array<MakeSectionProps> =
       titleName: skills.title,
       extendedClasses: ['w-screen', 'md:w-128', 'h-fit'],
       content: skills,
-      icon: <SkillsFolder {...iconSizeDesktop} />,
+      icon: <Image src="/skillsIcon.png" alt="Skills Icon" {...iconSizeDesktop} />,
     },
     {
       id: WindowElementsType.WORKING_EXPERIENCE,
@@ -58,7 +53,7 @@ export const startingWindowElements: Array<MakeSectionProps> =
       titleName: workingExperience.title,
       extendedClasses: ['w-screen', 'md:w-128', 'h-fit'],
       content: workingExperience,
-      icon: <WorkingExperienceFolder {...iconSizeDesktop} />,
+      icon: <Image src="/workingExperienceIcon.png" alt="Working Experience Icon" {...iconSizeDesktop} />,
     },
     {
       id: WindowElementsType.PERSONAL_INFORMATION,
@@ -66,7 +61,7 @@ export const startingWindowElements: Array<MakeSectionProps> =
       titleName: personalInformation.title,
       extendedClasses: ['w-screen', 'md:w-128', 'h-fit'],
       content: personalInformation,
-      icon: <PersonalInformationFolder {...iconSizeDesktop} />,
+      icon: <Image src="/personalInformationIcon.png" alt="Personal Information Icon" {...iconSizeDesktop} />,
     },
     {
       id: WindowElementsType.MUSIC_PLAYER,
@@ -74,7 +69,7 @@ export const startingWindowElements: Array<MakeSectionProps> =
       titleName: musicPlayer.title,
       extendedClasses: ['w-fit', 'md:w-120', 'h-fit'],
       content: musicPlayer,
-      icon: <MusicPlayerApp {...iconSizeDesktop} />,
+      icon: <Image src="/musicPlayerIcon.png" alt="Music Player Icon" {...iconSizeDesktop} />,
       type: WindowsType.APP,
     },
   ];
@@ -97,7 +92,7 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       titleName: about.title,
       extendedClasses: ['w-screen', 'md:w-140', 'h-fit'],
       content: about,
-      icon: <AboutMeFolder {...iconSizeDesktop} />,
+      icon: <Image src="/aboutMeIcon.png" alt="About Me Icon" {...iconSizeDesktop} />,
     },
     {
       id: WindowElementsType.CONTACT,
@@ -114,7 +109,7 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       titleName: contact.title,
       extendedClasses: ['w-screen', 'md:w-96', 'h-fit'],
       content: contact,
-      icon: <ContactMeFolder {...iconSizeDesktop} />,
+      icon: <Image src="/contactMeIcon.png" alt="Contact Me Icon" {...iconSizeDesktop} />,
     },
     {
       id: WindowElementsType.SKILLS,
@@ -131,7 +126,7 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       titleName: skills.title,
       extendedClasses: ['w-screen', 'md:w-128', 'h-fit'],
       content: skills,
-      icon: <SkillsFolder {...iconSizeDesktop} />,
+      icon: <Image src="/skillsIcon.png" alt="Skills Icon" {...iconSizeDesktop} />,
     },
     {
       id: WindowElementsType.WORKING_EXPERIENCE,
@@ -148,7 +143,7 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       titleName: workingExperience.title,
       extendedClasses: ['w-screen', 'md:w-128', 'h-fit'],
       content: workingExperience,
-      icon: <WorkingExperienceFolder {...iconSizeDesktop} />,
+      icon: <Image src="/workingExperienceIcon.png" alt="Working Experience Icon" {...iconSizeDesktop} />,
     },
     {
       id: WindowElementsType.PERSONAL_INFORMATION,
@@ -165,7 +160,7 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       titleName: personalInformation.title,
       extendedClasses: ['w-screen', 'md:w-128', 'h-fit'],
       content: personalInformation,
-      icon: <PersonalInformationFolder {...iconSizeDesktop} />,
+      icon: <Image src="/personalInformationIcon.png" alt="Personal Information Icon" {...iconSizeDesktop} />,
     },
     {
       id: WindowElementsType.MUSIC_PLAYER,
@@ -182,7 +177,7 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       titleName: musicPlayer.title,
       extendedClasses: ['w-fit', 'md:w-120', 'h-fit'],
       content: musicPlayer,
-      icon: <MusicPlayerApp {...iconSizeDesktop} />,
+      icon: <Image src="/musicPlayerIcon.png" alt="Music Player Icon" {...iconSizeDesktop} />,
       type: WindowsType.APP,
     },
   ];

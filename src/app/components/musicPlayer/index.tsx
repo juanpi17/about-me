@@ -192,6 +192,7 @@ export const MusicPlayer = (props: CommonWindowProps) => {
       }
 
       return () => {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         audioRef.current?.removeEventListener("loadeddata", handleLoaded);
       };
     }
