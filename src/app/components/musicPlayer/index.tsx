@@ -383,7 +383,7 @@ export const MusicPlayer = (props: CommonWindowProps) => {
               {isReady ? (
                 <>
                   <input type="range" min={0} max={1} step="any" value={volume} style={volumeBarStyle} onChange={handleVolumeChange} className="custom-slider appearance-none h-2 rounded-2xl" />
-                  <button className="flex flex-row text-xs justify-start items-center gap-2 text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-1 active:translate-1/25 active:shadow-2xl"
+                  <button className="flex flex-row text-xs justify-start items-center gap-2 text-[#5e6e78] bg-[#bccfd8] border-3 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-1 active:translate-1/25 active:shadow-2xl"
                     onClick={handlePlaylist}>
                     <span className={`border border-[#3a3846] p-1 ${isPlaylistEnabled ? 'bg-green-500 outline-1 outline-gray-200' : ''}`}></span>
                     <span className="font-bold">PLAYLIST</span>
@@ -398,19 +398,19 @@ export const MusicPlayer = (props: CommonWindowProps) => {
             ) : null}
           </div>
           <div className="flex w-full p-1 gap-1">
-            <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={skipBackward}>
+            <button className="relative text-[#5e6e78] bg-[#bccfd8] border-3 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={skipBackward}>
               <BsSkipBackwardFill size={buttonSize} />
             </button>
-            <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={togglePlay}>
+            <button className="text-[#5e6e78] bg-[#bccfd8] border-3 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={togglePlay}>
               <BsPlayFill size={buttonSize} />
             </button>
-            <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={togglePause}>
+            <button className="text-[#5e6e78] bg-[#bccfd8] border-3 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={togglePause}>
               <BsPauseFill size={buttonSize} />
             </button>
-            <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={toggleStop}>
+            <button className="text-[#5e6e78] bg-[#bccfd8] border-3 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={toggleStop}>
               <BsStopFill size={buttonSize} />
             </button>
-            <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={skipForward}>
+            <button className="text-[#5e6e78] bg-[#bccfd8] border-3 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={skipForward}>
               <BsSkipForwardFill size={buttonSize} />
             </button>
           </div>
