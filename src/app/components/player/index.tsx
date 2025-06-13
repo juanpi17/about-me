@@ -341,27 +341,17 @@ export const MusicPlayer = (props: CommonWindowProps) => {
           <>
           <div className="flex flex-col w-full border-2 border-[#3a3846] bg-gradient-to-br from-[#292a3d] via-[#343752] to-[#292a3d]">
             <div className="grid grid-cols-2 grid-rows-3 w-full gap-x-3">
-              {/* <div className="flex row-span-3 bg-black items-center justify-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
-                {analyserData && <WaveForm analyserData={analyserData} />}
-                <p className="text-3xl text-center text-white">{formatTime(currentTime)} / {formatTime(duration)}</p>
-                <CurrentStateIcon size={48}/>
-              </div> */}
-
               <div className="flex row-span-3 bg-black items-center justify-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
                 <div className="flex flex-col w-full h-full">
-                  <div className="flex flex-row w-full h-full items-center justify-start gap-8 px-4">
+                  <div className="flex flex-row w-full h-full items-center justify-start gap-8 py-2 px-4">
                     <CurrentStateIcon size={20}/>
                     <p className="text-xl text-center text-white">{formatTime(currentTime)} / {formatTime(duration)}</p>
                   </div>
-                  <div className="relative w-full h-full">
+                  <div className="relative w-full h-full my-1">
                     {analyserData && <WaveForm analyserData={analyserData} />}
                   </div>
                 </div>
               </div>
-
-
-
-
               <div className="flex col-start-2 bg-black items-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
                 <p className="text-white p-1 px-2">{currentTrack.title}</p>
               </div>
