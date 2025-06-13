@@ -320,6 +320,8 @@ export const MusicPlayer = (props: CommonWindowProps) => {
 
   const isReady = !isLoading && !isBuffering && currentTrack && currentTrack.title && currentTrack.url;
 
+  const buttonSize = 24;
+
   const CurrentStateIcon = ({size = 28}: {size: number}) => isPlaying ? <BsPlayFill size={size} /> : (isStopped ? <BsStopFill size={size} /> : <BsPauseFill size={size} />);
 
   if (!element || !element.visible) {
@@ -336,18 +338,19 @@ export const MusicPlayer = (props: CommonWindowProps) => {
           <span className="title text-md font-bold text-black font-[family-name:var(--font-custom)]">{titleName}</span>
         </div>
       </div>
-      <div className="flex flex-col items-center p-2 bg-[#27283d] w-120 font-[family-name:var(--font-music-player)] text-(--default-music-player-text)">
+      <div className="flex flex-col items-center p-2 bg-[#27283d] w-100 font-[family-name:var(--font-music-player)] text-(--default-music-player-text)">
         <audio ref={audioRef} />
 
-        <div className="flex flex-col w-full border-2 border-[#3a3846] bg-gradient-to-br from-[#292a3d] via-[#343752] to-[#292a3d]">
-          <div className="grid grid-cols-2 grid-rows-3 w-full gap-x-3">
-            <div className="flex row-span-3 bg-black items-center justify-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
+        <div className="flex flex-col w-full border-2 border-[#3a3846] bg-gradient-to-br from-[#101018] via-[#3b3856] to-[#26283a]">
+        {/* <div className="flex flex-col w-full border-2 border-[#3a3846] bg-gradient-to-br from-[#292a3d] via-[#343752] to-[#292a3d]"> */}
+          <div className="grid grid-cols-5 grid-rows-3 w-full gap-x-3 h-fit">
+            <div className="flex col-start-1 col-span-2 row-start-1 row-span-3 mb-3 bg-black items-center justify-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
               <div className="flex flex-col w-full h-full">
                 <IsPlayerReady>
                   <>
-                    <div className="flex flex-row w-full h-full items-center justify-start gap-8 px-4">
+                    <div className="flex flex-row w-full h-fit items-center justify-start gap-6 px-4">
                       <CurrentStateIcon size={20}/>
-                      <p className="text-2xl text-center">{formatTime(currentTime)} / {formatTime(duration)}</p>
+                      <p className="text-3xl text-center">{formatTime(currentTime)}</p>
                     </div>
                     <div className="relative flex flex-row h-full mx-2 mb-2">
                       {analyserData && <WaveForm analyserData={analyserData} />}
@@ -356,52 +359,63 @@ export const MusicPlayer = (props: CommonWindowProps) => {
                 </IsPlayerReady>
               </div>
             </div>
-            <div className="flex col-start-2 bg-black items-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
-              <p className="p-1 px-2">{isReady && currentTrack.title}</p>
+            <div className="flex col-start-3 col-span-3 bg-black items-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78] overflow-hidden">
+              {isReady ? (
+                <div className="flex flex-row px-2 gap-2 animate-move">
+                  <span className="text-nowrap">{currentTrack.title}</span>
+                  {duration > 0 && currentTrack.type === 'mp3' && (
+                    <span>{'<' + formatTime(duration) + '>'}</span>
+                  )}
+                </div>
+              ) : null}
             </div>
-            <div className="flex w-full justify-end gap-4 px-2 items-center row-start-2 col-start-2 text-[#f0fdfe] text-xs font-black">
+            <div className="flex col-start-3 col-span-3 row-start-2 w-full justify-end gap-4 px-2 items-center text-[#5e6e78] text-xs font-black">
               <p className={`${isReady && currentTrack.type === 'stream' ? 'text-green-200 text-shadow-md text-shadow-green-500' : '' }`}>STREAMING</p>
               <p className={`${isReady && currentTrack.type === 'stream' ? '' : 'text-green-200 text-shadow-md text-shadow-green-500' }`}>LOCAL</p>
             </div>
-            <div className="flex row-start-3 col-start-2 items-center gap-3 pr-1">
-              <input type="range" min={0} max={1} step="any" value={volume} style={volumeBarStyle} onChange={handleVolumeChange} className="custom-slider appearance-none w-full h-2 bg-amber-500 rounded-2xl" />
-              <button className="flex text-sm justify-between items-center gap-2 text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-1 active:translate-1/25 active:shadow-2xl"
-                onClick={handlePlaylist}>
-                <span className={`border border-[#3a3846] p-1 ${isPlaylistEnabled ? 'bg-green-500 outline-1 outline-gray-200' : ''}`}></span>
-                <span className="font-bold">PL</span>
-              </button>
+            <div className="flex col-start-3 col-span-3 row-start-3 items-center justify-between gap-2 pr-1">
+              {isReady ? (
+                <>
+                  <input type="range" min={0} max={1} step="any" value={volume} style={volumeBarStyle} onChange={handleVolumeChange} className="custom-slider appearance-none w-32 h-2 bg-amber-500 rounded-2xl" />
+                  <button className="flex flex-row text-xs justify-start items-center gap-2 text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-1 active:translate-1/25 active:shadow-2xl"
+                    onClick={handlePlaylist}>
+                    <span className={`border border-[#3a3846] p-1 ${isPlaylistEnabled ? 'bg-green-500 outline-1 outline-gray-200' : ''}`}></span>
+                    <span className="font-bold">PLAYLIST</span>
+                  </button>
+                </>
+              ) : null}
             </div>
           </div>
-          <div className="flex w-full p-1 my-1 h-fit">
+          <div className="flex w-full mb-2 h-fit">
             {isReady ? (
-              <input type="range" min={0} max={1} step="any" value={currentTime / duration} onChange={handleProgressClick} disabled={currentTrack.type === 'stream'} className="custom-progress-slider appearance-none w-full h-6 bg-black border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]" />
+              <input type="range" min={0} max={1} step="any" value={currentTime / duration} onChange={handleProgressClick} disabled={currentTrack.type === 'stream'} className="custom-progress-slider appearance-none w-full h-4 bg-black border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]" />
             ) : null}
           </div>
           <div className="flex w-full p-1 gap-1">
             <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={skipBackward}>
-              <BsSkipBackwardFill size={28} />
+              <BsSkipBackwardFill size={buttonSize} />
             </button>
             <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={togglePlay}>
-              <BsPlayFill size={28} />
+              <BsPlayFill size={buttonSize} />
             </button>
             <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={togglePause}>
-              <BsPauseFill size={28} />
+              <BsPauseFill size={buttonSize} />
             </button>
             <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={toggleStop}>
-              <BsStopFill size={28} />
+              <BsStopFill size={buttonSize} />
             </button>
             <button className="text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-2 active:translate-1/25 active:shadow-2xl" onClick={skipForward}>
-              <BsSkipForwardFill size={28} />
+              <BsSkipForwardFill size={buttonSize} />
             </button>
           </div>
         </div>
         
         {isPlaylistEnabled ? (
-          <div className="flex flex-col w-full mt-3 m-1">
-            <h4 className="font-semibold mt-2 px-2">Streamings</h4>
+          <div className="flex flex-col w-full m-1">
+            <h4 className="font-semibold mt-2 px-2 text-[#f0fdfe]">STREAMINGS</h4>
             <div className="flex flex-col border-3 border-[#3a3846] bg-black">
               <div className="flex flex-row w-full gap-5 p-2">
-                <ul className="flex mt-2">
+                <ul className="flex">
                   {tracks.map((track, index) => {
                     if (track.type !== 'stream') return;
                     return (
@@ -417,10 +431,10 @@ export const MusicPlayer = (props: CommonWindowProps) => {
                 </ul>
               </div>
             </div>
-            <h4 className="font-semibold mt-4 px-2">Lista de Canciones</h4>
+            <h4 className="font-semibold px-2 text-[#f0fdfe]">LISTA DE CANCIONES</h4>
             <div className="flex flex-col border-3 border-[#3a3846] bg-black">
-              <div className="flex flex-row w-full gap-3 p-2">
-                <ul className="flex flex-col mt-2 w-full">
+              <div className="flex flex-row w-full gap-3 p-2 text-nowrap">
+                <ul className="flex flex-col w-full">
                   {tracks.map((track, index) => {
                     if (track.type !== 'mp3') return;
                     return (
@@ -429,7 +443,11 @@ export const MusicPlayer = (props: CommonWindowProps) => {
                         className={`cursor-pointer p-2 ${index === currentTrackIndex ? "bg-[#0100c6] text-white" : "hover:bg-gray-700"}`}
                         onClick={() => handleClickPlaylist(index)}
                       >
-                        {track.title}
+                        <span className="flex flex-row w-full h-fit gap-2">
+                          <span>{index + 1}.</span>
+                          <span>{track.title}</span>
+                        </span>
+                        
                       </li>
                     )
                   })}
