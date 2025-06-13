@@ -15,7 +15,7 @@ import { limitOnTopYAxis } from '@/assets/modifiers';
 import { DroppableCanvas } from '@/components/droppableCanvas';
 import { MakeSection } from '@/components/makeSection';
 import { MainMenu } from '@/components/mainMenu';
-// import { Help } from '@/components/help';
+import { Help } from '@/components/help';
 
 import { useShowHelpContext } from '@/context/helpContext';
 import { useWindowElementsContext } from '@/context/windowElementsContext';
@@ -57,11 +57,13 @@ export function MainCanvas() {
   return (
     <DndContext onDragEnd={customHandleDragEnd} onDragStart={customHandleDragStart} modifiers={[restrictToWindowEdges, limitOnTopYAxis]} sensors={sensors}>
         <div className="relative h-screen">
-          {/* {showHelp && <Help />} */}
+          {showHelp && <Help />}
           <DroppableCanvas>
             <MainMenu />
             <DesktopIconsList />
             {windowElements.map((w,index) => {
+              if (!w.element.isLoaded)
+                return null;
               if (w.type === WindowsType.APP) {
                 return <MusicPlayer key={w.id + index} {...w} />;
               }

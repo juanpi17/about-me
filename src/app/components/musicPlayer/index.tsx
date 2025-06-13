@@ -159,6 +159,8 @@ export const MusicPlayer = (props: CommonWindowProps) => {
     if (audioRef.current && tracks.length > 0) {
       const track = tracks[currentTrackIndex];
 
+      setIsLoading(true);
+
       if (track.type === "stream" && Hls.isSupported()) {
         const hls = new Hls();
         hls.loadSource(track.url);
@@ -166,7 +168,6 @@ export const MusicPlayer = (props: CommonWindowProps) => {
 
         hls.on(Hls.Events.ERROR, (event, data) => {
           if (data.details === Hls.ErrorDetails.BUFFER_STALLED_ERROR) {
-            console.log("Buffering...");
             setIsBuffering(true);
           }
         });
@@ -175,11 +176,24 @@ export const MusicPlayer = (props: CommonWindowProps) => {
           setIsBuffering(false);
         });
 
+        // For HLS, force reload
+        audioRef.current.load();
       } else {
         audioRef.current.src = track.url;
+        audioRef.current.load();
       }
 
-      audioRef.current.addEventListener("canplay", () => setIsLoading(false));
+      const handleLoaded = () => setIsLoading(false);
+
+      audioRef.current.addEventListener("loadeddata", handleLoaded);
+
+      if (audioRef.current.readyState >= 3) {
+        setIsLoading(false);
+      }
+
+      return () => {
+        audioRef.current?.removeEventListener("loadeddata", handleLoaded);
+      };
     }
   }, [currentTrackIndex, tracks]);
 
