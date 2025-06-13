@@ -1,7 +1,7 @@
 import { SectionPageElement, MakeSectionProps } from '@/types';
 import { WindowElementsType, WindowsType } from '@/assets/const';
 
-import { about, contact, skills, workingExperience, personalInformation, iconSizeDesktop } from '@/assets/content/es';
+import { about, contact, skills, workingExperience, personalInformation, iconSizeDesktop, musicPlayer } from '@/assets/content/es';
 import { ClientRect } from '@dnd-kit/core';
 import { AboutMeFolder } from '@/components/svg/aboutMeFolder';
 import { ContactMeFolder } from '@/components/svg/contactMeFolder';
@@ -81,7 +81,7 @@ export const startingWindowElements: Array<MakeSectionProps> =
             top: 28,
         },
       },
-      titleName: personalInformation.title,
+      titleName: musicPlayer.title,
       extendedClasses: ['w-120', 'h-fit'],
       content: personalInformation,
       icon: <MusicPlayerApp {...iconSizeDesktop} />,
@@ -176,6 +176,24 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
       extendedClasses: ['w-screen', 'md:w-128', 'h-fit'],
       content: personalInformation,
       icon: <PersonalInformationFolder {...iconSizeDesktop} />,
+    },
+    {
+      id: WindowElementsType.MUSIC_PLAYER,
+      element: {
+        ...initialStateElement,
+        visible: false,
+        isLoaded: true,
+        position: {
+            ...initialPosition,
+            left: 22,
+            top: 28,
+        },
+      },
+      titleName: musicPlayer.title,
+      extendedClasses: ['w-120', 'h-fit'],
+      content: personalInformation,
+      icon: <MusicPlayerApp {...iconSizeDesktop} />,
+      type: WindowsType.APP,
     },
   ];
   

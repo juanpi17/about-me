@@ -303,12 +303,12 @@ export const MusicPlayer = (props: CommonWindowProps) => {
   const IsPlayerReady = ({children} : {children: React.JSX.Element}) => (
     <>
     {isLoading ? (
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center p-2">
             <ImSpinner className="animate-spin text-4xl mb-2" />
             <p>Cargando audio...</p>
           </div>
         ) : isBuffering ? (
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center p-2">
             <ImSpinner className="animate-spin text-4xl mb-2" />
             <p>Buffering...</p>
           </div>
@@ -342,7 +342,6 @@ export const MusicPlayer = (props: CommonWindowProps) => {
         <audio ref={audioRef} />
 
         <div className="flex flex-col w-full border-2 border-[#3a3846] bg-gradient-to-br from-[#101018] via-[#3b3856] to-[#26283a]">
-        {/* <div className="flex flex-col w-full border-2 border-[#3a3846] bg-gradient-to-br from-[#292a3d] via-[#343752] to-[#292a3d]"> */}
           <div className="grid grid-cols-5 grid-rows-3 w-full gap-x-3 h-fit">
             <div className="flex col-start-1 col-span-2 row-start-1 row-span-3 mb-3 bg-black items-center justify-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
               <div className="flex flex-col w-full h-full">
@@ -376,7 +375,7 @@ export const MusicPlayer = (props: CommonWindowProps) => {
             <div className="flex col-start-3 col-span-3 row-start-3 items-center justify-between gap-2 pr-1">
               {isReady ? (
                 <>
-                  <input type="range" min={0} max={1} step="any" value={volume} style={volumeBarStyle} onChange={handleVolumeChange} className="custom-slider appearance-none w-32 h-2 bg-amber-500 rounded-2xl" />
+                  <input type="range" min={0} max={1} step="any" value={volume} style={volumeBarStyle} onChange={handleVolumeChange} className="custom-slider appearance-none h-2 rounded-2xl" />
                   <button className="flex flex-row text-xs justify-start items-center gap-2 text-[#5e6e78] bg-[#bccfd8] border-2 border-b-[#3a3846] border-r-[#3a3846] border-t-[#f0fdfe] border-l-[#f0fdfe] px-1 active:translate-1/25 active:shadow-2xl"
                     onClick={handlePlaylist}>
                     <span className={`border border-[#3a3846] p-1 ${isPlaylistEnabled ? 'bg-green-500 outline-1 outline-gray-200' : ''}`}></span>
@@ -412,16 +411,16 @@ export const MusicPlayer = (props: CommonWindowProps) => {
         
         {isPlaylistEnabled ? (
           <div className="flex flex-col w-full m-1">
-            <h4 className="font-semibold mt-2 px-2 text-[#f0fdfe]">STREAMINGS</h4>
-            <div className="flex flex-col border-3 border-[#3a3846] bg-black">
-              <div className="flex flex-row w-full gap-5 p-2">
+            <div className="flex flex-col border-3 border-[#3a3846]">
+              <div className="flex flex-row w-full gap-5 p-2 items-center">
+                <h4 className="font-semibold text-sm text-[#f0fdfe] text-center">STREAMING</h4>
                 <ul className="flex">
                   {tracks.map((track, index) => {
                     if (track.type !== 'stream') return;
                     return (
                       <li
                         key={index}
-                        className={`cursor-pointer p-2 ${index === currentTrackIndex ? "bg-[#0100c6] text-white" : "hover:bg-gray-700"}`}
+                        className={`cursor-pointer px-2 mr-1 ${index === currentTrackIndex ? "bg-[#0100c6] text-white" : "hover:bg-gray-700"}`}
                         onClick={() => handleClickPlaylist(index)}
                       >
                         {track.title}
@@ -430,17 +429,14 @@ export const MusicPlayer = (props: CommonWindowProps) => {
                   })}
                 </ul>
               </div>
-            </div>
-            <h4 className="font-semibold px-2 text-[#f0fdfe]">LISTA DE CANCIONES</h4>
-            <div className="flex flex-col border-3 border-[#3a3846] bg-black">
-              <div className="flex flex-row w-full gap-3 p-2 text-nowrap">
+              <div className="flex flex-row w-full gap-3 p-2 text-nowrap bg-black overflow-y-auto">
                 <ul className="flex flex-col w-full">
                   {tracks.map((track, index) => {
                     if (track.type !== 'mp3') return;
                     return (
                       <li
                         key={index}
-                        className={`cursor-pointer p-2 ${index === currentTrackIndex ? "bg-[#0100c6] text-white" : "hover:bg-gray-700"}`}
+                        className={`cursor-pointer px-2 ${index === currentTrackIndex ? "bg-[#0100c6] text-white" : "hover:bg-gray-700"}`}
                         onClick={() => handleClickPlaylist(index)}
                       >
                         <span className="flex flex-row w-full h-fit gap-2">

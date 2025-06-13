@@ -1,4 +1,4 @@
-import { AboutMeSectionText, AchievementsSectionText, CombinedSectionText, ContactSectionText, EducationSectionText, LanguagesSectionText, SkillsSectionText, SVGIcons, WorkingExperienceSectionText } from "@/types";
+import { AboutMeSectionText, AchievementsSectionText, BasicSectionText, CombinedSectionText, ContactSectionText, EducationSectionText, LanguagesSectionText, SkillsSectionText, SVGIcons, WorkingExperienceSectionText } from "@/types";
 import { JavaScriptIcon } from "@/components/svg/javascriptIcon";
 import { JestIcon } from "@/components/svg/jestIcon";
 import { NodeJsIcon } from "@/components/svg/nodeJsIcon";
@@ -289,3 +289,8 @@ export const personalInformation: CombinedSectionText = {
     }
     
 }
+
+export const musicPlayer: BasicSectionText = {
+    title: "Reproductor de música",
+    description: "Reproductor de música interactivo. Haz click en el botón de play para comenzar a escuchar música.",
+};
