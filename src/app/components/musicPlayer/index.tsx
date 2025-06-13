@@ -209,13 +209,11 @@ export const MusicPlayer = (props: CommonWindowProps) => {
 
   const togglePlay = () => {
     if (audioRef.current) {
-      if (!isPlaying) {
-        audioRef.current.play().catch(error => {
-            console.error("Error al intentar reproducir:", error);
-            setIsPlaying(false);
-        });
-        audioAnalyzer();
-      }
+      audioRef.current.play().catch(error => {
+        console.error("Error al intentar reproducir:", error);
+        setIsPlaying(false);
+      });
+      audioAnalyzer();
       setIsPlaying(true);
       setIsStopped(false);
     }
@@ -250,6 +248,9 @@ export const MusicPlayer = (props: CommonWindowProps) => {
       
       return tracks.findIndex(t => t.title === nextTrack.title && t.type === nextTrack.type);
     });
+    setTimeout(() => {
+      togglePlay();
+    }, 0);
   };
 
   const skipBackward = () => {
@@ -262,6 +263,9 @@ export const MusicPlayer = (props: CommonWindowProps) => {
       
       return tracks.findIndex(t => t.title === nextTrack.title && t.type === nextTrack.type);
     });
+    setTimeout(() => {
+      togglePlay();
+    }, 0);
   };
 
   const formatTime = (time: number) => {
@@ -292,12 +296,15 @@ export const MusicPlayer = (props: CommonWindowProps) => {
   };
 
   const handleClickPlaylist = (index: number) => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        setIsPlaying(false);
-      }
-    }
     setCurrentTrackIndex(index);
+    setTimeout(() => {
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+      }
+      setIsStopped(false);
+      setIsPlaying(false);
+      togglePlay();
+    }, 0);
   }
 
   const IsPlayerReady = ({children} : {children: React.JSX.Element}) => (
@@ -368,7 +375,7 @@ export const MusicPlayer = (props: CommonWindowProps) => {
                 </div>
               ) : null}
             </div>
-            <div className="flex col-start-3 col-span-3 row-start-2 w-full justify-end gap-4 px-2 items-center text-[#5e6e78] text-xs font-black">
+            <div className="flex col-start-3 col-span-3 row-start-2 w-full justify-end gap-4 px-2 items-center text-[#5e6e78] text-xs font-black cursor-default">
               <p className={`${isReady && currentTrack.type === 'stream' ? 'text-green-200 text-shadow-md text-shadow-green-500' : '' }`}>STREAMING</p>
               <p className={`${isReady && currentTrack.type === 'stream' ? '' : 'text-green-200 text-shadow-md text-shadow-green-500' }`}>LOCAL</p>
             </div>
@@ -409,7 +416,7 @@ export const MusicPlayer = (props: CommonWindowProps) => {
           </div>
         </div>
         
-        {isPlaylistEnabled ? (
+        {isReady && isPlaylistEnabled ? (
           <div className="flex flex-col w-full m-1">
             <div className="flex flex-col border-3 border-[#3a3846]">
               <div className="flex flex-row w-full gap-5 p-2 items-center">
