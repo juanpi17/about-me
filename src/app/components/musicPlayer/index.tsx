@@ -308,7 +308,7 @@ export const MusicPlayer = (props: CommonWindowProps) => {
   //     <BsStopFill size={size} className={`${isStopped ? 'text-white' : 'text-[#27283d]'}`} />
   //   </div>
   // );
-  const CurrentStateIcon = ({size = 28}: {size: number}) => isPlaying ? <BsPlayFill size={size} className="text-white" /> : (isStopped ? <BsStopFill size={size} className="text-white" /> : <BsPauseFill size={size} className="text-white" />);
+  const CurrentStateIcon = ({size = 28}: {size: number}) => isPlaying ? <BsPlayFill size={size} /> : (isStopped ? <BsStopFill size={size} /> : <BsPauseFill size={size} />);
 
   if (!element || !element.visible) {
     return null;
@@ -324,17 +324,17 @@ export const MusicPlayer = (props: CommonWindowProps) => {
           <span className="title text-md font-bold text-black font-[family-name:var(--font-custom)]">{titleName}</span>
         </div>
       </div>
-      <div className="flex flex-col items-center p-2 bg-[#27283d] w-120">
+      <div className="flex flex-col items-center p-2 bg-[#27283d] w-120 font-[family-name:var(--font-music-player)] text-(--default-music-player-text)">
         <audio ref={audioRef} />
 
         {isLoading ? (
-          <div className="flex flex-col items-center text-white">
-            <ImSpinner className="animate-spin text-white text-4xl mb-2" />
+          <div className="flex flex-col items-center">
+            <ImSpinner className="animate-spin text-4xl mb-2" />
             <p>Cargando audio...</p>
           </div>
         ) : isBuffering ? (
-          <div className="flex flex-col items-center text-white">
-            <ImSpinner className="animate-spin text-white text-4xl mb-2" />
+          <div className="flex flex-col items-center">
+            <ImSpinner className="animate-spin text-4xl mb-2" />
             <p>Buffering...</p>
           </div>
         ) : (
@@ -345,7 +345,7 @@ export const MusicPlayer = (props: CommonWindowProps) => {
                 <div className="flex flex-col w-full h-full">
                   <div className="flex flex-row w-full h-full items-center justify-start gap-8 px-4">
                     <CurrentStateIcon size={20}/>
-                    <p className="text-2xl text-center text-white">{formatTime(currentTime)} / {formatTime(duration)}</p>
+                    <p className="text-2xl text-center">{formatTime(currentTime)} / {formatTime(duration)}</p>
                   </div>
                   <div className="relative flex flex-row h-full mx-2 mb-2">
                     {analyserData && <WaveForm analyserData={analyserData} />}
@@ -353,11 +353,11 @@ export const MusicPlayer = (props: CommonWindowProps) => {
                 </div>
               </div>
               <div className="flex col-start-2 bg-black items-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
-                <p className="text-white p-1 px-2">{currentTrack.title}</p>
+                <p className="p-1 px-2">{currentTrack.title}</p>
               </div>
               <div className="flex w-full justify-end gap-4 px-2 items-center row-start-2 col-start-2 text-[#f0fdfe] text-xs font-black">
-                <p className={`${currentTrack.type === 'stream' ? 'text-green-200 text-shadow-md text-shadow-green-500' : '' }`}>streaming</p>
-                <p className={`${currentTrack.type === 'stream' ? '' : 'text-green-200 text-shadow-md text-shadow-green-500' }`}>local</p>
+                <p className={`${currentTrack.type === 'stream' ? 'text-green-200 text-shadow-md text-shadow-green-500' : '' }`}>STREAMING</p>
+                <p className={`${currentTrack.type === 'stream' ? '' : 'text-green-200 text-shadow-md text-shadow-green-500' }`}>LOCAL</p>
               </div>
               <div className="flex row-start-3 col-start-2 items-center gap-3 pr-1">
                 <input type="range" min={0} max={1} step="any" value={volume} style={volumeBarStyle} onChange={handleVolumeChange} className="custom-slider appearance-none w-full h-2 bg-amber-500 rounded-2xl" />
@@ -391,7 +391,7 @@ export const MusicPlayer = (props: CommonWindowProps) => {
           </div>
           
           {isPlaylistEnabled ? (
-            <div className="flex flex-col w-full text-white mt-3 m-1">
+            <div className="flex flex-col w-full mt-3 m-1">
               <h4 className="font-semibold mt-2 px-2">Streamings</h4>
               <div className="flex flex-col border-3 border-[#3a3846] bg-black">
                 <div className="flex flex-row w-full gap-5 p-2">
@@ -401,7 +401,7 @@ export const MusicPlayer = (props: CommonWindowProps) => {
                       return (
                         <li
                           key={index}
-                          className={`cursor-pointer p-2 ${index === currentTrackIndex ? "bg-blue-500 text-white" : "hover:bg-gray-700"}`}
+                          className={`cursor-pointer p-2 ${index === currentTrackIndex ? "bg-[#0100c6] text-white" : "hover:bg-gray-700"}`}
                           onClick={() => handleClickPlaylist(index)}
                         >
                           {track.title}
@@ -420,7 +420,7 @@ export const MusicPlayer = (props: CommonWindowProps) => {
                       return (
                         <li
                           key={index}
-                          className={`cursor-pointer p-2 ${index === currentTrackIndex ? "bg-blue-500 text-white" : "hover:bg-gray-700"}`}
+                          className={`cursor-pointer p-2 ${index === currentTrackIndex ? "bg-[#0100c6] text-white" : "hover:bg-gray-700"}`}
                           onClick={() => handleClickPlaylist(index)}
                         >
                           {track.title}

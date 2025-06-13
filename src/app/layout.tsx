@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Electrolize } from "next/font/google";
+import { Electrolize, VT323 } from "next/font/google";
 import "./globals.css";
 
 import { WindowElementsProvider } from '@/context/windowElementsContext';
@@ -8,6 +8,12 @@ import { isMobileType } from "@/utils/deviceCheck";
 
 const custom = Electrolize({
   variable: "--font-custom",
+  weight: '400',
+  subsets: ["latin"],
+});
+
+const musicPlayer = VT323({
+  variable: "--font-music-player",
   weight: '400',
   subsets: ["latin"],
 });
@@ -27,7 +33,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${custom.variable} antialiased`}
+        className={`${custom.variable} ${musicPlayer.variable} antialiased`}
       >
         <WindowElementsProvider isMobile={isMobile}>
           <ShowHelpProvider>

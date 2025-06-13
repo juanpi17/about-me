@@ -7,6 +7,7 @@
   --custom-yellow: #fab503;
   --custom-yellow-soft: #fec902;
   --custom-light-gray: #abacad;
+  --custom-music-player-text: #12da16;
 }
 
 @theme inline {
@@ -19,6 +20,7 @@
   --default-yellow-soft: var(--custom-yellow-soft);
   --default-light-gray: var(--custom-light-gray);
   --text-shadow-stream-type: 0 1px 2px #ffffff, 0 1 5px #1db731;
+  --default-music-player-text: var(--custom-music-player-text);
 }
 
 body {

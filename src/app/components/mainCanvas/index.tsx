@@ -21,7 +21,7 @@ import { useShowHelpContext } from '@/context/helpContext';
 import { useWindowElementsContext } from '@/context/windowElementsContext';
 import { handleDragEnd, handleDragStart } from '@/utils/events';
 import { DesktopIconsList } from '@/components/desktopIconsList';
-import { MusicPlayer } from '../player';
+import { MusicPlayer } from '../musicPlayer';
 import { WindowsType } from '@/assets/const';
 
 export function MainCanvas() {
