@@ -99,32 +99,6 @@ export const MusicPlayer = (props: CommonWindowProps) => {
 
   const currentTrack = tracks[currentTrackIndex];
 
-  // const [analyserData, setAnalyserData] = useState<AnalyserDataType | null>(null);
-
-  // const analyserRef = useRef<AnalyserNode | null>(null);
-  // const audioCtxRef = useRef<AudioContext | null>(null);
-
-  // const audioAnalyzer = () => {
-  //   if (!audioRef.current) return;
-
-  //   // Crear el contexto de audio
-  //   audioCtxRef.current = new AudioContext();
-  //   analyserRef.current = audioCtxRef.current.createAnalyser();
-
-  //   // Crear la fuente de audio
-  //   const source = audioCtxRef.current.createMediaElementSource(audioRef.current);
-  //   source.connect(analyserRef.current);
-  //   analyserRef.current.connect(audioCtxRef.current.destination);
-
-  //   // Configurar el `AnalyserNode`
-  //   analyserRef.current.fftSize = 256;
-  //   const analyser = analyserRef.current;
-  //   const bufferLength = analyserRef.current.frequencyBinCount;
-  //   const dataArray = new Uint8Array(bufferLength);
-
-  //   setAnalyserData({ analyser, bufferLength, dataArray });
-  // };
-
   const [analyserData, setAnalyserData] = useState<AnalyserDataType | null>(null);
 
   const analyserRef = useRef<AnalyserNode | null>(null);
@@ -157,41 +131,6 @@ export const MusicPlayer = (props: CommonWindowProps) => {
   };
 
   useEffect(() => {
-    return () => {
-      if (audioCtxRef.current) {
-        audioCtxRef.current.close();
-      }
-      sourceRef.current = null;
-      analyserRef.current = null;
-    };
-  }, []);
-
-  // const audioAnalyzer = () => {
-  //   if (!audioRef.current) return;
-
-  //   // if context and source already exists, just update the analyser
-  //   if (!audioCtxRef.current) {
-  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  //     audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
-  //   }
-  //   if (!sourceRef.current) {
-  //     sourceRef.current = audioCtxRef.current.createMediaElementSource(audioRef.current);
-  //   }
-  //   if (!analyserRef.current) {
-  //     analyserRef.current = audioCtxRef.current.createAnalyser();
-  //     sourceRef.current.connect(analyserRef.current);
-  //     analyserRef.current.connect(audioCtxRef.current.destination);
-  //   }
-
-  //   analyserRef.current.fftSize = 256;
-  //   const analyser = analyserRef.current;
-  //   const bufferLength = analyser.frequencyBinCount;
-  //   const dataArray = new Uint8Array(bufferLength);
-
-  //   setAnalyserData({ analyser, bufferLength, dataArray });
-  // };
-
-  useEffect(() => {
     const fetchTracks = async () => {
       try {
         const response = await fetch("/tracks.json");
@@ -203,6 +142,16 @@ export const MusicPlayer = (props: CommonWindowProps) => {
     };
 
     fetchTracks();
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (audioCtxRef.current) {
+        audioCtxRef.current.close();
+      }
+      sourceRef.current = null;
+      analyserRef.current = null;
+    };
   }, []);
 
   useEffect(() => {
@@ -222,13 +171,11 @@ export const MusicPlayer = (props: CommonWindowProps) => {
         });
 
         hls.on(Hls.Events.BUFFER_APPENDED, () => {
-          // audioAnalyzer();
           setIsBuffering(false);
         });
 
       } else {
         audioRef.current.src = track.url;
-        audioAnalyzer();
       }
 
       audioRef.current.addEventListener("canplay", () => setIsLoading(false));
@@ -266,6 +213,7 @@ export const MusicPlayer = (props: CommonWindowProps) => {
             console.error("Error al intentar reproducir:", error);
             setIsPlaying(false);
         });
+        audioAnalyzer();
       }
       setIsPlaying(!isPlaying);
     }
@@ -291,11 +239,27 @@ export const MusicPlayer = (props: CommonWindowProps) => {
   };
 
   const skipForward = () => {
-    setCurrentTrackIndex((prevIndex) => (prevIndex + 1) % tracks.length);
+    setCurrentTrackIndex((prevIndex) => {
+      const currentTrack = tracks[prevIndex];
+      const similarTracks = tracks.filter(t => t.type === currentTrack.type);
+      const currentSimilarIndex = similarTracks.findIndex(t => t.title === currentTrack.title && t.type === currentTrack.type);
+      const nextSimilarIndex = (currentSimilarIndex + 1) % similarTracks.length;
+      const nextTrack = similarTracks[nextSimilarIndex];
+      
+      return tracks.findIndex(t => t.title === nextTrack.title && t.type === nextTrack.type);
+    });
   };
 
   const skipBackward = () => {
-    setCurrentTrackIndex((prevIndex) => (prevIndex - 1 + tracks.length) % tracks.length);
+    setCurrentTrackIndex((prevIndex) => {
+      const currentTrack = tracks[prevIndex];
+      const similarTracks = tracks.filter(t => t.type === currentTrack.type);
+      const currentSimilarIndex = similarTracks.findIndex(t => t.title === currentTrack.title && t.type === currentTrack.type);
+      const nextSimilarIndex = (currentSimilarIndex - 1 + similarTracks.length) % similarTracks.length;
+      const nextTrack = similarTracks[nextSimilarIndex];
+      
+      return tracks.findIndex(t => t.title === nextTrack.title && t.type === nextTrack.type);
+    });
   };
 
   const formatTime = (time: number) => {
@@ -332,7 +296,6 @@ export const MusicPlayer = (props: CommonWindowProps) => {
       }
     }
     setCurrentTrackIndex(index);
-    // togglePlay();
   }
 
   if (!element || !element.visible) {
