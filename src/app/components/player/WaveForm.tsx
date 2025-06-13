@@ -79,17 +79,19 @@ const WaveForm = ({ analyserData }: WaveFormProps) => {
   }, [dataArray, analyser, bufferLength]);
 
   return (
-    <canvas
-      style={{
-        position: "absolute",
-        top: "0",
-        left: "0",
-        zIndex: "-10"
-      }}
-      ref={canvasRef}
-      width={width}
-      height={height}
-    />
+    <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
+      <canvas
+        style={{
+          position: "absolute",
+          top: "0",
+          left: "0",
+          zIndex: "-10"
+        }}
+        ref={canvasRef}
+        width={width}
+        height={height}
+      />
+    </div>
   );
 };
 

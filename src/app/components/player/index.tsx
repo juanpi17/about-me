@@ -89,6 +89,7 @@ export const MusicPlayer = (props: CommonWindowProps) => {
   const [tracks, setTracks] = useState<Track[]>([]);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isStopped, setIsStopped] = useState(true);
   const [volume, setVolume] = useState<number>(0.8);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -215,7 +216,8 @@ export const MusicPlayer = (props: CommonWindowProps) => {
         });
         audioAnalyzer();
       }
-      setIsPlaying(!isPlaying);
+      setIsPlaying(true);
+      setIsStopped(false);
     }
   };
 
@@ -224,17 +226,17 @@ export const MusicPlayer = (props: CommonWindowProps) => {
       if (isPlaying) {
         audioRef.current.pause();
       }
-      setIsPlaying(!isPlaying);
+      setIsPlaying(false);
+      setIsStopped(false);
     }
   };
 
   const toggleStop = () => {
     if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      }
-      setIsPlaying(!isPlaying);
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      setIsPlaying(false);
+      setIsStopped(true);
     }
   };
 
@@ -298,6 +300,16 @@ export const MusicPlayer = (props: CommonWindowProps) => {
     setCurrentTrackIndex(index);
   }
 
+
+  // const CurrentStateIcon = ({size = 28}: {size: number}) => (
+  //   <div className="absolute top-0 left-0 w-fit h-full flex items-center justify-center">
+  //     <BsPlayFill size={size} className={`${isPlaying ? 'text-white' : 'text-[#27283d]'}`} />
+  //     <BsPauseFill size={size} className={`${!isPlaying && !isStopped ? 'text-white' : 'text-[#27283d]'}`} />
+  //     <BsStopFill size={size} className={`${isStopped ? 'text-white' : 'text-[#27283d]'}`} />
+  //   </div>
+  // );
+  const CurrentStateIcon = ({size = 28}: {size: number}) => isPlaying ? <BsPlayFill size={size} className="text-white" /> : (isStopped ? <BsStopFill size={size} className="text-white" /> : <BsPauseFill size={size} className="text-white" />);
+
   if (!element || !element.visible) {
     return null;
   }
@@ -316,12 +328,12 @@ export const MusicPlayer = (props: CommonWindowProps) => {
         <audio ref={audioRef} />
 
         {isLoading ? (
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center text-white">
             <ImSpinner className="animate-spin text-white text-4xl mb-2" />
             <p>Cargando audio...</p>
           </div>
         ) : isBuffering ? (
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center text-white">
             <ImSpinner className="animate-spin text-white text-4xl mb-2" />
             <p>Buffering...</p>
           </div>
@@ -329,10 +341,27 @@ export const MusicPlayer = (props: CommonWindowProps) => {
           <>
           <div className="flex flex-col w-full border-2 border-[#3a3846] bg-gradient-to-br from-[#292a3d] via-[#343752] to-[#292a3d]">
             <div className="grid grid-cols-2 grid-rows-3 w-full gap-x-3">
-              <div className="flex row-span-3 bg-black items-center justify-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
+              {/* <div className="flex row-span-3 bg-black items-center justify-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
                 {analyserData && <WaveForm analyserData={analyserData} />}
                 <p className="text-3xl text-center text-white">{formatTime(currentTime)} / {formatTime(duration)}</p>
+                <CurrentStateIcon size={48}/>
+              </div> */}
+
+              <div className="flex row-span-3 bg-black items-center justify-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
+                <div className="flex flex-col w-full h-full">
+                  <div className="flex flex-row w-full h-full items-center justify-start gap-8 px-4">
+                    <CurrentStateIcon size={20}/>
+                    <p className="text-xl text-center text-white">{formatTime(currentTime)} / {formatTime(duration)}</p>
+                  </div>
+                  <div className="relative w-full h-full">
+                    {analyserData && <WaveForm analyserData={analyserData} />}
+                  </div>
+                </div>
               </div>
+
+
+
+
               <div className="flex col-start-2 bg-black items-center border-2 border-solid border-t-[#3a3846] border-l-[#3a3846] border-r-[#6c6d78] border-b-[#6c6d78]">
                 <p className="text-white p-1 px-2">{currentTrack.title}</p>
               </div>
