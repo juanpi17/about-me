@@ -272,6 +272,6 @@ export const personalInformation: CombinedSectionText = {
 }
 
 export const musicPlayer: BasicSectionText = {
-    title: "Reproductor de música",
+    title: "Reproductor de música con un nombre extremadamente largo",
     description: "Reproductor de música interactivo. Haz click en el botón de play para comenzar a escuchar música.",
 };

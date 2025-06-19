@@ -3,13 +3,14 @@ import React, { createContext, useContext, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 import { CommonWindowElementsContextProps, MakeSectionProps } from '@/types';
-import { startingWindowElements, startingWindowElementsResume } from '@/assets/initialState';
+import { Localized } from '@/assets/initialState';
 import { hideWindowInitialStateForMobile, changeWindowInitialPositionsForMobile } from '@/utils/windows';
 
 const WindowElements = createContext<CommonWindowElementsContextProps>({ windowElements: [], setWindowElements: () => {}, historyClickedElements: [], setHistoryClickedElements: () => {} });
 
 export function WindowElementsProvider({ isMobile, children } : { isMobile: boolean, children: React.ReactNode }) {
   const pathname = usePathname();
+  const { startingWindowElements, startingWindowElementsResume } = Localized();
 
   let config: Array<MakeSectionProps>;
 

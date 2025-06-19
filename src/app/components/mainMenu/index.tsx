@@ -44,7 +44,7 @@ export const MainMenu = () => {
               className={`p-2 hover:bg-gray-200 cursor-pointer hover:transition-all duration-300 ${el.element.onTop && el.element.visible ? 'bg-gray-100 outline outline-gray-800 font-bold' : ''}`}
               onClick={() => customHandleOnClickItemMenu(el.id)}
             >
-              <span className="nowrap text-ellipsis">{el.titleName}</span>
+              <p className="overflow-hidden whitespace-nowrap text-ellipsis">{el.titleName}</p>
             </div>
           ): null}
         </div>

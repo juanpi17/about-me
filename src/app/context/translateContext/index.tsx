@@ -10,7 +10,7 @@ interface TranslateContextProps {
 const LocalizedContent = createContext<TranslateContextProps>({ language: 'es' });
 
 export function TranslateProvider({ children } : { children: React.ReactNode }) {
-  const [language] = useState<Lang>('es'); // Default language set to 'es'
+  const [language] = useState<Lang>('es');
 
   return (
     <LocalizedContent value={{ language }}>

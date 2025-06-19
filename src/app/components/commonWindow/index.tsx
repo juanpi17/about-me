@@ -45,12 +45,12 @@ export const CommonWindow = (props: CommonWindowProps) => {
 
   return (
     <div onClick={customHandleOnTop} ref={setNodeRef} style={style} className={`absolute ${classNames(extendedClasses)}`}>
-      <div className={`absolute left-0 top-[-2rem] h-[2rem] header flex flex-row items-center gap-2 ${onTop ? 'bg-(--default-yellow-soft)' : 'bg-(--default-light-gray)'} border border-(--default-light-gray) rounded-t-lg border-b-0 w-fit px-1 pr-3 hover:cursor-grab`}>
+      <div className={`absolute left-0 top-[-2rem] h-[2rem] header flex flex-row items-center gap-2 ${onTop ? 'bg-(--default-yellow-soft)' : 'bg-(--default-light-gray)'} border border-(--default-light-gray) rounded-t-lg border-b-0 w-fit px-1 pr-3 hover:cursor-grab max-w-3/4`}>
         <button type='button' onClick={customHandleClose} className={`w-auto ${onTop ? 'bg-(--default-yellow)' : 'bg-(--default-light-gray)' } focus:outline-none rounded-xs hover:bg-red-600`}>
           <CloseIcon />
         </button>
-        <div ref={setActivatorNodeRef} {...listeners} {...attributes} className='flex-grow p-1'>
-          <span className="title text-md font-bold text-black font-[family-name:var(--font-custom)]">{titleName}</span>
+        <div ref={setActivatorNodeRef} {...listeners} {...attributes} className='flex-grow p-1 overflow-hidden whitespace-nowrap text-ellipsis'>
+          <p className="title text-md font-bold text-black font-[family-name:var(--font-custom)]">{titleName}</p>
         </div>
       </div>
       <div className={`content touch-auto overflow-x-hidden p-4 border-1 bg-white border-(--default-light-gray) border-t rounded-b-lg rounded-tr-lg shadow-lg font-[family-name:var(--font-custom)] max-h-160 ${props.overflow} ${onTop ? '' : 'grayscale'}`}>
