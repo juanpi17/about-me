@@ -1,9 +1,13 @@
+'use client';
+
 import Image from 'next/image';
+import { ClientRect } from '@dnd-kit/core';
 
 import { SectionPageElement, MakeSectionProps } from '@/types';
 import { WindowElementsType, WindowsType } from '@/assets/const';
-import { about, contact, skills, workingExperience, personalInformation, iconSizeDesktop, musicPlayer } from '@/assets/content/es';
-import { ClientRect } from '@dnd-kit/core';
+import { getContent } from '@/assets/content';
+import { iconSizeDesktop } from '@/assets/sizes';
+import { useTranslateContext } from '@/context/translateContext';
 
 export const initialPosition: ClientRect = {
     left: 200,
@@ -21,54 +25,68 @@ const initialStateElement: SectionPageElement = {
   isLoaded: false,
 };
 
+export const Localized = () => {
+  const { language } = useTranslateContext();
+  const { about, contact, skills, workingExperience, personalInformation, musicPlayer } = getContent(language);
+
+  return {
+    about,
+    contact,
+    skills,
+    workingExperience,
+    personalInformation,
+    musicPlayer,
+  };
+}
+
 export const startingWindowElements: Array<MakeSectionProps> = 
   [
     {
       id: WindowElementsType.ABOUT,
       element: initialStateElement,
-      titleName: about.title,
+      titleName: Localized().about.title,
       extendedClasses: ['w-screen', 'md:w-140', 'h-fit'],
-      content: about,
+      content: Localized().about,
       icon: <Image src="/aboutMeIcon.png" alt="About Me Icon" {...iconSizeDesktop} />,
     },
     {
       id: WindowElementsType.CONTACT,
       element: initialStateElement,
-      titleName: contact.title,
+      titleName: Localized().contact.title,
       extendedClasses: ['w-screen', 'md:w-90', 'h-fit'],
-      content: contact,
+      content: Localized().contact,
       icon: <Image src="/contactMeIcon.png" alt="Contact Me Icon" {...iconSizeDesktop} />,
     },
     {
       id: WindowElementsType.SKILLS,
       element: initialStateElement,
-      titleName: skills.title,
+      titleName: Localized().skills.title,
       extendedClasses: ['w-screen', 'md:w-128', 'h-fit'],
-      content: skills,
+      content: Localized().skills,
       icon: <Image src="/skillsIcon.png" alt="Skills Icon" {...iconSizeDesktop} />,
     },
     {
       id: WindowElementsType.WORKING_EXPERIENCE,
       element: initialStateElement,
-      titleName: workingExperience.title,
+      titleName: Localized().workingExperience.title,
       extendedClasses: ['w-screen', 'md:w-128', 'h-fit'],
-      content: workingExperience,
+      content: Localized().workingExperience,
       icon: <Image src="/workingExperienceIcon.png" alt="Working Experience Icon" {...iconSizeDesktop} />,
     },
     {
       id: WindowElementsType.PERSONAL_INFORMATION,
       element: initialStateElement,
-      titleName: personalInformation.title,
+      titleName: Localized().personalInformation.title,
       extendedClasses: ['w-screen', 'md:w-128', 'h-fit'],
-      content: personalInformation,
+      content: Localized().personalInformation,
       icon: <Image src="/personalInformationIcon.png" alt="Personal Information Icon" {...iconSizeDesktop} />,
     },
     {
       id: WindowElementsType.MUSIC_PLAYER,
       element: initialStateElement,
-      titleName: musicPlayer.title,
+      titleName: Localized().musicPlayer.title,
       extendedClasses: ['w-fit', 'md:w-120', 'h-fit'],
-      content: musicPlayer,
+      content: Localized().musicPlayer,
       icon: <Image src="/musicPlayerIcon.png" alt="Music Player Icon" {...iconSizeDesktop} />,
       type: WindowsType.APP,
     },
@@ -89,9 +107,9 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
             top: 28,
         },
       },
-      titleName: about.title,
+      titleName: Localized().about.title,
       extendedClasses: ['w-screen', 'md:w-140', 'h-fit'],
-      content: about,
+      content: Localized().about,
       icon: <Image src="/aboutMeIcon.png" alt="About Me Icon" {...iconSizeDesktop} />,
     },
     {
@@ -106,9 +124,9 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
             top: 632,
         },
       },
-      titleName: contact.title,
+      titleName: Localized().contact.title,
       extendedClasses: ['w-screen', 'md:w-96', 'h-fit'],
-      content: contact,
+      content: Localized().contact,
       icon: <Image src="/contactMeIcon.png" alt="Contact Me Icon" {...iconSizeDesktop} />,
     },
     {
@@ -123,9 +141,9 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
             top: 28,
         },
       },
-      titleName: skills.title,
+      titleName: Localized().skills.title,
       extendedClasses: ['w-screen', 'md:w-128', 'h-fit'],
-      content: skills,
+      content: Localized().skills,
       icon: <Image src="/skillsIcon.png" alt="Skills Icon" {...iconSizeDesktop} />,
     },
     {
@@ -140,9 +158,9 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
             top: 400,
         },
       },
-      titleName: workingExperience.title,
+      titleName: Localized().workingExperience.title,
       extendedClasses: ['w-screen', 'md:w-128', 'h-fit'],
-      content: workingExperience,
+      content: Localized().workingExperience,
       icon: <Image src="/workingExperienceIcon.png" alt="Working Experience Icon" {...iconSizeDesktop} />,
     },
     {
@@ -157,9 +175,9 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
             top: 28,
         },
       },
-      titleName: personalInformation.title,
+      titleName: Localized().personalInformation.title,
       extendedClasses: ['w-screen', 'md:w-128', 'h-fit'],
-      content: personalInformation,
+      content: Localized().personalInformation,
       icon: <Image src="/personalInformationIcon.png" alt="Personal Information Icon" {...iconSizeDesktop} />,
     },
     {
@@ -174,9 +192,9 @@ export const startingWindowElementsResume: Array<MakeSectionProps> =
             top: 28,
         },
       },
-      titleName: musicPlayer.title,
+      titleName: Localized().musicPlayer.title,
       extendedClasses: ['w-fit', 'md:w-120', 'h-fit'],
-      content: musicPlayer,
+      content: Localized().musicPlayer,
       icon: <Image src="/musicPlayerIcon.png" alt="Music Player Icon" {...iconSizeDesktop} />,
       type: WindowsType.APP,
     },

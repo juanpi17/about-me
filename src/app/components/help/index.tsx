@@ -1,10 +1,13 @@
-
-import { touchToStart, clickToStart } from "@/assets/content/es";
 import { useShowHelpContext } from "@/context/helpContext";
 import { ArrowIcon } from "@/components/svg/arrowIcon";
+import { useTranslateContext } from "@/context/translateContext";
+import { getContent } from "@/assets/content";
 
 export const Help = () => {
+  const { language } = useTranslateContext();
   const { showHelp, setShowHelp } = useShowHelpContext();
+
+  const localized = getContent(language);
 
   const handleOnClick = () => {
     if (showHelp) {
@@ -20,8 +23,8 @@ export const Help = () => {
           <ArrowIcon width={'70'} height={'70'} />
         </span>
         <div className='text-4xl text-center text-white'>
-          <span className="hidden md:block">{clickToStart}</span>
-          <span className="block md:hidden">{touchToStart}</span>
+          <span className="hidden md:block">{localized.clickToStart}</span>
+          <span className="block md:hidden">{localized.touchToStart}</span>
         </div>
       </div>
     </div>

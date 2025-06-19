@@ -1,12 +1,16 @@
 import React from "react";
 
-import { noWindowsTitle, noWindowsActive } from "@/assets/content/es";
+import { useTranslateContext } from "@/context/translateContext";
 import { useWindowElementsContext } from "@/context/windowElementsContext";
 import { handleOnClickItemMenu } from "@/utils/events";
 import { isAnyWindowLoaded } from "@/utils/windows";
+import { getContent } from "@/assets/content";
 
 export const MainMenu = () => {
   const { windowElements, historyClickedElements, setWindowElements } = useWindowElementsContext();
+  const { language } = useTranslateContext();
+
+  const localized = getContent(language);
 
   const customHandleOnClickItemMenu = (currentWindowId: string) => {
     handleOnClickItemMenu({ currentWindowId, windowElements, setWindowElements, historyClickedElements});
@@ -19,7 +23,7 @@ export const MainMenu = () => {
         <span className="bg-gray-600 p-2 pr-3 text-white border border-l-0 border-gray-800 -ml-5 pl-7 z-0">Lepore</span>
       </div>
       <div className="flex flex-col p-1 w-full bg-gray-200 border border-gray-400 text-sm text-center">
-        <div className="flex flex-row flex-wrap w-full h-5.5 gap-2 justify-center cursor-default" title={`${noWindowsTitle}`}>
+        <div className="flex flex-row flex-wrap w-full h-5.5 gap-2 justify-center cursor-default" title={`${localized.noWindowsTitle}`}>
           {windowElements.map((el) => (
               el.element.isLoaded ? (
                 <div key={el.id + 'tray-icon'} className="w-fit h-fit">{React.cloneElement(el.icon, { width: 22, height: 22 })}</div>
@@ -27,7 +31,7 @@ export const MainMenu = () => {
               )
             )}
           {!isAnyWindowLoaded(windowElements)
-            ? <span>{noWindowsActive}</span>
+            ? <span>{localized.noWindowsActive}</span>
             : null
           }
         </div>
@@ -40,7 +44,7 @@ export const MainMenu = () => {
               className={`p-2 hover:bg-gray-200 cursor-pointer hover:transition-all duration-300 ${el.element.onTop && el.element.visible ? 'bg-gray-100 outline outline-gray-800 font-bold' : ''}`}
               onClick={() => customHandleOnClickItemMenu(el.id)}
             >
-              <span className="">{el.titleName}</span>
+              <span className="nowrap text-ellipsis">{el.titleName}</span>
             </div>
           ): null}
         </div>

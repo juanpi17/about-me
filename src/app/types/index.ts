@@ -2,6 +2,8 @@ import React, { Dispatch, SetStateAction, MouseEvent } from 'react';
 import { ClientRect, DragEndEvent, DragStartEvent } from '@dnd-kit/core';
 import { StaticImageData } from 'next/image';
 
+export type Lang = "es" | "en";
+
 export interface SVGIcons {
   [key: string]: string;
 };

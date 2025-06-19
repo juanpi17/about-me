@@ -23,17 +23,17 @@ import Me from '@/assets/images/me_1.jpg';
 import { WordpressIcon } from "@/components/svg/wordpressIcon";
 import { iconSizeExtraSmall, iconSizeBig, iconSizeSmall } from "@/assets/sizes";
 
-export const noWindowsTitle = "Ventanas activas";
-export const noWindowsActive = "Ninguna ventana activa";
-export const clickToStart = "Haz click sobre un ícono para acceder a las distintas secciones";
-export const touchToStart = "Toca sobre un ícono para acceder a las distintas secciones";
+export const noWindowsTitle = "Active Windows";
+export const noWindowsActive = "No active windows";
+export const clickToStart = "Click on an icon to access the different sections";
+export const touchToStart = "Tap on an icon to access the different sections";
 
 export const about: AboutMeSectionText = {
-    title: "Acerca de mí",
+    title: "About me",
     description: "",
     information: [
-        "Sólida formación en el desarrollo de soluciones web a medida con énfasis en el diseño visual, con más de 5+ años de experiencia en JavaScript y 3+ años de especialización en TypeScript y tests unitarios.",
-        "Enfoque en innovación y mejora de la experiencia del usuario a través de desarrollo de software robusto. Aprendizaje continuo y adaptación a nuevos desafíos.",
+        "Strong background in developing custom web solutions with an emphasis on visual design, with 5+ years of experience in JavaScript and 3+ years of specialization in TypeScript and unit testing.",
+        "Focus on innovation and improving the user experience through robust software development. Continuous learning and adaptation to new challenges.",
     ],
     images: [
         Me,
@@ -41,8 +41,8 @@ export const about: AboutMeSectionText = {
 };
 
 export const contact: ContactSectionText = {
-    title: "Contactame",
-    description: "Para comunicarte conmigo, podés hacerlo mediante:",
+    title: "Contact me",
+    description: "To contact me, you can do so throught:",
     items: [
         {
             text: "(+54) 342 4785455",
@@ -63,41 +63,41 @@ export const contact: ContactSectionText = {
 };
 
 export const skills: SkillsSectionText = {
-    title: "Habilidades",
-    description: "A lo largo de mi vida profesional y como hobbista, utilicé diversos stacks tecnológicos según lo que el proyecto demandara. Es por esto, que divido mis habilidades técnicas en dos grandes grupos: principales y secundarias.",
+    title: "Skills",
+    description: "Throughout my professional and hobbyist career, I've used various technology stacks depending on the project's needs. This is why I divide my technical skills into two broad groups: primary and secondary.",
     primarySkillsTitle: {
-        key: "Habilidades principales",
-        content: " las cuales utilicé a lo largo de toda mi carrera profesional",
+        key: "Main skills",
+        content: " which I used throughout my professional career and with which I have extensive experience",
     },
     primarySkills: [{
             name: "JavaScript",
             icon: <JavaScriptIcon {...iconSizeBig} />,
-            description: '5+ años de experiencia en desarrollo web con JavaScript, incluyendo la creación de aplicaciones interactivas y dinámicas.',
+            description: '5+ years of experience in web development with JavaScript, including creating interactive and dynamic applications.',
         },
         {
             name: "TypeScript",
             icon: <TypeScriptIcon {...iconSizeBig} />,
-            description: '3+ años de experiencia en desarrollo web con TypeScript, mejorando la calidad del código y la mantenibilidad de las aplicaciones.',
+            description: '3+ years of experience in web development with TypeScript, improving code quality and application maintainability.',
         },
         {
             name: "React",
             icon: <ReactIcon {...iconSizeBig} />,
-            description: '5+ años de experiencia en desarrollo de aplicaciones web/webview/nativas con React: implementación "vanilla" y uso del framework Next.js.',
+            description: '5+ years of experience developing web/webview/native applications with React: "vanilla" implementation and use of the Next.js framework.',
         },
         {
             name: "Node.js",
             icon: <NodeJsIcon {...iconSizeBig} />,
-            description: '5+ años de experiencia en desarrollo de aplicaciones middle-end/back-end con Node.js, incluyendo la creación de APIs RESTful y servicios en tiempo real.',
+            description: '5+ years of experience developing middle-end/back-end applications with Node.js, including building RESTful APIs and real-time services.',
         },
         {
             name: "Jest",
             icon: <JestIcon {...iconSizeBig} />,
-            description: '3+ años de experiencia en pruebas unitarias y de integración con Jest, asegurando la calidad y confiabilidad del código.',
+            description: '3+ years of experience in unit and integration testing with Jest, ensuring code quality and reliability.',
         }
     ],
     secondarySkillsTitle: {
-        key: "Otras habilidades",
-        content: " (a.k.a. habilidades secundarias) con las que trabajé y de las cuales tengo conocimientos",
+        key: "Secondary skills",
+        content: " that I worked with and of which I have knowledge",
     },
     secondarySkills: [
         {
@@ -148,7 +148,7 @@ export const skills: SkillsSectionText = {
 };
 
 export const workingExperience : WorkingExperienceSectionText = {
-    title: "Experiencia Laboral",
+    title: "Working experience",
     description: "",
     jobs: [
         {
@@ -156,9 +156,9 @@ export const workingExperience : WorkingExperienceSectionText = {
             subtitle: "Software Engineer",
             fromTo: "2021 - 2025",
             items: [
-                "Optimización de microservicios, aumentando performance al implementar código TypeScript mediante la utilización de buenas prácticas del lenguaje.",
-                "Colaboración con diversos equipos para desarrollo e implementación de nuevas funcionalidades orientadas al usuario final.",
-                "Recreación/implementación de diseños de UIs pixel-perfect mediante React y SCSS."
+                "Microservice optimization, increasing performance by implementing TypeScript code through the use of language best practices.",
+                "Collaboration with various teams to develop and implement new end-user-oriented functionalities.",
+                "Recreation/implementation of pixel-perfect UI designs using React and SCSS."
             ]
         },
         {
@@ -166,9 +166,9 @@ export const workingExperience : WorkingExperienceSectionText = {
             subtitle: "Full Stack SSR developer",
             fromTo: "2017 - 2021",
             items: [
-                "Desarrollo de sistemas web a medida para clientes procedentes del exterior.",
-                "Diseño e implementación del back-end y front-end.",
-                "Utilización de diferentes stacks tecnológicos para implementación de soluciones óptimas."
+                "Development of custom web systems for international clients.",
+                "Design and implementation of the back-end and front-end.",
+                "Using different technology stacks to implement optimal solutions."
             ]
         },
         {
@@ -176,7 +176,7 @@ export const workingExperience : WorkingExperienceSectionText = {
             subtitle: "Freelance developer",
             fromTo: "2016 - 2023",
             items: [
-                "Diseño e implementación de un sistema de lotería para utilización en diferentes entes provinciales (Entre Ríos, Formosa, Chaco), con la capacidad de controlar PLCs para el manejo de bolillas, generación de estadísticas y visualización multi-dispositivos.",
+                "Design and implementation of a lottery system for use in different provincial entities (Entre Ríos, Formosa, Chaco), with the ability to control PLCs for ball management, statistics generation, and multi-device visualization.",
             ]
         },
         {
@@ -184,8 +184,8 @@ export const workingExperience : WorkingExperienceSectionText = {
             subtitle: "Freelance developer",
             fromTo: "2015 - 2023",
             items: [
-                "Desarrollo de un sistema web de estadística y seguimiento de enfermedades respiratorias de acceso nacional.",
-                "Desarrollo de un sistema completo de vacunación para menores de edad, con foco en el seguimiento de pacientes. Creado para uso principal en sistemas desktop para los diferentes centros médicos de las localidades de Villa María, Gualeguaychú, Paraná y Concordia, y con funciones web para sincronización de datos y generación de estadísticas.",
+                "Development of a nationwide web-based respiratory disease statistics and monitoring system.",
+                "Development of a comprehensive vaccination system for minors, focusing on patient follow-up. Designed primarily for desktop systems for the various medical centers in Villa María, Gualeguaychú, Paraná, and Concordia, it also includes web-based capabilities for data synchronization and statistics generation.",
             ]
         },
         {
@@ -193,75 +193,75 @@ export const workingExperience : WorkingExperienceSectionText = {
             subtitle: "Asesoría informática",
             fromTo: "2014 - 2015",
             items: [
-                "Asesoría sobre actualización de equipamientos físicos y automatización de tareas cotidianas.",
+                "Consulting on updating physical equipment and automating daily tasks.",
             ]
         }
     ]
 };
 
 const education: EducationSectionText = {
-    title: "Educación",
+    title: "Education",
     description: "",
     studies: [
         {
-            title: "Ingeniería en Informática",
+            title: "Computer Engineering",
             subtitle: "Universidad Nacional del Litoral (UNL)",
             fromTo: "2008 - 2018",
             items: [
-                "Graduado en la Facultad de Ingeniería y Ciencias Hídricas (FICH) de la Universidad Nacional del Litoral (UNL)",
+                "Graduated from the Faculty of Engineering and Water Sciences (FICH) of the National University of Litoral (UNL)",
             ]
         },
         {
-            title: "Analista en Informática Aplicada",
+            title: "Computer Analyst",
             subtitle: "Universidad Nacional del Litoral (UNL)",
             fromTo: "2008 - 2012",
             items: [
-                "Graduado en la Facultad de Ingeniería y Ciencias Hídricas (FICH) de la Universidad Nacional del Litoral (UNL)",
+                "Graduated from the Faculty of Engineering and Water Sciences (FICH) of the National University of Litoral (UNL)",
             ]
         },
         {
-            title: "Bachiller Perito Mercantil",
+            title: "Bachelor's Degree in Commercial Expertise",
             subtitle: 'EEMPI Nro. 8106 "Don Bosco"',
             fromTo: "1997 - 2001",
             items: [
-                'Graduado en la Escuela de Enseñanza Media Particular Incorporada Nro. 8106 "Don Bosco"',
+                'Graduated from the Private Secondary School "Don Bosco"',
             ]
         }
     ]
 }
 
 const personalAchievements: AchievementsSectionText = {
-    title: "Logros personales",
+    title: "Personal achievements",
     description: "",
     achievements: [
         {
             title: "Web and Mobile UI Management",
-            description: "Optimización de microservicios y mejora de interfaces mobile y web browser para aumentar la satisfacción de la navegación del usuario en un 25%."
+            description: "Optimized micro-services and enhancing mobile and desktop UIs to improve user's browsing satisfaction by 25%."
         },
         {
             title: "Vaccination System Rollout",
-            description: "Implementación de un sistema de vacunación en 4 ciudades, mejorando la eficiencia del proceso en un 50%."
+            description: "Implemented vaccination system for 4 cities, improving process efficiency by 50%."
         },
         {
             title: "Lottery System Maintenance",
-            description: "Gestión y mantenimiento del sistema de lotería, logrando un tiempo de actividad del 99.9% durante 5 años."
+            description: "Managed and maintained lottery system, achieving uptime of 99.9% over 5 years."
         }
     ]
 }
 
 const idioms: LanguagesSectionText = {
-    title: "Idiomas",
+    title: "Languages",
     description: "",
     languages: [
-        "Inglés (Avanzado)",
-        "Español (Nativo)",
-        "Portugués (Básico)",
-        "Japonés (Básico)"
+        "English (Advanced)",
+        "Spanish (Native)",
+        "Portuguese (Basic)",
+        "Japanese (Basic)"
     ]
 }
 
 export const personalInformation: CombinedSectionText = {
-    title: "Información personal",
+    title: "Personal information",
     description: "",
     sections: {
         education,
@@ -272,6 +272,6 @@ export const personalInformation: CombinedSectionText = {
 }
 
 export const musicPlayer: BasicSectionText = {
-    title: "Reproductor de música",
-    description: "Reproductor de música interactivo. Haz click en el botón de play para comenzar a escuchar música.",
+    title: "Music Player",
+    description: "Interactive music player. Click the play button to start listening to music.",
 };
