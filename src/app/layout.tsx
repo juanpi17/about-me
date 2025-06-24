@@ -5,7 +5,6 @@ import "./globals.css";
 import { WindowElementsProvider } from '@/context/windowElementsContext';
 import { ShowHelpProvider } from "@/context/helpContext";
 import { isMobileType } from "@/utils/deviceCheck";
-import { TranslateProvider } from "./context/translateContext";
 
 const custom = Electrolize({
   variable: "--font-custom",
@@ -36,13 +35,11 @@ export default async function RootLayout({
       <body
         className={`${custom.variable} ${musicPlayer.variable} antialiased`}
       >
-        <TranslateProvider>
-          <WindowElementsProvider isMobile={isMobile}>
-            <ShowHelpProvider>
-              {children}
-            </ShowHelpProvider>
-          </WindowElementsProvider>
-        </TranslateProvider>
+        <WindowElementsProvider isMobile={isMobile}>
+          <ShowHelpProvider>
+            {children}
+          </ShowHelpProvider>
+        </WindowElementsProvider>
       </body>
     </html>
   );

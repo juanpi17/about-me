@@ -27,6 +27,7 @@ const initialStateElement: SectionPageElement = {
 
 export const Localized = () => {
   const { language } = useTranslateContext();
+  console.log('🚀 ~ Localized ~ language:', language);
   const { about, contact, skills, workingExperience, personalInformation, musicPlayer } = getContent(language);
 
   const startingWindowElements: Array<MakeSectionProps> = 
