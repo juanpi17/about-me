@@ -9,7 +9,7 @@ export const DesktopIconsList = () => {
         {windowElements.map((shortcut) => {
           return (
             <div key={shortcut.id + 'icon'} className='mb-2'>
-              <DesktopIconHolder id={shortcut.id} icon={shortcut.icon} legend={shortcut.titleName} />
+              <DesktopIconHolder id={shortcut.id} icon={shortcut.icon} legend={shortcut.titleName} type={shortcut.type} />
             </div>
           )
         })}

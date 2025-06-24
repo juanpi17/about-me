@@ -4,8 +4,9 @@ import { useWindowElementsContext } from "@/context/windowElementsContext";
 import { getWindowElement, isWindowLoaded, setWIndowsOnTopFalse, updateWindowElement } from "@/utils/windows";
 import { MakeSectionProps } from "@/types";
 import { updateClickedElements } from "@/utils/events";
+import { WindowsType } from "@/assets/const";
 
-export const DesktopIconHolder = ({ id, icon, legend } : { id:string, icon: React.JSX.Element, legend: string }) => {
+export const DesktopIconHolder = ({ id, icon, legend, type } : { id:string, icon: React.JSX.Element, legend: string, type?: string }) => {
   const { windowElements, setWindowElements, setHistoryClickedElements } = useWindowElementsContext();
   
   const loadSection = (id: string, isMobileTouch: boolean) => {
@@ -62,7 +63,7 @@ export const DesktopIconHolder = ({ id, icon, legend } : { id:string, icon: Reac
       <div className='w-fit h-fit mb-1'>
         {icon}
       </div>
-      <p className='text-center text-sm text-white'>{legend}.txt</p>
+      <p className='text-center text-sm text-white'>{legend}{type && type === WindowsType.APP ? '' : '.txt'}</p>
     </button>
   );
 }
